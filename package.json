@@ -1,0 +1,11 @@
+{
+  "name": "voicecraftwebsite",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "frontend:dev": "npm --prefix voicecraft-frontend run dev",
+    "frontend:build": "npm --prefix voicecraft-frontend run build",
+    "backend:dev": "npm --prefix voicecraft-backend run dev",
+    "backend:start": "npm --prefix voicecraft-backend run start"
+  }
+}
