@@ -410,9 +410,58 @@ const socialLinks = [
 
 export default function Home() {
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [activeSection, setActiveSection] = useState("home");
+  const [navKey, setNavKey] = useState(0);
+  const currentSectionRef = useRef("home");
+
+  const handleNavigateSection = (id) => {
+    currentSectionRef.current = id;
+    setActiveSection(id);
+    setNavKey((k) => k + 1);
+  };
+
+  useEffect(() => {
+    const handleNavEvent = (e) => {
+      const id = e.detail?.id;
+      if (id) {
+        currentSectionRef.current = id;
+        setActiveSection(id);
+        setNavKey((k) => k + 1);
+      }
+    };
+    window.addEventListener("voicecraft:navigate", handleNavEvent);
+    return () => window.removeEventListener("voicecraft:navigate", handleNavEvent);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+            const id = entry.target.id;
+            if (id && currentSectionRef.current !== id) {
+              currentSectionRef.current = id;
+              setActiveSection(id);
+              setNavKey((k) => k + 1);
+            }
+          }
+        });
+      },
+      { threshold: [0.25, 0.5] }
+    );
+
+    const sectionIds = ["home", "about", "programs", "testimonials", "gallery", "enquiry"];
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const selectProgram = (courseTitle) => {
     setSelectedCourse(courseTitle);
+    handleNavigateSection("programs");
     window.setTimeout(() => {
       document
         .getElementById("programs")
@@ -425,24 +474,45 @@ export default function Home() {
       <Navbar
         programs={programs.map((program) => program.title)}
         onSelectProgram={selectProgram}
+        onNavigateSection={handleNavigateSection}
       />
-      <HeroSection />
-      <About />
+      <HeroSection
+        isAnimated={activeSection === "home"}
+        animKey={navKey}
+      />
+      <About
+        isAnimated={activeSection === "about"}
+        animKey={navKey}
+      />
       <Programs
         selectedCourse={selectedCourse}
         setSelectedCourse={setSelectedCourse}
+        isAnimated={activeSection === "programs"}
+        animKey={navKey}
       />
-      <WhyChoose />
-      <Testimonials />
-      <Gallery />
-      <Enquiry />
+      <WhyChoose
+        isAnimated={activeSection === "programs" || activeSection === "about"}
+        animKey={navKey}
+      />
+      <Testimonials
+        isAnimated={activeSection === "testimonials"}
+        animKey={navKey}
+      />
+      <Gallery
+        isAnimated={activeSection === "gallery"}
+        animKey={navKey}
+      />
+      <Enquiry
+        isAnimated={activeSection === "enquiry"}
+        animKey={navKey}
+      />
       <Footer />
     </main>
   );
 }
 
-// 1. HERO SECTION (Clean, standardized layout with round buttons & glassmorphic StatPills)
-function HeroSection() {
+// 1. HERO SECTION (Clean, standardized layout with round buttons, text entrance animations & compact glassmorphic StatPills)
+function HeroSection({ isAnimated, animKey }) {
   return (
     <section
       id="home"
@@ -460,30 +530,31 @@ function HeroSection() {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
-        <div className="max-w-xl md:max-w-lg lg:max-w-xl">
-          <p className="inline-block px-4 py-1.5 rounded-full bg-brand-olive/15 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-3">
+        <div key={`hero-content-${animKey}`} className="max-w-xl md:max-w-lg lg:max-w-xl">
+          <p className="inline-block px-4 py-1.5 rounded-full bg-brand-olive/15 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-3 anim-hero-badge">
             MANY PATHS TO ONE CONFIDENT VOICE
           </p>
 
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.16] tracking-tight text-brand-purple">
-            Unlock your confidence. <br />
-            <span className="text-brand-olive">Communicate with power.</span>
+            <span className="inline-block anim-hero-title-1">Unlock your confidence.</span> <br />
+            <span className="inline-block text-brand-olive anim-hero-title-2">Communicate with power.</span>
           </h1>
 
-          <div className="mt-4 h-1 w-20 rounded-full bg-brand-gold" />
+          <div className="mt-4 h-1 w-20 rounded-full bg-brand-gold anim-hero-line" />
 
-          <p className="mt-4 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90 max-w-lg">
+          <p className="mt-4 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90 max-w-lg anim-hero-desc">
             From confident speaking to developing fluency, we help you express,
             connect and succeed in every stage of life.
           </p>
 
           {/* Round Buttons (strictly rounded-full) */}
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-4 anim-hero-buttons">
             <Button
               href="#enquiry"
               variant="primary"
               size="lg"
               icon={CalendarDays}
+              className="rounded-full shadow-md hover:scale-105 transition-all duration-300"
             >
               Join a Session
             </Button>
@@ -491,13 +562,14 @@ function HeroSection() {
               href="#programs"
               variant="secondary"
               size="lg"
+              className="rounded-full shadow-sm hover:scale-105 transition-all duration-300"
             >
               Explore Programs
             </Button>
           </div>
 
           {/* Mobile Stats Pills */}
-          <div className="mt-10 flex flex-wrap gap-3 md:hidden">
+          <div className="mt-8 flex flex-wrap gap-2.5 md:hidden anim-hero-stats">
             <StatPill icon={Users} value="1000+" label="Students Trained" tone="purple" />
             <StatPill icon={Star} value="20 years" label="Experience" tone="gold" />
             <StatPill icon={Sparkles} value="Personalized" label="Mentorship" tone="purple" />
@@ -505,8 +577,11 @@ function HeroSection() {
         </div>
       </div>
 
-      {/* Desktop Floating Glassmorphic Stat Badges (Cleanly floating along bottom) */}
-      <div className="absolute bottom-6 sm:bottom-8 left-0 right-0 z-20 hidden md:flex items-center justify-center gap-6 lg:gap-8 px-6">
+      {/* Desktop Floating Glassmorphic Stat Badges (Cleanly fitted between the given layout) */}
+      <div
+        key={`hero-stats-${animKey}`}
+        className="absolute bottom-12 md:bottom-14 lg:bottom-16 left-0 right-0 z-20 hidden md:flex items-center justify-center gap-3.5 lg:gap-5 px-4 anim-hero-stats"
+      >
         <StatPill icon={Users} value="1000+" label="Students Trained" tone="purple" />
         <StatPill icon={Star} value="20 years" label="Experience" tone="gold" />
         <StatPill icon={Sparkles} value="Personalized" label="Mentorship" tone="purple" />
@@ -518,25 +593,25 @@ function HeroSection() {
 function StatPill({ icon: Icon, value, label, tone }) {
   const isGold = tone === "gold";
   return (
-    <div className="glass-pill flex items-center gap-3.5 px-5 py-2.5 rounded-full shadow-[0_8px_25px_rgba(74,21,75,0.08)] border border-white/90 backdrop-blur-xl bg-white/85 hover:scale-105 hover:bg-white transition-all duration-300">
+    <div className="glass-pill inline-flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full shadow-[0_4px_14px_rgba(74,21,75,0.06)] border border-white/90 backdrop-blur-xl bg-white/90 hover:scale-105 hover:bg-white transition-all duration-300">
       <div
-        className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
+        className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
           isGold
             ? "bg-gradient-to-tr from-brand-gold to-[#d4aa3b] text-white"
             : "bg-gradient-to-tr from-brand-purple to-brand-deep text-white"
         }`}
       >
-        <Icon size={18} strokeWidth={2.4} />
+        <Icon size={13} strokeWidth={2.4} />
       </div>
       <div className="flex flex-col text-left">
         <strong
-          className={`font-display text-lg sm:text-xl font-extrabold leading-none ${
+          className={`font-display text-xs sm:text-sm font-extrabold leading-tight ${
             isGold ? "text-brand-gold" : "text-brand-purple"
           }`}
         >
           {value}
         </strong>
-        <span className="text-[11px] sm:text-xs font-semibold text-brand-ink/80 leading-tight mt-0.5 whitespace-nowrap">
+        <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 leading-tight whitespace-nowrap">
           {label}
         </span>
       </div>
@@ -545,14 +620,17 @@ function StatPill({ icon: Icon, value, label, tone }) {
 }
 
 // 2. ABOUT SECTION
-function About() {
+function About({ isAnimated, animKey }) {
   return (
     <section
       id="about"
       className="scroll-mt-24 bg-brand-cream px-4 py-16 sm:px-6 md:px-10 md:py-24 border-t border-[#eadfcd]"
     >
-      <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
-        <div className="mx-auto flex flex-col items-center text-center">
+      <div
+        key={`about-${animKey}`}
+        className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center"
+      >
+        <div className={`mx-auto flex flex-col items-center text-center ${isAnimated ? "section-card-enter" : ""}`}>
           <div className="aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-3xl border border-[#eadfcd] bg-white shadow-lg sm:max-w-[300px]">
             <img
               src={authorpic}
@@ -570,7 +648,7 @@ function About() {
             Founder & Master Coach
           </span>
         </div>
-        <div>
+        <div className={isAnimated ? "section-text-enter" : ""}>
           <span className="px-4 py-1.5 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-extrabold uppercase tracking-wider inline-block mb-3">
             Founder's Profile
           </span>
@@ -591,7 +669,7 @@ function About() {
 }
 
 // 3. PROGRAMS SECTION
-function Programs({ selectedCourse, setSelectedCourse }) {
+function Programs({ selectedCourse, setSelectedCourse, isAnimated, animKey }) {
   const detailRef = useRef(null);
   const selectedProgram = selectedCourse ? courseDetails[selectedCourse] : null;
 
@@ -611,9 +689,9 @@ function Programs({ selectedCourse, setSelectedCourse }) {
       id="programs"
       className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 md:px-8 md:py-24 border-t border-[#eadfcd]"
     >
-      <div className="mx-auto max-w-[1240px]">
-        <SectionHeading title="Our Programs" />
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div key={`programs-${animKey}`} className="mx-auto max-w-[1240px]">
+        <SectionHeading title="Our Programs" isAnimated={isAnimated} />
+        <div className={`mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 ${isAnimated ? "section-card-enter" : ""}`}>
           {programs.map((program) => (
             <ProgramCard
               key={program.title}
@@ -845,7 +923,7 @@ function CoursePoint({ children }) {
 }
 
 // 4. WHY CHOOSE SECTION
-function WhyChoose() {
+function WhyChoose({ isAnimated, animKey }) {
   const benefits = [
     {
       title: "Stage Presence",
@@ -881,15 +959,15 @@ function WhyChoose() {
 
   return (
     <section className="bg-brand-deep px-5 py-14 text-center text-white md:px-8 md:py-20 border-t border-[#e6dfd4]">
-      <div className="mx-auto max-w-[1280px]">
-        <div className="mb-10 flex items-center justify-center gap-4">
+      <div key={`why-${animKey}`} className="mx-auto max-w-[1280px]">
+        <div className={`mb-10 flex items-center justify-center gap-4 ${isAnimated ? "section-text-enter" : ""}`}>
           <span className="hidden h-px w-16 bg-brand-gold md:block" />
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#f6f0ec]">
             Why Choose VoiceCraft?
           </h2>
           <span className="hidden h-px w-16 bg-brand-gold md:block" />
         </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+        <div className={`grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 ${isAnimated ? "section-card-enter" : ""}`}>
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
             return (
@@ -916,15 +994,18 @@ function WhyChoose() {
 }
 
 // 5. TESTIMONIALS SECTION
-function Testimonials() {
+function Testimonials({ isAnimated, animKey }) {
   return (
     <section
       id="testimonials"
       className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 md:px-10 md:py-24 border-t border-[#eadfcd]"
     >
-      <div className="mx-auto max-w-[1240px]">
-        <SectionHeading title="From her years of teaching across Bahrain and India, her students say..." />
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div key={`testi-${animKey}`} className="mx-auto max-w-[1240px]">
+        <SectionHeading
+          title="From her years of teaching across Bahrain and India, her students say..."
+          isAnimated={isAnimated}
+        />
+        <div className={`mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${isAnimated ? "section-card-enter" : ""}`}>
           {testimonials.map((item, idx) => (
             <TestimonialCard key={idx} {...item} />
           ))}
@@ -944,7 +1025,7 @@ function TestimonialCard({ quote, name }) {
     .toUpperCase();
 
   return (
-    <figure className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-[#fffaf1] p-6 sm:p-7 shadow-sm">
+    <figure className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-[#fffaf1] p-6 sm:p-7 shadow-sm hover:scale-[1.02] transition-transform duration-300">
       <div>
         <div className="flex gap-1 mb-3" aria-label="5 star rating">
           {[1, 2, 3, 4, 5].map((star) => (
@@ -971,15 +1052,15 @@ function TestimonialCard({ quote, name }) {
 }
 
 // 6. GALLERY SECTION
-function Gallery() {
+function Gallery({ isAnimated, animKey }) {
   return (
     <section
       id="gallery"
       className="scroll-mt-24 bg-brand-cream px-4 py-16 sm:px-6 md:px-10 md:py-20 border-t border-[#eadfcd]"
     >
-      <div className="mx-auto max-w-[1240px]">
-        <SectionHeading title="Gallery" />
-        <div className="marquee-wrapper mt-8 overflow-hidden py-4">
+      <div key={`gallery-${animKey}`} className="mx-auto max-w-[1240px]">
+        <SectionHeading title="Gallery" isAnimated={isAnimated} />
+        <div className={`marquee-wrapper mt-8 overflow-hidden py-4 ${isAnimated ? "section-card-enter" : ""}`}>
           <div className="marquee-track flex gap-6 w-max">
             {[...galleryMoments, ...galleryMoments].map((moment, index) => (
               <div
@@ -1001,14 +1082,14 @@ function Gallery() {
 }
 
 // 7. ENQUIRY SECTION
-function Enquiry() {
+function Enquiry({ isAnimated, animKey }) {
   return (
     <section
       id="enquiry"
       className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 md:px-8 md:py-24 border-t border-[#eadfcd]"
     >
-      <div className="mx-auto max-w-[1180px] rounded-3xl border border-[#eadfcd] bg-brand-cream p-6 sm:p-8 md:p-10 shadow-lg">
-        <div className="mb-8 text-center">
+      <div key={`enquiry-${animKey}`} className={`mx-auto max-w-[1180px] rounded-3xl border border-[#eadfcd] bg-brand-cream p-6 sm:p-8 md:p-10 shadow-lg ${isAnimated ? "section-card-enter" : ""}`}>
+        <div className={`mb-8 text-center ${isAnimated ? "section-text-enter" : ""}`}>
           <div className="mb-3 inline-flex rounded-full border border-[#eadfcd] bg-white px-6 py-2">
             <img src={logo} alt="VoiceCraft" className="h-8 w-auto" />
           </div>
@@ -1316,9 +1397,9 @@ function Footer() {
   );
 }
 
-function SectionHeading({ eyebrow, title }) {
+function SectionHeading({ eyebrow, title, isAnimated }) {
   return (
-    <div className="text-center max-w-3xl mx-auto mb-4">
+    <div className={`text-center max-w-3xl mx-auto mb-4 ${isAnimated ? "section-text-enter" : ""}`}>
       {eyebrow ? (
         <p className="text-xs font-bold uppercase tracking-widest text-brand-olive mb-2">
           {eyebrow}

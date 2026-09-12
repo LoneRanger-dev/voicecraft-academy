@@ -108,3 +108,105 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #B39239;
 }
+
+/* ===================================================
+   DYNAMIC ENTRANCE & PAGE TRANSITION ANIMATIONS
+   =================================================== */
+
+@keyframes textRevealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes textRevealScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes lineExpand {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 5rem;
+    opacity: 1;
+  }
+}
+
+@keyframes sectionTextPulse {
+  0% {
+    opacity: 0.25;
+    transform: translateY(22px);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes cardStaggerEntrance {
+  0% {
+    opacity: 0.3;
+    transform: translateY(24px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Hero Opening Animations */
+.anim-hero-badge {
+  animation: textRevealScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.anim-hero-title-1 {
+  animation: textRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.anim-hero-title-2 {
+  animation: textRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.anim-hero-line {
+  animation: lineExpand 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.anim-hero-desc {
+  animation: textRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.anim-hero-buttons {
+  animation: textRevealScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.72s both;
+}
+
+.anim-hero-stats {
+  animation: textRevealScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+}
+
+/* Page / Section Click Animations */
+.section-text-enter {
+  animation: sectionTextPulse 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.section-card-enter {
+  animation: cardStaggerEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+

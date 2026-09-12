@@ -12,7 +12,7 @@ const navItems = [
   { label: "Enquiry", id: "enquiry" },
 ];
 
-export default function Navbar({ programs = [], onSelectProgram }) {
+export default function Navbar({ programs = [], onSelectProgram, onNavigateSection }) {
   const [activeSection, setActiveSection] = useState("home");
   const [isProgramsOpen, setIsProgramsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -55,6 +55,8 @@ export default function Navbar({ programs = [], onSelectProgram }) {
     setIsProgramsOpen(false);
     setIsMobileMenuOpen(false);
     onSelectProgram?.(program);
+    onNavigateSection?.("programs");
+    window.dispatchEvent(new CustomEvent("voicecraft:navigate", { detail: { id: "programs" } }));
     const elem = document.getElementById("programs");
     if (elem) {
       elem.scrollIntoView({ behavior: "smooth" });
@@ -65,6 +67,8 @@ export default function Navbar({ programs = [], onSelectProgram }) {
     setIsMobileMenuOpen(false);
     setIsProgramsOpen(false);
     setActiveSection(id);
+    onNavigateSection?.(id);
+    window.dispatchEvent(new CustomEvent("voicecraft:navigate", { detail: { id } }));
     const elem = document.getElementById(id);
     if (elem) {
       elem.scrollIntoView({ behavior: "smooth" });
