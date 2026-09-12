@@ -5,12 +5,11 @@ import Button from "./Button.jsx";
 
 const navItems = [
   { label: "Home", id: "home" },
+  { label: "About", id: "about" },
   { label: "Programs", id: "programs" },
-  { label: "Sound Lab", id: "sound-lab" },
-  { label: "Why Us", id: "about" },
-  { label: "Reviews", id: "testimonials" },
+  { label: "Testimonials", id: "testimonials" },
   { label: "Gallery", id: "gallery" },
-  { label: "Contact", id: "enquiry" },
+  { label: "Enquiry", id: "enquiry" },
 ];
 
 export default function Navbar({ programs = [], onSelectProgram }) {

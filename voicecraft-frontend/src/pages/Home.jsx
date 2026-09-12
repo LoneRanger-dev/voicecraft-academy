@@ -1,957 +1,1314 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  Mic,
-  Volume2,
   BookOpen,
+  CalendarDays,
+  ChevronRight,
   Globe,
-  Star,
-  Sparkles,
-  CheckCircle2,
-  Phone,
   Mail,
   MapPin,
-  Clock,
   MessageCircle,
-  ArrowRight,
-  ShieldCheck,
+  Mic,
+  Phone,
+  Presentation,
+  Shield,
+  Sparkles,
+  Star,
   Users,
-  Award,
-  Calendar,
-  Send,
-  Check,
 } from "lucide-react";
-
-// Components
-import Navbar from "../components/Navbar.jsx";
-import Footer from "../components/Footer.jsx";
-import Button from "../components/Button.jsx";
-import SectionTitle from "../components/SectionTitle.jsx";
-import AudioSamplePlayer from "../components/AudioSamplePlayer.jsx";
-import VoiceDiagnosticQuiz from "../components/VoiceDiagnosticQuiz.jsx";
-import ReviewCard from "../components/ReviewCard.jsx";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 
 // Assets
-import logo from "../assets/logo.png";
-import heroBg from "../assets/herobg.png";
-import ieltsLogo from "../assets/icons/ielts-cropped.png";
-import frenchLogo from "../assets/icons/fr-cropped.png";
-import eloquenceLogo from "../assets/icons/Eloquent-cropped.png";
-import englingoLogo from "../assets/icons/eng-cropped.png";
-import authorPic from "../assets/gallery/authorpic.png";
-
-// Gallery Images
-import g1 from "../assets/gallery/g1.jpeg";
-import g2 from "../assets/gallery/g2.jpeg";
-import g3 from "../assets/gallery/g3.jpeg";
-import g4 from "../assets/gallery/g4.jpeg";
-import g5 from "../assets/gallery/g5.jpeg";
-import g6 from "../assets/gallery/g6.jpeg";
+import authorpic from "../assets/gallery/authorpic.png";
+import gallery1 from "../assets/gallery/g1.jpeg";
+import gallery2 from "../assets/gallery/g2.jpeg";
+import gallery3 from "../assets/gallery/g3.jpeg";
+import gallery4 from "../assets/gallery/g4.jpeg";
+import gallery5 from "../assets/gallery/g5.jpeg";
+import gallery6 from "../assets/gallery/g6.jpeg";
 import wa1 from "../assets/gallery/WhatsApp Image 2026-07-27 at 11.04.09 AM.jpeg";
 import wa2 from "../assets/gallery/WhatsApp Image 2026-07-27 at 11.04.20 AM (1).jpeg";
 import wa3 from "../assets/gallery/WhatsApp Image 2026-07-27 at 11.04.20 AM.jpeg";
 import wa4 from "../assets/gallery/WhatsApp Image 2026-07-27 at 11.12.52 AM.jpeg";
 import wa5 from "../assets/gallery/WhatsApp Image 2026-07-27 at 11.12.53 AM.jpeg";
+import heroBg from "../assets/herobg.png";
+import engIcon from "../assets/icons/eng-cropped.png";
+import frIcon from "../assets/icons/fr-cropped.png";
+import ieltsIcon from "../assets/icons/ielts-cropped.png";
+import speakIcon from "../assets/icons/Eloquent-cropped.png";
+import logo from "../assets/logo.png";
 
-const galleryImages = [g1, g2, g3, g4, g5, g6, wa1, wa2, wa3, wa4, wa5];
+// Components
+import Button from "../components/Button.jsx";
+import Navbar from "../components/Navbar.jsx";
 
-const programDetails = [
+const programs = [
   {
-    id: "ielts",
-    title: "IELTS & PTE with VoiceCraft",
-    category: "Exam Mastery",
-    logo: ieltsLogo,
-    badge: "Band 7.5+ Focus",
-    tagline: "Comprehensive Academic & General Training with 1-on-1 Mock Speaking Interviews",
-    overview:
-      "Designed for students and professionals targeting top universities and PR in Canada, the UK, Australia, and New Zealand. Our proprietary rubric pinpoints your lexical range, fluency barriers, and pronunciation markers.",
-    highlights: [
-      "1-on-1 Daily Speaking Evaluations with Real-time Scoring",
-      "Band 8.0+ Model Essay Frameworks & Task 1/2 Blueprints",
-      "Computer-Delivered & Paper-Based Full Length Mock Tests",
-      "Special Focus on Cambridge Practice Tests 15–19",
-      "PTE Core & Academic Modules Included",
-    ],
-    mode: "Classroom in Marathahalli & Live Online",
-    duration: "4 to 8 Weeks Flexible Cohorts",
-    color: "purple",
-  },
-  {
-    id: "bonjour",
-    title: "Bonjour by VoiceCraft",
-    category: "French Language",
-    logo: frenchLogo,
-    badge: "CEFR A1 to B2",
-    tagline: "Immersive French Learning for Beginners, DELF Certification & Canada PR (TEF/TCF)",
-    overview:
-      "Master the French language naturally through phonetics, interactive dialogue roleplays, and structured grammar. Whether starting from scratch (A1) or preparing for Canada PR points (B2/TEF), we guide you to native-like fluency.",
-    highlights: [
-      "DELF A1, A2, B1, B2 Structured Exam Preparation",
-      "Canada PR Additional Points Pathway (TEF Canada / TCF)",
-      "Native Phonetics Lab: R-Sound, Liaison, and Nasal Vowels",
-      "Interactive Speaking Circles & Cultural Immersion",
-      "Official Alliance Française Syllabus Alignment",
-    ],
-    mode: "Weekend & Weekday Batches (Offline/Online)",
-    duration: "Level-wise (6 to 10 Weeks per Level)",
-    color: "gold",
-  },
-  {
-    id: "eloquence",
     title: "Eloquence by VoiceCraft",
-    category: "Leadership & Speaking",
-    logo: eloquenceLogo,
-    badge: "Public Speaking",
-    tagline: "Conquer Stage Anxiety, Inspire Any Audience & Master Executive Presence",
-    overview:
-      "Public speaking is not just about words; it is about energy, cadence, body language, and voice modulation. Eloquence empowers students, executives, and youth leaders to speak with authority on any stage.",
-    highlights: [
-      "The 3-Second Rule: Overcoming Stage Fright & Nervous Tremors",
-      "Vocal Projection, Pacing, and Intentional Silence (The Power Pause)",
-      "Storytelling Structures: The Hero's Journey & Keynote Delivery",
-      "Impromptu Speaking Drills (Table Topics & Panel Discussions)",
-      "Video Recorded Stage Speeches with Frame-by-Frame Critiques",
-    ],
-    mode: "Studio Stage Sessions in Marathahalli & Online",
-    duration: "6 Weeks Intensive Bootcamp",
-    color: "olive",
+    description: "Find your voice, speak confidently, and inspire an audience.",
+    icon: Mic,
+    iconImage: speakIcon,
+    tone: "olive",
   },
   {
-    id: "englingo",
     title: "EngLingo by VoiceCraft",
-    category: "Corporate & Fluency",
-    logo: englingoLogo,
-    badge: "Everyday English",
-    tagline: "Workplace Communication, Accent Clarity, Fluency & Confident Conversations",
-    overview:
-      "Break free from translation hesitation and mother tongue influence. EngLingo is engineered for professionals, job seekers, and homemakers who want crisp, spontaneous English in daily meetings and social life.",
-    highlights: [
-      "Accent Neutralization & MTI (Mother Tongue Influence) Reduction",
-      "Corporate Phrasing: Emails, Negotiations, and Standups",
-      "Spontaneous Thinking Drills without Internal Translation",
-      "Small Group Practice with Safe, Constructive Feedback",
-      "Grammar in Action: Natural Usage without Rote Memorization",
-    ],
-    mode: "Classroom in Marathahalli & Live Evening Online",
-    duration: "4 to 8 Weeks",
-    color: "purple",
+    description: "Build strong language skills for everyday fluency and professional use.",
+    icon: BookOpen,
+    iconImage: engIcon,
+    tone: "purple",
+  },
+  {
+    title: "Bonjour by VoiceCraft",
+    description: "Learn French with ease and speak with confidence.",
+    icon: BookOpen,
+    iconImage: frIcon,
+    tone: "olive",
+  },
+  {
+    title: "IELTS & PTE Training",
+    description: "Expert coaching to help you achieve your desired band score.",
+    icon: Globe,
+    iconImage: ieltsIcon,
+    tone: "purple",
   },
 ];
 
+const galleryMoments = [
+  gallery1,
+  gallery2,
+  gallery3,
+  gallery4,
+  gallery5,
+  gallery6,
+  wa1,
+  wa2,
+  wa3,
+  wa4,
+  wa5,
+].map((image, index) => ({ title: `Gallery Photo ${index + 1}`, image }));
+
+const enquiryPrograms = [
+  "IELTS & PTE Training",
+  "Eloquence by VoiceCraft",
+  "Bonjour by VoiceCraft",
+  "EngLingo by VoiceCraft",
+];
+
+const courseDetails = {
+  "Eloquence by VoiceCraft": {
+    intro:
+      "Eloquence by VoiceCraft helps young learners find their voice and inspire their audience.",
+    overview: [
+      "Public speaking is the ability to think clearly, communicate confidently, express ideas effectively, and connect with people in meaningful ways.",
+      "The program is designed for children, teenagers, and young adults, and is inspired by recognized public speaking and youth leadership frameworks.",
+      "Eloquence develops the complete communicator: someone who can think, organize, present, lead discussions, and communicate effectively in real-life situations.",
+    ],
+    bestFor:
+      "Children aged 10 to 12 years, teenagers, young adults, students in debates and competitions, learners with stage fear, and students preparing for interviews or leadership roles.",
+    covers: [
+      "Communication skills",
+      "Confidence building",
+      "Presentation skills",
+      "Thinking skills",
+      "Leadership skills",
+      "Audience engagement",
+    ],
+    outcomes: [
+      "Speak confidently before an audience",
+      "Organize and present ideas clearly",
+      "Improve articulation, fluency, body language, and voice modulation",
+      "Think critically and respond spontaneously",
+      "Build leadership and interpersonal communication skills",
+    ],
+    moreDetails: [
+      {
+        title: "Mentorship and Program Foundation",
+        paragraphs: [
+          "Developed by Jothi, the course helps learners overcome hesitation, build self-confidence, and develop communication skills for academic, professional, and personal life.",
+          "Public speaking is not a single skill. It is a combination of communication, confidence, leadership, critical thinking, and audience engagement.",
+        ],
+      },
+      {
+        title: "Option 1: Eloquence Fast Track (3 Months)",
+        paragraphs: [
+          "Recommended for students who already possess a reasonable command of English and want focused communication development for competitions, interviews, leadership roles, or presentations.",
+        ],
+        points: [
+          "24 sessions of 2.5 hours each",
+          "Level 1: Speaking with Confidence",
+          "Level 2: Organizing and Delivering Ideas",
+          "Level 3: Thinking on Your Feet",
+          "Final showcase speech",
+        ],
+      },
+      {
+        title: "Option 2: Leadership and Communication Pathway (1 Year)",
+        paragraphs: [
+          "Recommended for students aged 8 to 15 years who wish to build communication skills progressively and develop long-term confidence, leadership, and presentation abilities.",
+        ],
+        points: [
+          "80 to 100 instructional hours",
+          "Level 1: Finding My Voice",
+          "Level 2: Expressing My Ideas",
+          "Level 3: Influencing and Leading",
+          "Level 4: The Confident Communicator",
+        ],
+      },
+      {
+        title: "Assessment and Feedback",
+        points: [
+          "Speech evaluations",
+          "Individual feedback",
+          "Peer assessments",
+          "Presentation reviews",
+          "Communication challenges",
+          "Leadership activities",
+          "Final showcase presentations",
+        ],
+      },
+      {
+        title: "Why Choose Eloquence by VoiceCraft?",
+        paragraphs: [
+          "To speak confidently and live boldly, Eloquence helps young learners discover their voice, develop confidence, and express themselves with clarity, purpose, and impact.",
+        ],
+      },
+    ],
+  },
+  "EngLingo by VoiceCraft": {
+    intro:
+      "EngLingo by VoiceCraft is customized English learning for real-life success.",
+    overview: [
+      "EngLingo is a personalized English language development program designed around your goals, age, proficiency level, and purpose for learning.",
+      "It supports students, professionals, entrepreneurs, job seekers, homemakers, and parents seeking academic support for children.",
+    ],
+    bestFor:
+      "Students, professionals, entrepreneurs, job seekers, homemakers, and parents looking for academic English support.",
+    covers: [
+      "English grammar and foundations",
+      "Spoken English",
+      "Workplace communication",
+      "Business English",
+      "Email and letter writing",
+      "Presentation and meeting skills",
+      "Vocabulary",
+      "Reading comprehension",
+      "Creative and academic writing",
+      "Interview preparation",
+    ],
+    outcomes: [
+      "Communicate more confidently",
+      "Write clearly and professionally",
+      "Strengthen grammar and accuracy",
+      "Improve reading and comprehension",
+      "Express ideas with clarity",
+    ],
+    moreDetails: [
+      {
+        title: "Our Approach",
+        paragraphs: [
+          "Training is built on a strong grammar foundation using trusted resources such as Wren & Martin along with contemporary learning materials.",
+          "Every learner begins with an assessment, followed by a customized learning plan.",
+        ],
+      },
+      {
+        title: "For School Students",
+        paragraphs: [
+          "Sessions can align with school curriculum, textbooks, worksheets, and classroom requirements.",
+        ],
+      },
+      {
+        title: "For Professionals",
+        paragraphs: [
+          "Professionals can choose targeted modules for workplace communication, business writing, presentations, client interactions, and leadership communication.",
+        ],
+      },
+      {
+        title: "Why Choose EngLingo by VoiceCraft?",
+        paragraphs: [
+          "To find your voice and shape your future, language learning should fit the learners needs rather than being the other way around. We build for every learner a bespoke learning pathway that fits their language acquisition needs and wants.",
+        ],
+      },
+    ],
+  },
+  "Bonjour by VoiceCraft": {
+    intro:
+      "Bonjour by VoiceCraft builds practical French communication skills for study, travel, work, relocation, and cultural integration.",
+    overview: [
+      "French is a gateway to global opportunities, cultural experiences, travel, higher education, and human connections.",
+      "Bonjour is designed for complete beginners and early intermediate learners who want practical French skills.",
+    ],
+    bestFor:
+      "Beginners, students, professionals, relocating individuals, travellers, and anyone interested in French language and culture.",
+    covers: [
+      "Listening",
+      "Speaking",
+      "Reading",
+      "Writing",
+      "Guided practice",
+      "Assessments and feedback",
+    ],
+    outcomes: [
+      "Understand basic to intermediate conversations",
+      "Discuss everyday topics",
+      "Read practical French texts",
+      "Write short messages",
+      "Use grammar and vocabulary accurately",
+      "Build confidence with French speakers",
+    ],
+    moreDetails: [
+      {
+        title: "Structured Learning Journey",
+        paragraphs: [
+          "Bonjour is divided into six progressive levels from foundational French toward intermediate communication competency.",
+        ],
+      },
+      {
+        title: "Our Approach",
+        paragraphs: [
+          "Classes combine practical conversation, pronunciation coaching, grammar, vocabulary, listening, reading, writing, and cultural learning.",
+        ],
+      },
+      {
+        title: "Learning Beyond the Classroom",
+        points: [
+          "Practice worksheets",
+          "Vocabulary lists",
+          "Audio resources",
+          "Reading materials",
+          "Conversation activities",
+          "Revision exercises",
+        ],
+      },
+      {
+        title: "Assessment and Feedback",
+        paragraphs: [
+          "Progress is monitored through assessments, participation, practical activities, and tutor feedback.",
+        ],
+      },
+      {
+        title: "Why Choose Bonjour by VoiceCraft?",
+        paragraphs: [
+          "To learn French and be a global citizen, language learning should prepare one not merely for an exam but also for life. Bonjour has six levels of French modules that caters to freshers, beginners and intermediate levels of learning French.",
+        ],
+      },
+    ],
+  },
+  "IELTS & PTE Training": {
+    intro:
+      "IELTS and PTE by VoiceCraft is your gateway to global education, work, and migration opportunities.",
+    overview: [
+      "IELTS is one of the world's most recognized English proficiency examinations.",
+      "IELTS and PTE by VoiceCraft helps learners understand the exam format, develop strong language skills, and approach the test with confidence.",
+    ],
+    bestFor:
+      "Students planning to study abroad, professionals seeking overseas opportunities, emigrating applicants and learners requiring proof of English proficiency.",
+    covers: [
+      "IELTS format",
+      "Listening",
+      "Reading",
+      "Writing",
+      "Speaking",
+      "Test strategies",
+      "Grammar and vocabulary",
+      "Personalized feedback",
+    ],
+    outcomes: [
+      "Understand the IELTS format",
+      "Improve all four modules",
+      "Develop test-taking strategies",
+      "Strengthen grammar and vocabulary",
+      "Communicate clearly",
+      "Prepare for global opportunities",
+    ],
+    moreDetails: [
+      {
+        title: "Learn from Experience",
+        paragraphs: [
+          "The program is led by Jothi, an experienced language educator with over 20 years of English training and learner mentoring experience.",
+        ],
+      },
+      {
+        title: "Understanding the IELTS Examination",
+        paragraphs: [
+          "IELTS assesses Listening, Reading, Writing, and Speaking skills.",
+        ],
+      },
+      {
+        title: "Module Practice",
+        points: [
+          "Listening for details and opinions",
+          "Reading for main ideas and viewpoints",
+          "Writing essays, reports, and correspondence",
+          "Speaking with fluency and pronunciation",
+        ],
+      },
+      {
+        title: "Our Approach",
+        paragraphs: [
+          "Training focuses on official format understanding, language proficiency, grammar, vocabulary, confidence, writing structure, and individual feedback.",
+        ],
+      },
+      {
+        title: "Assessment and Progress Tracking",
+        points: [
+          "Practice exercises",
+          "Module-based activities",
+          "Mock assessments",
+          "Speaking evaluations",
+          "Writing reviews",
+          "Performance discussions",
+        ],
+      },
+      {
+        title: "Why Choose IELTS and PTE by VoiceCraft?",
+        paragraphs: [
+          "To prepare learners for global opportunities as a student or a professional, learners receive structured guidance, expert mentoring, targeted practice and personalized feedback.",
+        ],
+      },
+    ],
+  },
+};
+
 const testimonials = [
   {
-    name: "Dr. Arvind Menon",
-    role: "Medical Professional, NHS UK",
-    rating: 5,
-    program: "IELTS with VoiceCraft",
-    result: "Band 8.0 First Attempt",
-    review:
-      "Trainer Jothi’s personalized speaking feedback completely eliminated my nervous pacing. She diagnosed exact lexical patterns holding me back at Band 6.5. Within 5 weeks, I scored Band 8.0 overall!",
+    quote: "Jyothi Ma'am's friendly guidance, deep knowledge, and practical teaching improved my confidence in speaking English.",
+    name: "Kavin Raj",
   },
   {
-    name: "Priyanka Deshmukh",
-    role: "Software Architect, Bengaluru",
-    rating: 5,
-    program: "Eloquence by VoiceCraft",
-    result: "Keynote Speaker",
-    review:
-      "Before Eloquence, presenting to directors felt paralyzing. The vocal projection drills and stage simulations gave me unmatched composure. Last month, I delivered our annual tech keynote to 400+ attendees!",
+    quote: "Jothi mam was very interactive and supportive, making every IELTS & PTE class engaging and easy to understand.",
+    name: "Meriza Kuruvilla",
   },
   {
-    name: "Rohan Kulkarni",
-    role: "Canada Express Entry Candidate",
-    rating: 5,
-    program: "Bonjour by VoiceCraft",
-    result: "DELF B2 Cleared",
-    review:
-      "Learning French from scratch seemed daunting, but Bonjour's phonetic approach made pronunciation intuitive. The mock TEF interviews were the golden key to achieving my extra 50 Canada PR points!",
+    quote: "Jyothi Ma'am's support, enthusiasm, and clear explanations helped me grow confident in speaking skills.",
+    name: "Avani Goyal",
   },
   {
-    name: "Sneha Reddy",
-    role: "Product Marketing Manager",
-    rating: 5,
-    program: "EngLingo by VoiceCraft",
-    result: "Promoted to Lead",
-    review:
-      "EngLingo transformed my workplace confidence. I stopped translating Telugu to English in my head. My articulation is crisp, clear, and respected in international stakeholder calls.",
+    quote: "Jothi Ma'am explained grammar clearly, gave regular speaking practice, and helped me overcome my fear of English.",
+    name: "Gowthami Ragappagari",
   },
   {
-    name: "Vikram Shenoy",
-    role: "Civil Engineering Student",
-    rating: 5,
-    program: "IELTS with VoiceCraft",
-    result: "Band 7.5 (Speaking 8.0)",
-    review:
-      "The classroom energy at Marathahalli is electrifying. Mock tests on Saturdays feel exactly like the real IDP exam. VoiceCraft is the best investment I made for my Australian Masters journey.",
+    quote: "Jyothi Ma'am taught effectively, spoke clearly, gave daily homework, and helped me speak English more confidently.",
+    name: "Laxmikanta Sahu",
   },
   {
-    name: "Meera Nair",
-    role: "High School Debater",
-    rating: 5,
-    program: "Eloquence by VoiceCraft",
-    result: "Best Speaker Trophy",
-    review:
-      "The trainer helped me structure arguments logically under time limits. From stuttering during school assemblies to winning the inter-school debate trophy, Eloquence changed my life!",
+    quote: "Jothi Ma'am made English lessons fun and engaging, helping me overcome my fear of speaking and making mistakes.",
+    name: "Pahi Borborah",
+  },
+];
+
+const socialLinks = [
+  {
+    label: "Facebook",
+    icon: FaFacebookF,
+    href: "https://www.facebook.com/profile.php?id=61591796930292",
+  },
+  {
+    label: "Instagram",
+    icon: FaInstagram,
+    href: "https://www.instagram.com/voicecraftacademy_india",
   },
 ];
 
 export default function Home() {
-  const [selectedProgramTab, setSelectedProgramTab] = useState("ielts");
-  const [enquiryProgram, setEnquiryProgram] = useState("IELTS & PTE with VoiceCraft");
-  const [formStatus, setFormStatus] = useState({ submitting: false, success: false, error: "" });
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
-  const enquiryFormRef = useRef(null);
-
-  const handleSelectProgramFromNavbar = (programName) => {
-    const found = programDetails.find((p) =>
-      p.title.toLowerCase().includes(programName.toLowerCase())
-    );
-    if (found) {
-      setSelectedProgramTab(found.id);
-      setEnquiryProgram(found.title);
-    }
+  const selectProgram = (courseTitle) => {
+    setSelectedCourse(courseTitle);
+    window.setTimeout(() => {
+      document
+        .getElementById("programs")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 40);
   };
 
-  const handleEnrollClick = (programTitle) => {
-    setEnquiryProgram(programTitle);
-    const element = document.getElementById("enquiry");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  return (
+    <main className="mx-auto min-h-screen w-full max-w-[1440px] overflow-hidden bg-brand-cream pt-[72px] shadow-soft sm:border sm:border-[#e8dfd7] lg:pt-[76px]">
+      <Navbar
+        programs={programs.map((program) => program.title)}
+        onSelectProgram={selectProgram}
+      />
+      <HeroSection />
+      <About />
+      <Programs
+        selectedCourse={selectedCourse}
+        setSelectedCourse={setSelectedCourse}
+      />
+      <WhyChoose />
+      <Testimonials />
+      <Gallery />
+      <Enquiry />
+      <Footer />
+    </main>
+  );
+}
+
+// 1. HERO SECTION (Clean, standardized layout with round buttons & zero overlap)
+function HeroSection() {
+  return (
+    <section
+      id="home"
+      data-section="home"
+      aria-label="Home section"
+      className="relative min-h-[540px] scroll-mt-24 overflow-hidden bg-brand-cream px-4 py-12 sm:px-6 md:min-h-[640px] lg:min-h-[700px] flex items-center"
+    >
+      {/* Background Graphic */}
+      <img
+        src={heroBg}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 hidden h-full w-full select-none object-cover opacity-90 md:block"
+        draggable="false"
+      />
+
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-xl">
+          <p className="inline-block px-4 py-1.5 rounded-full bg-brand-olive/15 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-3">
+            MANY PATHS TO ONE CONFIDENT VOICE
+          </p>
+
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.18] tracking-tight text-brand-purple">
+            Unlock your confidence. <br />
+            <span className="text-brand-olive">Communicate with power.</span>
+          </h1>
+
+          <div className="mt-4 h-1 w-20 rounded-full bg-brand-gold" />
+
+          <p className="mt-4 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90">
+            From confident speaking to developing fluency, we help you express,
+            connect and succeed in every stage of life.
+          </p>
+
+          {/* Round Buttons (rounded-full) */}
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Button
+              href="#enquiry"
+              variant="primary"
+              size="lg"
+              icon={CalendarDays}
+            >
+              Join a Session
+            </Button>
+            <Button
+              href="#programs"
+              variant="secondary"
+              size="lg"
+            >
+              Explore Programs
+            </Button>
+          </div>
+        </div>
+
+        {/* Hero Stats Row (Standardized cleanly at bottom) */}
+        <div className="mt-14 pt-8 border-t border-brand-purple/15 grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-2xl">
+          <HeroStat value="1000+" label="Students Trained" tone="purple" />
+          <HeroStat value="20 years" label="Experience" tone="gold" />
+          <HeroStat value="Personalized" label="Mentorship" tone="purple" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HeroStat({ value, label, tone }) {
+  return (
+    <div className="flex flex-col">
+      <strong
+        className={`font-display text-2xl sm:text-3xl font-extrabold leading-tight ${
+          tone === "gold" ? "text-brand-gold" : "text-brand-purple"
+        }`}
+      >
+        {value}
+      </strong>
+      <span className="mt-1 text-xs sm:text-sm font-semibold text-brand-ink/80">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+// 2. ABOUT SECTION
+function About() {
+  return (
+    <section
+      id="about"
+      className="scroll-mt-24 bg-brand-cream px-4 py-16 sm:px-6 md:px-10 md:py-24 border-t border-[#eadfcd]"
+    >
+      <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
+        <div className="mx-auto flex flex-col items-center text-center">
+          <div className="aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-3xl border border-[#eadfcd] bg-white shadow-lg sm:max-w-[300px]">
+            <img
+              src={authorpic}
+              alt="Jothi from VoiceCraft"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <blockquote className="mt-4 text-[17px] font-semibold italic text-brand-olive sm:text-[19px]">
+            “Reading is rewarding”
+          </blockquote>
+          <p className="mt-2 font-display text-[28px] font-bold leading-none text-brand-purple sm:text-[32px]">
+            DTM Jothi
+          </p>
+          <span className="text-xs font-bold text-brand-gold uppercase tracking-wider mt-1">
+            Founder & Master Coach
+          </span>
+        </div>
+        <div>
+          <span className="px-4 py-1.5 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-extrabold uppercase tracking-wider inline-block mb-3">
+            Founder's Profile
+          </span>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-brand-purple">
+            About VoiceCraft
+          </h2>
+          <p className="mt-5 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90">
+            Founded and led by DTM Jothi, VoiceCraft is dedicated to empowering
+            individuals to speak with clarity, confidence, and impact. With
+            decades of experience in mentoring speakers and language learners,
+            her work helps students, professionals, and aspiring leaders communicate
+            effectively at every stage of life.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// 3. PROGRAMS SECTION
+function Programs({ selectedCourse, setSelectedCourse }) {
+  const detailRef = useRef(null);
+  const selectedProgram = selectedCourse ? courseDetails[selectedCourse] : null;
+
+  useEffect(() => {
+    if (selectedCourse) {
+      window.setTimeout(() => {
+        detailRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }, 60);
     }
-  };
+  }, [selectedCourse]);
 
-  const handleSubmitEnquiry = async (e) => {
-    e.preventDefault();
-    setFormStatus({ submitting: true, success: false, error: "" });
+  return (
+    <section
+      id="programs"
+      className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 md:px-8 md:py-24 border-t border-[#eadfcd]"
+    >
+      <div className="mx-auto max-w-[1240px]">
+        <SectionHeading title="Our Programs" />
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {programs.map((program) => (
+            <ProgramCard
+              key={program.title}
+              {...program}
+              isActive={selectedCourse === program.title}
+              onLearnMore={() => setSelectedCourse(program.title)}
+            />
+          ))}
+        </div>
+        {selectedProgram ? (
+          <CourseDetailPanel
+            panelRef={detailRef}
+            title={selectedCourse}
+            iconImage={
+              programs.find((program) => program.title === selectedCourse)
+                ?.iconImage
+            }
+            details={selectedProgram}
+          />
+        ) : null}
+      </div>
+    </section>
+  );
+}
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+function ProgramCard({
+  title,
+  description,
+  icon: Icon,
+  iconImage,
+  isActive,
+  onLearnMore,
+}) {
+  return (
+    <article
+      className={`flex min-h-[330px] flex-col items-center rounded-3xl border bg-[#FAF9F6] p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${
+        isActive
+          ? "border-brand-olive ring-2 ring-brand-olive/30 bg-white"
+          : "border-[#eadfcd]"
+      }`}
+    >
+      <div className="grid h-[130px] w-full place-items-center justify-items-center">
+        {iconImage ? (
+          <img
+            src={iconImage}
+            alt={title}
+            className="max-h-[110px] max-w-[90%] object-contain rounded-2xl bg-white p-2 shadow-sm"
+          />
+        ) : (
+          <Icon className="h-20 w-20 text-brand-purple" />
+        )}
+      </div>
+
+      <h3 className="mt-4 font-display text-xl font-bold text-brand-purple">
+        {title}
+      </h3>
+
+      <p className="mt-2 min-h-[64px] text-sm font-medium leading-relaxed text-brand-ink/80">
+        {description}
+      </p>
+
+      {/* Strict rounded-full button */}
+      <button
+        type="button"
+        aria-expanded={isActive}
+        onClick={onLearnMore}
+        className={`mt-auto inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm ${
+          isActive
+            ? "bg-brand-olive text-white hover:bg-[#5e6b26]"
+            : "bg-brand-purple text-white hover:bg-brand-deep"
+        }`}
+      >
+        <span>{isActive ? "Viewing Details" : "Learn More"}</span>
+        <ChevronRight size={16} strokeWidth={2.8} />
+      </button>
+    </article>
+  );
+}
+
+function CourseDetailPanel({ panelRef, title, iconImage, details }) {
+  const [isMoreDetailsOpen, setIsMoreDetailsOpen] = useState(false);
+  useEffect(() => setIsMoreDetailsOpen(false), [title]);
+
+  return (
+    <article
+      ref={panelRef}
+      className="mt-10 overflow-hidden rounded-3xl border border-[#d8cc8b] bg-brand-cream shadow-xl"
+    >
+      <div className="grid gap-0 lg:grid-cols-[0.95fr_1.4fr]">
+        <div className="relative overflow-hidden bg-brand-deep px-6 py-8 text-white md:px-10 md:py-10">
+          <div className="grid h-[120px] w-[200px] place-items-center overflow-hidden rounded-2xl bg-white p-3 shadow-md">
+            {iconImage ? (
+              <img
+                src={iconImage}
+                alt=""
+                className="max-h-full max-w-full object-contain"
+              />
+            ) : null}
+          </div>
+          <p className="mt-6 text-xs font-bold uppercase tracking-widest text-brand-gold">
+            Course Details
+          </p>
+          <h3 className="mt-2 font-display text-3xl font-bold leading-tight text-white md:text-4xl">
+            {title}
+          </h3>
+          <p className="mt-4 text-sm font-medium leading-relaxed text-white/90">
+            {details.intro}
+          </p>
+          {details.overview.map((paragraph, i) => (
+            <p
+              key={i}
+              className="mt-3 text-xs sm:text-sm font-medium leading-relaxed text-white/80"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <div className="bg-[#fffaf1] p-6 md:p-10 flex flex-col justify-between">
+          <div>
+            <div className="grid gap-6 md:grid-cols-2">
+              <DetailList title="What you will learn" items={details.covers} />
+              <DetailList title="You will be able to" items={details.outcomes} />
+            </div>
+
+            {details.moreDetails?.length ? (
+              <button
+                type="button"
+                aria-expanded={isMoreDetailsOpen}
+                onClick={() => setIsMoreDetailsOpen((open) => !open)}
+                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-brand-olive bg-white px-6 py-3 text-xs font-bold text-brand-olive shadow-sm transition hover:bg-brand-cream cursor-pointer"
+              >
+                <span>{isMoreDetailsOpen ? "Hide Details" : "More Details"}</span>
+                <ChevronRight
+                  size={16}
+                  strokeWidth={2.8}
+                  className={`transition-transform ${isMoreDetailsOpen ? "-rotate-90" : "rotate-90"}`}
+                />
+              </button>
+            ) : null}
+
+            {details.moreDetails?.length && isMoreDetailsOpen ? (
+              <div className="mt-6">
+                <MoreDetails details={details.moreDetails} />
+              </div>
+            ) : null}
+          </div>
+
+          <div className="mt-8 rounded-2xl border border-[#eadfcd] bg-white p-5 shadow-sm">
+            <p className="text-xs sm:text-sm font-medium leading-relaxed text-brand-ink">
+              <strong className="text-brand-olive">Best for:</strong>{" "}
+              {details.bestFor}
+            </p>
+            <div className="mt-4 flex flex-col gap-3 border-t border-[#eadfcd] pt-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm font-bold text-brand-purple">
+                Start your journey with us by filling the enquiry form.
+              </p>
+              <a
+                href="#enquiry"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-purple px-6 py-3 text-xs font-bold text-white shadow-md hover:bg-brand-deep transition-colors shrink-0"
+              >
+                <span>Enquire Now</span>
+                <ChevronRight size={16} strokeWidth={3} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function MoreDetails({ details }) {
+  return (
+    <div className="mb-6 rounded-2xl border border-[#eadfcd] bg-white p-6 shadow-sm">
+      <h4 className="font-display text-xl font-bold text-brand-purple mb-4">
+        More Details
+      </h4>
+      <div className="grid gap-5">
+        {details.map((section, idx) => (
+          <section key={idx}>
+            <h5 className="text-sm font-bold text-brand-olive">
+              {section.title}
+            </h5>
+            <div className="mt-2 grid gap-2">
+              {section.paragraphs?.map((paragraph, pIdx) => (
+                <p
+                  key={pIdx}
+                  className="text-xs sm:text-sm font-medium leading-relaxed text-brand-ink"
+                >
+                  {paragraph}
+                </p>
+              ))}
+              {section.points?.length ? (
+                <ul className="mt-2 grid gap-1.5">
+                  {section.points.map((point, ptIdx) => (
+                    <CoursePoint key={ptIdx}>{point}</CoursePoint>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DetailList({ title, items }) {
+  return (
+    <div>
+      <h4 className="text-sm font-bold text-brand-purple mb-3">{title}</h4>
+      <ul className="grid gap-2">
+        {items.map((item, idx) => (
+          <CoursePoint key={idx}>{item}</CoursePoint>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function CoursePoint({ children }) {
+  return (
+    <li className="flex items-start gap-2.5 text-xs sm:text-sm font-medium leading-relaxed text-brand-ink">
+      <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-olive" />
+      <span>{children}</span>
+    </li>
+  );
+}
+
+// 4. WHY CHOOSE SECTION
+function WhyChoose() {
+  const benefits = [
+    {
+      title: "Stage Presence",
+      description: "To overcome the 'phobia' of speaking in public, build stage presence, Engage any audience with confidence and poise.",
+      icon: Presentation,
+    },
+    {
+      title: "Build Confidence",
+      description: "To build confidence. Speak without fear, self-doubt, or hesitation.",
+      icon: Star,
+    },
+    {
+      title: "Improve Fluency",
+      description: "To improve fluency. Express your thoughts clearly, naturally, and precisely.",
+      icon: MessageCircle,
+    },
+    {
+      title: "Conquer Fear",
+      description: "To overcome stage fear. Conquer anxiety and stand tall in front of any crowd.",
+      icon: Shield,
+    },
+    {
+      title: "Speak & Lead",
+      description: "To speak, lead and be heard. Inspire others and command attention with your voice.",
+      icon: Users,
+    },
+    {
+      title: "Unleash Potential",
+      description: "To unleash your potential. Unlock new personal and professional opportunities.",
+      icon: Sparkles,
+    },
+  ];
+
+  return (
+    <section className="bg-brand-deep px-5 py-14 text-center text-white md:px-8 md:py-20 border-t border-[#e6dfd4]">
+      <div className="mx-auto max-w-[1280px]">
+        <div className="mb-10 flex items-center justify-center gap-4">
+          <span className="hidden h-px w-16 bg-brand-gold md:block" />
+          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#f6f0ec]">
+            Why Choose VoiceCraft?
+          </h2>
+          <span className="hidden h-px w-16 bg-brand-gold md:block" />
+        </div>
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon;
+            return (
+              <article
+                key={benefit.title}
+                className={`flex flex-col items-center px-4 ${index > 0 ? "lg:border-l lg:border-white/15" : ""}`}
+              >
+                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-3">
+                  <Icon className="h-8 w-8 text-brand-gold" strokeWidth={2} />
+                </div>
+                <h3 className="font-display text-lg font-bold text-brand-gold">
+                  {benefit.title}
+                </h3>
+                <p className="mt-2 text-xs font-medium leading-relaxed text-[#efe9f2]/85">
+                  {benefit.description}
+                </p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// 5. TESTIMONIALS SECTION
+function Testimonials() {
+  return (
+    <section
+      id="testimonials"
+      className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 md:px-10 md:py-24 border-t border-[#eadfcd]"
+    >
+      <div className="mx-auto max-w-[1240px]">
+        <SectionHeading title="From her years of teaching across Bahrain and India, her students say..." />
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((item, idx) => (
+            <TestimonialCard key={idx} {...item} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialCard({ quote, name }) {
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+
+  return (
+    <figure className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-[#fffaf1] p-6 sm:p-7 shadow-sm">
+      <div>
+        <div className="flex gap-1 mb-3" aria-label="5 star rating">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <Star
+              key={star}
+              className="h-5 w-5 fill-brand-gold text-brand-gold"
+            />
+          ))}
+        </div>
+        <blockquote className="text-sm font-medium italic leading-relaxed text-brand-ink/90">
+          "{quote}"
+        </blockquote>
+      </div>
+      <figcaption className="mt-6 flex items-center gap-3.5 pt-4 border-t border-brand-purple/10">
+        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-[#d8cc8b] bg-white text-base font-extrabold uppercase text-brand-purple shadow-sm">
+          {initials}
+        </div>
+        <strong className="text-sm font-bold text-brand-purple">
+          {name}
+        </strong>
+      </figcaption>
+    </figure>
+  );
+}
+
+// 6. GALLERY SECTION
+function Gallery() {
+  return (
+    <section
+      id="gallery"
+      className="scroll-mt-24 bg-brand-cream px-4 py-16 sm:px-6 md:px-10 md:py-20 border-t border-[#eadfcd]"
+    >
+      <div className="mx-auto max-w-[1240px]">
+        <SectionHeading title="Gallery" />
+        <div className="marquee-wrapper mt-8 overflow-hidden py-4">
+          <div className="marquee-track flex gap-6 w-max">
+            {[...galleryMoments, ...galleryMoments].map((moment, index) => (
+              <div
+                key={index}
+                className="w-64 sm:w-80 aspect-[4/3] shrink-0 overflow-hidden rounded-2xl border border-[#d8cc8b] bg-white shadow-md hover:scale-105 transition-transform duration-300"
+              >
+                <img
+                  src={moment.image}
+                  alt={moment.title}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// 7. ENQUIRY SECTION
+function Enquiry() {
+  return (
+    <section
+      id="enquiry"
+      className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 md:px-8 md:py-24 border-t border-[#eadfcd]"
+    >
+      <div className="mx-auto max-w-[1180px] rounded-3xl border border-[#eadfcd] bg-brand-cream p-6 sm:p-8 md:p-10 shadow-lg">
+        <div className="mb-8 text-center">
+          <div className="mb-3 inline-flex rounded-full border border-[#eadfcd] bg-white px-6 py-2">
+            <img src={logo} alt="VoiceCraft" className="h-8 w-auto" />
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-brand-purple">
+            Enquire Now
+          </h2>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-start">
+          <ProgramEnquiryForm />
+
+          <aside className="flex flex-col justify-between rounded-2xl border border-[#eadfcd] bg-white p-6 sm:p-7 shadow-sm h-full">
+            <div>
+              <h3 className="font-display text-2xl font-bold text-brand-olive">
+                Need to talk?
+              </h3>
+              <p className="mt-1 text-sm font-bold text-brand-ink">
+                We're here to help.
+              </p>
+              <div className="mt-6 space-y-4">
+                <EnquiryContactItem
+                  icon={Phone}
+                  label="Phone"
+                  value="+91 9919911027"
+                />
+                <EnquiryContactItem
+                  icon={Mail}
+                  label="Email"
+                  value="voicecraftwithjothi@gmail.com"
+                />
+              </div>
+            </div>
+
+            <div className="mt-8 flex items-center gap-3 border-t border-[#e5d8bd] pt-5">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#25D366] text-white">
+                <MessageCircle size={20} />
+              </span>
+              <p className="text-xs sm:text-sm font-bold text-brand-ink">
+                We usually respond within 24 hours.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProgramEnquiryForm() {
+  const [submitState, setSubmitState] = useState({
+    status: "idle",
+    message: "",
+  });
+  const isSubmitting = submitState.status === "submitting";
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const enquiry = {
+      fullName: formData.get("fullName"),
+      phone: formData.get("phone"),
+      program: formData.get("program"),
+      mode: formData.get("mode"),
+      message: formData.get("message"),
+    };
+    setSubmitState({ status: "submitting", message: "Sending enquiry..." });
 
     try {
       const web3FormsKey = import.meta.env.VITE_WEB3FORMS_KEY || "197f0109-a9e0-4029-88e8-63c5461c8801";
 
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: web3FormsKey,
-          subject: `VoiceCraft Enquiry: ${data.fullName} - ${data.program}`,
-          from_name: "VoiceCraft Academy Website",
-          ...data,
+          subject: `New VoiceCraft Enquiry - ${enquiry.program}`,
+          from_name: enquiry.fullName,
+          name: enquiry.fullName,
+          "Phone / WhatsApp": enquiry.phone,
+          "Program Interested In": enquiry.program,
+          "Preferred Mode": enquiry.mode,
+          Message: enquiry.message || "Not provided",
         }),
       });
 
-      const result = await response.json();
-
-      if (result.success) {
-        setFormStatus({ submitting: false, success: true, error: "" });
-        e.target.reset();
-      } else {
-        setFormStatus({
-          submitting: false,
-          success: false,
-          error: result.message || "Failed to submit. Please try WhatsApp directly.",
-        });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || "Could not send enquiry right now.");
       }
-    } catch (err) {
-      setFormStatus({
-        submitting: false,
-        success: false,
-        error: "Network issue. Please contact via WhatsApp at +91 99199 11027.",
+
+      form.reset();
+      setSubmitState({
+        status: "success",
+        message: "Thank you for your interest! The VoiceCraft team will get back to you shortly.",
+      });
+    } catch (error) {
+      setSubmitState({
+        status: "error",
+        message: error.message || "Could not send enquiry right now. Please contact WhatsApp directly.",
       });
     }
   };
 
-  const currentProgram =
-    programDetails.find((p) => p.id === selectedProgramTab) || programDetails[0];
-
   return (
-    <div className="min-h-screen bg-brand-cream text-brand-ink selection:bg-brand-purple selection:text-white">
-      {/* Floating Pill Navbar */}
-      <Navbar
-        programs={programDetails.map((p) => p.title)}
-        onSelectProgram={handleSelectProgramFromNavbar}
-      />
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-2xl border border-[#e9e2d8] bg-white p-6 shadow-sm"
+    >
+      <h3 className="font-display text-2xl font-bold text-brand-purple mb-5">
+        Choose your course
+      </h3>
 
-      {/* ========================================================= */}
-      {/* 1. HERO SECTION                                           */}
-      {/* ========================================================= */}
-      <section
-        id="home"
-        className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden"
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FormField
+          name="fullName"
+          label="Full Name"
+          placeholder="Enter full name"
+          required
+        />
+        <FormField
+          name="phone"
+          label="Phone / WhatsApp"
+          placeholder="Enter phone / WhatsApp number"
+          required
+        />
+        <FormSelect
+          name="program"
+          label="Program Interested In"
+          options={["Select a program", ...enquiryPrograms]}
+          required
+        />
+        <FormSelect
+          name="mode"
+          label="Preferred Mode"
+          options={["Select preferred mode", "Online", "Offline"]}
+          required
+        />
+      </div>
+
+      <label className="mt-4 block">
+        <span className="mb-1.5 block text-xs font-bold text-brand-ink">
+          Message
+        </span>
+        <textarea
+          name="message"
+          rows="3"
+          placeholder="Type your message here..."
+          className="w-full resize-none rounded-2xl border border-[#dcd8df] bg-white px-4 py-3 text-xs sm:text-sm font-medium text-brand-ink outline-none transition placeholder:text-slate-400 focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15"
+        />
+      </label>
+
+      {/* Strict rounded-full submit button */}
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="mt-5 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-brand-purple px-6 text-sm font-bold text-white shadow-md hover:bg-brand-deep transition-all duration-200 cursor-pointer disabled:opacity-60"
       >
-        {/* Ambient liquid orbs */}
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full liquid-orb-purple blur-3xl pointer-events-none -z-10" />
-        <div className="absolute top-40 right-10 w-96 h-96 rounded-full liquid-orb-gold blur-3xl pointer-events-none -z-10" />
-        <div className="absolute top-60 left-10 w-96 h-96 rounded-full liquid-orb-olive blur-3xl pointer-events-none -z-10" />
+        <span>{isSubmitting ? "Sending..." : "Submit Enquiry"}</span>
+        <ChevronRight size={18} strokeWidth={2.8} />
+      </button>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          {/* Eyebrow badge with pulse dot */}
-          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full glass-pill border border-brand-purple/20 text-brand-purple text-xs sm:text-sm font-extrabold uppercase tracking-wider mb-6 shadow-sm">
-            <span className="w-2.5 h-2.5 rounded-full bg-brand-gold animate-ping" />
-            <span className="w-2.5 h-2.5 rounded-full bg-brand-purple -ml-5" />
-            <span>Bengaluru’s Premier Language & Voice Institute • Marathahalli</span>
-          </div>
+      {submitState.message ? (
+        <p
+          className={`mt-4 rounded-full px-4 py-2.5 text-xs text-center font-bold ${
+            submitState.status === "success"
+              ? "bg-green-50 text-green-700"
+              : "bg-red-50 text-red-700"
+          }`}
+        >
+          {submitState.message}
+        </p>
+      ) : null}
+    </form>
+  );
+}
 
-          {/* Master Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold text-brand-purple tracking-tight leading-[1.12] max-w-5xl mx-auto">
-            Speak with Power. <br />
-            <span className="bg-gradient-to-r from-brand-purple via-brand-gold to-brand-olive bg-clip-text text-transparent">
-              Inspire Every Stage.
-            </span>{" "}
-            Achieve Band 7.5+.
-          </h1>
+function FormField({
+  name,
+  label,
+  placeholder,
+  type = "text",
+  required = false,
+}) {
+  return (
+    <label className="block">
+      <span className="mb-1.5 block text-xs font-bold text-brand-ink">
+        {label}
+        {required ? <span className="ml-1 text-red-600">*</span> : null}
+      </span>
+      <input
+        name={name}
+        type={type}
+        required={required}
+        placeholder={placeholder}
+        className="h-11 w-full rounded-full border border-[#dcd8df] bg-white px-4 text-xs sm:text-sm font-medium text-brand-ink outline-none transition placeholder:text-slate-400 focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15"
+      />
+    </label>
+  );
+}
 
-          {/* Subtitle */}
-          <p className="mt-6 text-lg sm:text-xl text-brand-muted max-w-3xl mx-auto leading-relaxed font-normal">
-            Specialized coaching in <span className="font-bold text-brand-purple">IELTS / PTE</span>,{" "}
-            <span className="font-bold text-brand-gold">French (DELF/TEF)</span>,{" "}
-            <span className="font-bold text-brand-olive">Public Speaking (Eloquence)</span>, and{" "}
-            <span className="font-bold text-brand-purple">Corporate English Fluency</span>. 
-            Experience 1-on-1 voice modulation drills with personalized feedback.
+function FormSelect({ name, label, options, required = false }) {
+  return (
+    <label className="block">
+      <span className="mb-1.5 block text-xs font-bold text-brand-ink">
+        {label}
+        {required ? <span className="ml-1 text-red-600">*</span> : null}
+      </span>
+      <select
+        name={name}
+        required={required}
+        defaultValue=""
+        className="h-11 w-full rounded-full border border-[#dcd8df] bg-white px-4 text-xs sm:text-sm font-medium text-slate-600 outline-none transition focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15 cursor-pointer"
+      >
+        {options.map((option, index) => (
+          <option
+            key={option}
+            value={index === 0 ? "" : option}
+            disabled={index === 0}
+          >
+            {option}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+function EnquiryContactItem({ icon: Icon, label, value }) {
+  return (
+    <div className="flex items-center gap-3.5">
+      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-purple text-white shadow-sm">
+        <Icon size={20} strokeWidth={2.4} />
+      </span>
+      <div>
+        <strong className="block text-xs font-bold text-brand-purple uppercase tracking-wider">
+          {label}
+        </strong>
+        <span className="block text-sm font-bold text-brand-purple/90">
+          {value}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// 8. FOOTER
+function Footer() {
+  return (
+    <footer className="bg-brand-deep text-white border-t border-brand-purple/20">
+      <div className="mx-auto flex max-w-[1240px] flex-col justify-between gap-8 px-6 py-12 sm:flex-row sm:items-center">
+        <div>
+          <a href="#home" className="inline-flex">
+            <img
+              src={logo}
+              alt="VoiceCraft"
+              className="h-10 w-auto brightness-110"
+            />
+          </a>
+          <p className="mt-3 text-xs text-white/70 max-w-xs">
+            Empowering individuals to speak with confidence, express with clarity, and lead with impact.
           </p>
+        </div>
 
-          {/* CTA Buttons (strictly rounded-full) */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button
-              href="#enquiry"
-              variant="primary"
-              size="lg"
-              showChevron
-            >
-              Book Free Trial Session
-            </Button>
+        <div className="flex flex-col items-start sm:items-end gap-2.5 text-xs text-white/80">
+          <h4 className="text-sm font-bold text-brand-gold uppercase tracking-wider mb-1">
+            Contact Us
+          </h4>
+          <div className="flex items-center gap-2">
+            <Phone size={14} className="text-brand-gold" />
+            <span>+91 9919911027</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Mail size={14} className="text-brand-gold" />
+            <span>voicecraftwithjothi@gmail.com</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin size={14} className="text-brand-gold" />
+            <span>Marathahalli, Bangalore, India</span>
+          </div>
+        </div>
+      </div>
 
-            <Button
-              href="#sound-lab"
-              variant="secondary"
-              size="lg"
-              icon={Volume2}
-            >
-              Experience Sound Lab
-            </Button>
-
+      <div className="flex flex-col items-center justify-center px-4 pb-8 pt-2 text-center">
+        <div className="flex items-center justify-center gap-3 mb-4">
+          {socialLinks.map(({ label, icon: Icon, href }) => (
             <a
-              href="https://wa.me/919919911027"
+              key={label}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-[#25D366] text-white text-base font-bold shadow-lg shadow-green-500/20 hover:bg-[#20bd5a] hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200"
+              aria-label={label}
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/40 text-white transition hover:border-brand-gold hover:text-brand-gold"
             >
-              <MessageCircle size={20} />
-              <span>WhatsApp Us (+91 99199 11027)</span>
+              <Icon className="h-4 w-4" />
             </a>
-          </div>
-
-          {/* Trust Metric Badges (strictly rounded-full) */}
-          <div className="mt-16 pt-10 border-t border-brand-purple/10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <div className="flex flex-col items-center p-4 rounded-2xl glass-card">
-              <div className="flex items-center gap-1 text-brand-gold mb-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={16} className="fill-brand-gold" />
-                ))}
-              </div>
-              <span className="text-xl font-bold text-brand-purple">4.9 / 5.0</span>
-              <span className="text-xs text-brand-muted">150+ Verified Google Reviews</span>
-            </div>
-
-            <div className="flex flex-col items-center p-4 rounded-2xl glass-card">
-              <Award size={24} className="text-brand-purple mb-1" />
-              <span className="text-xl font-bold text-brand-purple">Band 7.5+</span>
-              <span className="text-xs text-brand-muted">89% First Attempt Pass Rate</span>
-            </div>
-
-            <div className="flex flex-col items-center p-4 rounded-2xl glass-card">
-              <Users size={24} className="text-brand-olive mb-1" />
-              <span className="text-xl font-bold text-brand-purple">1,200+</span>
-              <span className="text-xs text-brand-muted">Students & Executives Coached</span>
-            </div>
-
-            <div className="flex flex-col items-center p-4 rounded-2xl glass-card">
-              <ShieldCheck size={24} className="text-brand-gold mb-1" />
-              <span className="text-xl font-bold text-brand-purple">1-on-1 Focus</span>
-              <span className="text-xs text-brand-muted">Individual Diagnostics</span>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* ========================================================= */}
-      {/* 2. INTERACTIVE SOUND LAB & VOICE DEMONSTRATION            */}
-      {/* ========================================================= */}
-      <section id="sound-lab" className="py-20 md:py-28 relative overflow-hidden bg-white/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle
-            eyebrow="Acoustic & Voice Demonstration"
-            title="Interactive VoiceCraft Sound Lab"
-            subtitle="Great speakers aren't born; they are calibrated. Listen to actual speech samples illustrating pronunciation clarity, intonation, and executive stage presence."
-          />
+      <div className="bg-brand-olive px-6 py-3.5 text-center text-xs font-bold text-white/90">
+        &copy; 2025 VoiceCraft. All Rights Reserved.
+      </div>
+    </footer>
+  );
+}
 
-          {/* Interactive Player Component */}
-          <AudioSamplePlayer />
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 3. THE 4 CORE PROGRAMS (OFFICIAL LOGOS & CURRICULUM)      */}
-      {/* ========================================================= */}
-      <section id="programs" className="py-20 md:py-28 relative overflow-hidden">
-        {/* Background gradient orbs */}
-        <div className="absolute top-1/2 left-0 w-80 h-80 rounded-full liquid-orb-purple blur-3xl pointer-events-none -z-10" />
-        <div className="absolute bottom-10 right-0 w-80 h-80 rounded-full liquid-orb-gold blur-3xl pointer-events-none -z-10" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle
-            eyebrow="Specialized Academies"
-            title="Our 4 Flagship Learning Programs"
-            subtitle="Whether preparing for international exams, foreign language fluency, or executive public speaking, each program is led with rigorous standards."
-          />
-
-          {/* Program Selector Tabs (strictly rounded-full) */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
-            {programDetails.map((prog) => {
-              const isActive = selectedProgramTab === prog.id;
-              return (
-                <button
-                  key={prog.id}
-                  type="button"
-                  onClick={() => setSelectedProgramTab(prog.id)}
-                  className={`flex items-center gap-2.5 px-5 py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
-                    isActive
-                      ? "bg-brand-purple text-white shadow-lg shadow-brand-purple/25 scale-105"
-                      : "glass-card text-brand-ink hover:bg-white hover:text-brand-purple border border-brand-purple/10"
-                  }`}
-                >
-                  <img
-                    src={prog.logo}
-                    alt={prog.title}
-                    className="w-5 h-5 object-contain rounded-full bg-white p-0.5"
-                  />
-                  <span>{prog.title.split(" ")[0]} {prog.title.split(" ")[1] || ""}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Active Program Card */}
-          <div className="max-w-5xl mx-auto rounded-3xl glass-card p-6 sm:p-10 lg:p-12 border border-white shadow-2xl relative">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              {/* Left Details */}
-              <div className="lg:col-span-7 flex flex-col items-start">
-                <div className="flex items-center gap-2.5 mb-3">
-                  <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-purple/10 text-brand-purple border border-brand-purple/15">
-                    {currentProgram.category}
-                  </span>
-                  <span className="px-3.5 py-1 rounded-full text-xs font-bold bg-brand-gold/15 text-[#85610D] border border-brand-gold/30">
-                    {currentProgram.badge}
-                  </span>
-                </div>
-
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-extrabold text-brand-purple leading-tight">
-                  {currentProgram.title}
-                </h3>
-
-                <p className="text-sm sm:text-base font-semibold text-brand-gold mt-2">
-                  {currentProgram.tagline}
-                </p>
-
-                <p className="mt-4 text-sm text-brand-ink/80 leading-relaxed">
-                  {currentProgram.overview}
-                </p>
-
-                {/* Highlights */}
-                <div className="mt-6 w-full">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-brand-muted mb-3">
-                    Curriculum Inclusions:
-                  </h4>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-brand-ink/90 font-medium">
-                    {currentProgram.highlights.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <CheckCircle2
-                          size={16}
-                          className="text-brand-olive shrink-0 mt-0.5"
-                        />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Delivery Mode & Duration Badges */}
-                <div className="mt-6 pt-6 border-t border-brand-purple/10 flex flex-wrap gap-4 text-xs text-brand-muted">
-                  <div className="flex items-center gap-1.5">
-                    <MapPin size={15} className="text-brand-purple" />
-                    <span>{currentProgram.mode}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Clock size={15} className="text-brand-gold" />
-                    <span>{currentProgram.duration}</span>
-                  </div>
-                </div>
-
-                {/* CTA */}
-                <div className="mt-8 flex flex-wrap items-center gap-3 w-full sm:w-auto">
-                  <Button
-                    onClick={() => handleEnrollClick(currentProgram.title)}
-                    variant="primary"
-                    size="lg"
-                    showChevron
-                    className="w-full sm:w-auto"
-                  >
-                    Enroll in {currentProgram.title.split(" ")[0]}
-                  </Button>
-
-                  <a
-                    href="https://wa.me/919919911027"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#25D366] text-white text-sm font-bold shadow-md hover:bg-[#20bd5a] transition-all w-full sm:w-auto"
-                  >
-                    <MessageCircle size={17} />
-                    <span>Ask Batch Timings</span>
-                  </a>
-                </div>
-              </div>
-
-              {/* Right Official Logo & Visual Badge */}
-              <div className="lg:col-span-5 flex flex-col items-center justify-center p-8 rounded-3xl bg-gradient-to-b from-white to-brand-cream/60 border border-brand-purple/15 shadow-inner text-center">
-                <div className="w-44 h-44 sm:w-56 sm:h-56 p-4 rounded-full bg-white shadow-xl border-4 border-brand-gold/20 flex items-center justify-center mb-4 transition-transform hover:scale-105 duration-300">
-                  <img
-                    src={currentProgram.logo}
-                    alt={currentProgram.title}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <h4 className="text-base font-bold text-brand-purple">
-                  Official VoiceCraft Certification
-                </h4>
-                <p className="text-xs text-brand-muted mt-1 max-w-xs">
-                  Course materials, mock tests, and certificates aligned to global standards.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 4. 60-SECOND SPEAKING DIAGNOSTIC QUIZ                     */}
-      {/* ========================================================= */}
-      <section className="py-20 md:py-24 relative overflow-hidden bg-brand-purple/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle
-            eyebrow="Interactive Self-Assessment"
-            title="Discover Your Speaking Blueprint"
-            subtitle="Take 60 seconds to identify your primary speaking obstacle and get an immediate recommended coaching roadmap."
-          />
-
-          <VoiceDiagnosticQuiz />
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 5. WHY VOICECRAFT / MASTER TRAINER JOTHI                  */}
-      {/* ========================================================= */}
-      <section id="about" className="py-20 md:py-28 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left: Trainer Portrait */}
-            <div className="lg:col-span-5 flex flex-col items-center">
-              <div className="relative">
-                {/* Glowing halo behind portrait */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-brand-purple via-brand-gold to-brand-olive blur-xl opacity-40 transform -rotate-3" />
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white max-w-md">
-                  <img
-                    src={authorPic}
-                    alt="Trainer Jothi - Founder & Master Coach"
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-6 text-center">
-                <h3 className="text-2xl font-display font-bold text-brand-purple">
-                  Trainer Jothi
-                </h3>
-                <p className="text-sm font-semibold text-brand-gold">
-                  Founder & Master Voice Coach
-                </p>
-                <p className="text-xs text-brand-muted mt-1 max-w-xs">
-                  IELTS Band 8.5 Specialist • Certified Public Speaking Mentor • DELF Coach
-                </p>
-              </div>
-            </div>
-
-            {/* Right: The 4-Pillar Methodology */}
-            <div className="lg:col-span-7 flex flex-col items-start">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-olive/15 text-brand-olive text-xs font-bold uppercase tracking-wider mb-3">
-                <Sparkles size={14} />
-                <span>The VoiceCraft Philosophy</span>
-              </div>
-
-              <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-brand-purple leading-tight">
-                "Speaking is not just a language; it is the projection of your identity."
-              </h2>
-
-              <p className="mt-4 text-sm sm:text-base text-brand-ink/80 leading-relaxed">
-                At VoiceCraft Academy, we don't believe in generic lectures. Every student carries a unique voice texture, confidence threshold, and communication goal. That is why our Marathahalli classroom is structured as a laboratory for spoken excellence.
-              </p>
-
-              {/* 4 Pillars Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 w-full">
-                <div className="p-4 rounded-2xl glass-card border border-white">
-                  <div className="w-8 h-8 rounded-full bg-brand-purple/10 text-brand-purple flex items-center justify-center font-bold text-xs mb-2">
-                    01
-                  </div>
-                  <h4 className="text-sm font-bold text-brand-ink mb-1">
-                    Diagnostic Baseline
-                  </h4>
-                  <p className="text-xs text-brand-muted leading-relaxed">
-                    We map your baseline fluency, filler words, mother tongue bias, and pacing habits before starting.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl glass-card border border-white">
-                  <div className="w-8 h-8 rounded-full bg-brand-gold/15 text-brand-gold flex items-center justify-center font-bold text-xs mb-2">
-                    02
-                  </div>
-                  <h4 className="text-sm font-bold text-brand-ink mb-1">
-                    Acoustic Voice Calibration
-                  </h4>
-                  <p className="text-xs text-brand-muted leading-relaxed">
-                    Diaphragmatic breathing, tone modulation, and resonance exercises to sound authoritative.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl glass-card border border-white">
-                  <div className="w-8 h-8 rounded-full bg-brand-olive/15 text-brand-olive flex items-center justify-center font-bold text-xs mb-2">
-                    03
-                  </div>
-                  <h4 className="text-sm font-bold text-brand-ink mb-1">
-                    Real Simulation Pressure
-                  </h4>
-                  <p className="text-xs text-brand-muted leading-relaxed">
-                    Full-length IDP mock exams, stage debates, and panel discussions under timer conditions.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl glass-card border border-white">
-                  <div className="w-8 h-8 rounded-full bg-brand-purple/10 text-brand-purple flex items-center justify-center font-bold text-xs mb-2">
-                    04
-                  </div>
-                  <h4 className="text-sm font-bold text-brand-ink mb-1">
-                    Personalized Rubric Feedback
-                  </h4>
-                  <p className="text-xs text-brand-muted leading-relaxed">
-                    Sentence-by-sentence corrections after every drill to compound your growth exponentially.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-8">
-                <Button
-                  href="#enquiry"
-                  variant="primary"
-                  size="md"
-                  showChevron
-                >
-                  Meet Trainer Jothi for a 1-on-1 Consultation
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 6. VERIFIED STUDENT REVIEWS & GOOGLE SOCIAL PROOF         */}
-      {/* ========================================================= */}
-      <section id="testimonials" className="py-20 md:py-28 relative overflow-hidden bg-white/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle
-            eyebrow="Student Transformations"
-            title="Real Success Stories, Genuine Scores"
-            subtitle="Read how our students achieved their Band 8.0 targets, conquered public speaking phobias, and earned global language credentials."
-          />
-
-          {/* Google Review Badge Banner */}
-          <div className="max-w-xl mx-auto mb-12 p-4 rounded-full glass-card border border-brand-gold/30 flex items-center justify-center gap-3 text-center shadow-md">
-            <div className="flex items-center gap-1 text-brand-gold">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} size={18} className="fill-brand-gold" />
-              ))}
-            </div>
-            <span className="text-sm font-bold text-brand-purple">
-              4.9 / 5.0 Star Rating on Google Reviews
-            </span>
-            <span className="hidden sm:inline text-xs text-brand-muted">• Marathahalli, Bengaluru</span>
-          </div>
-
-          {/* Reviews Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {testimonials.map((test, index) => (
-              <ReviewCard key={index} {...test} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 7. CLASSROOM MOMENTS & GALLERY                            */}
-      {/* ========================================================= */}
-      <section id="gallery" className="py-20 md:py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle
-            eyebrow="Life at VoiceCraft"
-            title="Classroom Moments & Stage Trophies"
-            subtitle="A glimpse inside our smart training rooms in Marathahalli: interactive speaking circles, debate tournaments, and celebration of results."
-          />
-
-          {/* Continuous Gallery Marquee */}
-          <div className="relative w-full overflow-hidden marquee-wrapper py-4">
-            <div className="flex gap-6 marquee-track w-max">
-              {[...galleryImages, ...galleryImages].map((imgSrc, idx) => (
-                <div
-                  key={idx}
-                  className="w-64 sm:w-80 h-48 sm:h-56 rounded-3xl overflow-hidden shadow-lg border-2 border-white shrink-0 hover:scale-105 transition-transform duration-300"
-                >
-                  <img
-                    src={imgSrc}
-                    alt={`VoiceCraft Classroom Moment ${idx + 1}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 8. ENQUIRY & CONTACT FORM (WITH WEB3FORMS INTEGRATION)     */}
-      {/* ========================================================= */}
-      <section id="enquiry" className="py-20 md:py-28 relative overflow-hidden bg-brand-purple/5">
-        {/* Background gradient bubbles */}
-        <div className="absolute top-0 right-1/3 w-96 h-96 rounded-full liquid-orb-purple blur-3xl pointer-events-none -z-10" />
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full liquid-orb-gold blur-3xl pointer-events-none -z-10" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle
-            eyebrow="Take The First Step"
-            title="Book Your Free Diagnostic Session"
-            subtitle="Speak directly with Trainer Jothi. Get an honest appraisal of your current score, weak areas, and a personalized roadmap."
-          />
-
-          <div className="max-w-4xl mx-auto rounded-3xl glass-card p-6 sm:p-10 md:p-12 border border-white shadow-2xl relative">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-              {/* Form Info Col */}
-              <div className="md:col-span-5 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-2xl font-display font-bold text-brand-purple mb-2">
-                    Start Your Journey
-                  </h3>
-                  <p className="text-sm text-brand-muted leading-relaxed mb-6">
-                    Fill out this quick form. Our admissions team will reach out via WhatsApp or call within 2 hours.
-                  </p>
-
-                  <div className="space-y-4 text-xs text-brand-ink/90">
-                    <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/70 border border-white">
-                      <div className="w-8 h-8 rounded-full bg-brand-purple/10 text-brand-purple flex items-center justify-center shrink-0">
-                        <MapPin size={16} />
-                      </div>
-                      <div>
-                        <p className="font-bold text-brand-purple">Campus Location</p>
-                        <p className="text-brand-muted">Marathahalli, Bengaluru, Karnataka</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/70 border border-white">
-                      <div className="w-8 h-8 rounded-full bg-brand-gold/15 text-brand-gold flex items-center justify-center shrink-0">
-                        <Clock size={16} />
-                      </div>
-                      <div>
-                        <p className="font-bold text-brand-purple">Operating Hours</p>
-                        <p className="text-brand-muted">Mon – Sun: 08:00 AM – 08:00 PM</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/70 border border-white">
-                      <div className="w-8 h-8 rounded-full bg-brand-olive/15 text-brand-olive flex items-center justify-center shrink-0">
-                        <Phone size={16} />
-                      </div>
-                      <div>
-                        <p className="font-bold text-brand-purple">Direct Phone Line</p>
-                        <p className="text-brand-muted font-mono">+91 99199 11027</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Instant WhatsApp Help */}
-                <div className="pt-6 border-t border-brand-purple/10 mt-6">
-                  <p className="text-xs text-brand-muted mb-2">Prefer instant answers?</p>
-                  <a
-                    href="https://wa.me/919919911027"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#25D366] text-white text-xs font-bold shadow-md hover:bg-[#20bd5a] transition-all"
-                  >
-                    <MessageCircle size={16} />
-                    <span>Chat on WhatsApp (+91 99199 11027)</span>
-                  </a>
-                </div>
-              </div>
-
-              {/* Form Input Fields */}
-              <div className="md:col-span-7">
-                {formStatus.success ? (
-                  <div className="p-8 rounded-2xl bg-green-50 border border-green-200 text-center flex flex-col items-center">
-                    <div className="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-3">
-                      <Check size={32} />
-                    </div>
-                    <h4 className="text-xl font-bold text-green-900 mb-1">
-                      Enquiry Received!
-                    </h4>
-                    <p className="text-sm text-green-700 max-w-sm mb-6">
-                      Thank you! Trainer Jothi and our academic team have received your details. We will contact you shortly on WhatsApp.
-                    </p>
-                    <Button
-                      onClick={() => setFormStatus({ submitting: false, success: false, error: "" })}
-                      variant="primary"
-                      size="sm"
-                    >
-                      Submit Another Enquiry
-                    </Button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmitEnquiry} className="space-y-4">
-                    {formStatus.error && (
-                      <div className="p-3 rounded-2xl bg-red-50 text-red-700 text-xs font-semibold border border-red-200">
-                        {formStatus.error}
-                      </div>
-                    )}
-
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-brand-purple mb-1.5">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="fullName"
-                        required
-                        placeholder="e.g. Ananya Sharma"
-                        className="w-full px-5 py-3.5 rounded-full bg-white/90 border border-brand-purple/20 text-brand-ink text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple/40 placeholder:text-gray-400"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-bold uppercase tracking-wider text-brand-purple mb-1.5">
-                          Phone / WhatsApp *
-                        </label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          required
-                          placeholder="+91 98765 43210"
-                          className="w-full px-5 py-3.5 rounded-full bg-white/90 border border-brand-purple/20 text-brand-ink text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple/40 placeholder:text-gray-400"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold uppercase tracking-wider text-brand-purple mb-1.5">
-                          Email Address
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          placeholder="ananya@example.com"
-                          className="w-full px-5 py-3.5 rounded-full bg-white/90 border border-brand-purple/20 text-brand-ink text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple/40 placeholder:text-gray-400"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-bold uppercase tracking-wider text-brand-purple mb-1.5">
-                          Program Interested In *
-                        </label>
-                        <select
-                          name="program"
-                          value={enquiryProgram}
-                          onChange={(e) => setEnquiryProgram(e.target.value)}
-                          className="w-full px-5 py-3.5 rounded-full bg-white/90 border border-brand-purple/20 text-brand-ink text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple/40 cursor-pointer"
-                        >
-                          {programDetails.map((p) => (
-                            <option key={p.id} value={p.title}>
-                              {p.title}
-                            </option>
-                          ))}
-                          <option value="Custom 1-on-1 Consultation">
-                            Custom 1-on-1 Consultation
-                          </option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold uppercase tracking-wider text-brand-purple mb-1.5">
-                          Preferred Mode *
-                        </label>
-                        <select
-                          name="mode"
-                          defaultValue="Classroom @ Marathahalli"
-                          className="w-full px-5 py-3.5 rounded-full bg-white/90 border border-brand-purple/20 text-brand-ink text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple/40 cursor-pointer"
-                        >
-                          <option value="Classroom @ Marathahalli">
-                            Classroom @ Marathahalli
-                          </option>
-                          <option value="Live Interactive Online">
-                            Live Interactive Online
-                          </option>
-                          <option value="Weekend Batch">Weekend Batch</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-brand-purple mb-1.5">
-                        Your Target Score or Speaking Challenge
-                      </label>
-                      <textarea
-                        name="message"
-                        rows={3}
-                        placeholder="Tell us what target score you need (e.g. Band 7.5) or if you want to improve fluency/stage confidence..."
-                        className="w-full px-5 py-3.5 rounded-2xl bg-white/90 border border-brand-purple/20 text-brand-ink text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple/40 placeholder:text-gray-400 resize-none"
-                      />
-                    </div>
-
-                    <div className="pt-2">
-                      <Button
-                        type="submit"
-                        variant="primary"
-                        size="lg"
-                        disabled={formStatus.submitting}
-                        className="w-full text-base font-bold shadow-xl"
-                        icon={Send}
-                      >
-                        {formStatus.submitting ? "Sending Details..." : "Confirm Free Assessment Booking"}
-                      </Button>
-                      <p className="text-[11px] text-center text-brand-muted mt-2">
-                        🔒 100% Privacy. We never share your phone number.
-                      </p>
-                    </div>
-                  </form>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <Footer />
+function SectionHeading({ eyebrow, title }) {
+  return (
+    <div className="text-center max-w-3xl mx-auto mb-4">
+      {eyebrow ? (
+        <p className="text-xs font-bold uppercase tracking-widest text-brand-olive mb-2">
+          {eyebrow}
+        </p>
+      ) : null}
+      <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-brand-purple">
+        {title}
+      </h2>
+      <div className="w-16 h-1 rounded-full bg-brand-gold mx-auto mt-4" />
     </div>
   );
 }
