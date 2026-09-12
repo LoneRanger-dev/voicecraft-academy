@@ -441,43 +441,43 @@ export default function Home() {
   );
 }
 
-// 1. HERO SECTION (Clean, standardized layout with round buttons & zero overlap)
+// 1. HERO SECTION (Clean, standardized layout with round buttons & glassmorphic StatPills)
 function HeroSection() {
   return (
     <section
       id="home"
       data-section="home"
       aria-label="Home section"
-      className="relative min-h-[540px] scroll-mt-24 overflow-hidden bg-brand-cream px-4 py-12 sm:px-6 md:min-h-[640px] lg:min-h-[700px] flex items-center"
+      className="relative min-h-[580px] scroll-mt-24 overflow-hidden bg-brand-cream px-4 py-16 sm:px-6 md:h-[calc(100vh-76px)] md:min-h-[660px] md:py-0 flex items-center"
     >
       {/* Background Graphic */}
       <img
         src={heroBg}
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 hidden h-full w-full select-none object-cover opacity-90 md:block"
+        className="absolute inset-0 hidden h-full w-full select-none object-cover opacity-90 md:block pointer-events-none"
         draggable="false"
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-xl">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="max-w-xl md:max-w-lg lg:max-w-xl">
           <p className="inline-block px-4 py-1.5 rounded-full bg-brand-olive/15 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-3">
             MANY PATHS TO ONE CONFIDENT VOICE
           </p>
 
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.18] tracking-tight text-brand-purple">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.16] tracking-tight text-brand-purple">
             Unlock your confidence. <br />
             <span className="text-brand-olive">Communicate with power.</span>
           </h1>
 
           <div className="mt-4 h-1 w-20 rounded-full bg-brand-gold" />
 
-          <p className="mt-4 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90">
+          <p className="mt-4 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90 max-w-lg">
             From confident speaking to developing fluency, we help you express,
             connect and succeed in every stage of life.
           </p>
 
-          {/* Round Buttons (rounded-full) */}
+          {/* Round Buttons (strictly rounded-full) */}
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button
               href="#enquiry"
@@ -495,32 +495,51 @@ function HeroSection() {
               Explore Programs
             </Button>
           </div>
-        </div>
 
-        {/* Hero Stats Row (Standardized cleanly at bottom) */}
-        <div className="mt-14 pt-8 border-t border-brand-purple/15 grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-2xl">
-          <HeroStat value="1000+" label="Students Trained" tone="purple" />
-          <HeroStat value="20 years" label="Experience" tone="gold" />
-          <HeroStat value="Personalized" label="Mentorship" tone="purple" />
+          {/* Mobile Stats Pills */}
+          <div className="mt-10 flex flex-wrap gap-3 md:hidden">
+            <StatPill icon={Users} value="1000+" label="Students Trained" tone="purple" />
+            <StatPill icon={Star} value="20 years" label="Experience" tone="gold" />
+            <StatPill icon={Sparkles} value="Personalized" label="Mentorship" tone="purple" />
+          </div>
         </div>
+      </div>
+
+      {/* Desktop Floating Glassmorphic Stat Badges (Cleanly floating along bottom) */}
+      <div className="absolute bottom-6 sm:bottom-8 left-0 right-0 z-20 hidden md:flex items-center justify-center gap-6 lg:gap-8 px-6">
+        <StatPill icon={Users} value="1000+" label="Students Trained" tone="purple" />
+        <StatPill icon={Star} value="20 years" label="Experience" tone="gold" />
+        <StatPill icon={Sparkles} value="Personalized" label="Mentorship" tone="purple" />
       </div>
     </section>
   );
 }
 
-function HeroStat({ value, label, tone }) {
+function StatPill({ icon: Icon, value, label, tone }) {
+  const isGold = tone === "gold";
   return (
-    <div className="flex flex-col">
-      <strong
-        className={`font-display text-2xl sm:text-3xl font-extrabold leading-tight ${
-          tone === "gold" ? "text-brand-gold" : "text-brand-purple"
+    <div className="glass-pill flex items-center gap-3.5 px-5 py-2.5 rounded-full shadow-[0_8px_25px_rgba(74,21,75,0.08)] border border-white/90 backdrop-blur-xl bg-white/85 hover:scale-105 hover:bg-white transition-all duration-300">
+      <div
+        className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
+          isGold
+            ? "bg-gradient-to-tr from-brand-gold to-[#d4aa3b] text-white"
+            : "bg-gradient-to-tr from-brand-purple to-brand-deep text-white"
         }`}
       >
-        {value}
-      </strong>
-      <span className="mt-1 text-xs sm:text-sm font-semibold text-brand-ink/80">
-        {label}
-      </span>
+        <Icon size={18} strokeWidth={2.4} />
+      </div>
+      <div className="flex flex-col text-left">
+        <strong
+          className={`font-display text-lg sm:text-xl font-extrabold leading-none ${
+            isGold ? "text-brand-gold" : "text-brand-purple"
+          }`}
+        >
+          {value}
+        </strong>
+        <span className="text-[11px] sm:text-xs font-semibold text-brand-ink/80 leading-tight mt-0.5 whitespace-nowrap">
+          {label}
+        </span>
+      </div>
     </div>
   );
 }

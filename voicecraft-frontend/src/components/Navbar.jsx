@@ -72,14 +72,8 @@ export default function Navbar({ programs = [], onSelectProgram }) {
   };
 
   return (
-    <header className="fixed top-3 left-0 right-0 z-50 px-3 sm:px-6 max-w-7xl mx-auto transition-all duration-300">
-      <nav
-        className={`w-full rounded-full transition-all duration-300 flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 ${
-          isScrolled
-            ? "bg-white/90 backdrop-blur-xl border border-white/80 shadow-[0_10px_35px_rgba(74,21,75,0.12)]"
-            : "bg-white/80 backdrop-blur-lg border border-white/60 shadow-[0_4px_20px_rgba(74,21,75,0.06)]"
-        }`}
-      >
+    <header className="fixed top-0 left-0 right-0 w-full z-50 border-b border-[#eadfcd]/80 bg-white/92 backdrop-blur-2xl shadow-[0_4px_25px_rgba(74,21,75,0.06)] transition-all duration-300">
+      <nav className="mx-auto flex min-h-[72px] lg:min-h-[76px] w-full max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10">
         {/* Logo */}
         <a
           href="#home"
