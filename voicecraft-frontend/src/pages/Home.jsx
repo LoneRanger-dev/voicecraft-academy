@@ -511,44 +511,45 @@ export default function Home() {
   );
 }
 
-// 1. HERO SECTION (Clean, standardized layout with round buttons, text entrance animations & compact glassmorphic StatPills)
+// 1. HERO SECTION (Locked to 1672/941 aspect ratio on desktop so stats align perfectly with circle graphics)
 function HeroSection({ isAnimated, animKey }) {
   return (
     <section
       id="home"
       data-section="home"
       aria-label="Home section"
-      className="relative min-h-[580px] scroll-mt-24 overflow-hidden bg-brand-cream px-4 py-16 sm:px-6 md:h-[calc(100vh-76px)] md:min-h-[660px] md:py-0 flex items-center"
+      className="relative w-full overflow-hidden bg-brand-cream scroll-mt-24 px-4 py-14 sm:px-6 md:aspect-[1672/941] md:py-0 md:px-0 flex items-center"
     >
-      {/* Background Graphic */}
+      {/* Background Graphic (Identical 1672/941 aspect ratio: zero cropping, 100% locked alignment) */}
       <img
         src={heroBg}
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 hidden h-full w-full select-none object-cover opacity-90 md:block pointer-events-none"
+        className="absolute inset-0 hidden h-full w-full select-none object-cover md:block pointer-events-none"
         draggable="false"
       />
 
+      {/* Main Hero Content (Left Column) */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
-        <div key={`hero-content-${animKey}`} className="max-w-xl md:max-w-lg lg:max-w-xl">
+        <div key={`hero-content-${animKey}`} className="max-w-xl md:max-w-md lg:max-w-lg xl:max-w-xl">
           <p className="inline-block px-4 py-1.5 rounded-full bg-brand-olive/15 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-3 anim-hero-badge">
             MANY PATHS TO ONE CONFIDENT VOICE
           </p>
 
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.16] tracking-tight text-brand-purple">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.16] tracking-tight text-brand-purple">
             <span className="inline-block anim-hero-title-1">Unlock your confidence.</span> <br />
             <span className="inline-block text-brand-olive anim-hero-title-2">Communicate with power.</span>
           </h1>
 
-          <div className="mt-4 h-1 w-20 rounded-full bg-brand-gold anim-hero-line" />
+          <div className="mt-3.5 sm:mt-4 h-1 w-20 rounded-full bg-brand-gold anim-hero-line" />
 
-          <p className="mt-4 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90 max-w-lg anim-hero-desc">
+          <p className="mt-3.5 sm:mt-4 text-sm sm:text-base lg:text-lg font-medium leading-relaxed text-brand-ink/90 max-w-lg anim-hero-desc">
             From confident speaking to developing fluency, we help you express,
             connect and succeed in every stage of life.
           </p>
 
           {/* Round Buttons (strictly rounded-full) */}
-          <div className="mt-8 flex flex-wrap items-center gap-4 anim-hero-buttons">
+          <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-4 anim-hero-buttons">
             <Button
               href="#enquiry"
               variant="primary"
@@ -568,53 +569,95 @@ function HeroSection({ isAnimated, animKey }) {
             </Button>
           </div>
 
-          {/* Mobile Stats Pills */}
+          {/* Mobile Stats (md:hidden) */}
           <div className="mt-8 flex flex-wrap gap-2.5 md:hidden anim-hero-stats">
-            <StatPill icon={Users} value="1000+" label="Students Trained" tone="purple" />
-            <StatPill icon={Star} value="20 years" label="Experience" tone="gold" />
-            <StatPill icon={Sparkles} value="Personalized" label="Mentorship" tone="purple" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-white shadow-sm">
+              <div className="w-6 h-6 rounded-full bg-brand-purple/10 flex items-center justify-center text-brand-purple">
+                <Users size={12} />
+              </div>
+              <div className="flex flex-col text-left">
+                <strong className="text-xs font-extrabold text-brand-purple leading-tight">1000+</strong>
+                <span className="text-[10px] font-semibold text-brand-ink/80 leading-tight">Students Trained</span>
+              </div>
+            </div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-white shadow-sm">
+              <div className="w-6 h-6 rounded-full bg-brand-gold/15 flex items-center justify-center text-brand-gold">
+                <Star size={12} />
+              </div>
+              <div className="flex flex-col text-left">
+                <strong className="text-xs font-extrabold text-brand-gold leading-tight">20 years</strong>
+                <span className="text-[10px] font-semibold text-brand-ink/80 leading-tight">Experience</span>
+              </div>
+            </div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-white shadow-sm">
+              <div className="w-6 h-6 rounded-full bg-brand-purple/10 flex items-center justify-center text-brand-purple">
+                <Sparkles size={12} />
+              </div>
+              <div className="flex flex-col text-left">
+                <strong className="text-xs font-extrabold text-brand-purple leading-tight">Personalized</strong>
+                <span className="text-[10px] font-semibold text-brand-ink/80 leading-tight">Mentorship</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Desktop Floating Glassmorphic Stat Badges (Cleanly fitted between the given layout) */}
+      {/* Desktop Card Overlay Text (Upper Right Cards in herobg.png) */}
+      <div className="pointer-events-none absolute left-[70.2%] top-[29.2%] z-10 hidden text-left md:block">
+        <p className="text-[clamp(0.85rem,1.1vw,1.15rem)] font-semibold leading-[1.28] text-brand-ink">
+          Speak clearly.
+          <br />
+          Lead confidently.
+        </p>
+      </div>
+
+      <div className="pointer-events-none absolute left-[70.2%] top-[60.2%] z-10 hidden text-left md:block">
+        <p className="text-[clamp(0.85rem,1.1vw,1.15rem)] font-semibold leading-[1.28] text-brand-ink">
+          Fluency. Accuracy.
+          <br />
+          Higher scores.
+        </p>
+      </div>
+
+      {/* Desktop Stat Boxes (Locked in exact reference alignment immediately to the right of each circle icon) */}
       <div
-        key={`hero-stats-${animKey}`}
-        className="absolute bottom-12 md:bottom-14 lg:bottom-16 left-0 right-0 z-20 hidden md:flex items-center justify-center gap-3.5 lg:gap-5 px-4 anim-hero-stats"
+        key={`hero-stat-1-${animKey}`}
+        className="absolute left-[31.8%] top-[85.87%] -translate-y-1/2 z-20 hidden md:block anim-hero-stats"
       >
-        <StatPill icon={Users} value="1000+" label="Students Trained" tone="purple" />
-        <StatPill icon={Star} value="20 years" label="Experience" tone="gold" />
-        <StatPill icon={Sparkles} value="Personalized" label="Mentorship" tone="purple" />
+        <HeroStat value="1000+" label="Students Trained" tone="purple" />
+      </div>
+
+      <div
+        key={`hero-stat-2-${animKey}`}
+        className="absolute left-[52.8%] top-[85.87%] -translate-y-1/2 z-20 hidden md:block anim-hero-stats"
+      >
+        <HeroStat value="20 years" label="Experience" tone="gold" />
+      </div>
+
+      <div
+        key={`hero-stat-3-${animKey}`}
+        className="absolute left-[74.0%] top-[85.87%] -translate-y-1/2 z-20 hidden md:block anim-hero-stats"
+      >
+        <HeroStat value="Personalized" label="Mentorship" tone="purple" />
       </div>
     </section>
   );
 }
 
-function StatPill({ icon: Icon, value, label, tone }) {
+function HeroStat({ value, label, tone }) {
   const isGold = tone === "gold";
   return (
-    <div className="glass-pill inline-flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full shadow-[0_4px_14px_rgba(74,21,75,0.06)] border border-white/90 backdrop-blur-xl bg-white/90 hover:scale-105 hover:bg-white transition-all duration-300">
-      <div
-        className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
-          isGold
-            ? "bg-gradient-to-tr from-brand-gold to-[#d4aa3b] text-white"
-            : "bg-gradient-to-tr from-brand-purple to-brand-deep text-white"
+    <div className="flex flex-col text-left px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl bg-white/90 backdrop-blur-md border border-white/90 shadow-[0_4px_16px_rgba(74,21,75,0.06)] hover:bg-white hover:scale-105 transition-all duration-300">
+      <strong
+        className={`font-display text-sm sm:text-base lg:text-lg font-extrabold leading-tight tracking-tight ${
+          isGold ? "text-[#a48c34]" : "text-brand-purple"
         }`}
       >
-        <Icon size={13} strokeWidth={2.4} />
-      </div>
-      <div className="flex flex-col text-left">
-        <strong
-          className={`font-display text-xs sm:text-sm font-extrabold leading-tight ${
-            isGold ? "text-brand-gold" : "text-brand-purple"
-          }`}
-        >
-          {value}
-        </strong>
-        <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 leading-tight whitespace-nowrap">
-          {label}
-        </span>
-      </div>
+        {value}
+      </strong>
+      <span className="text-[10px] sm:text-xs font-semibold text-brand-ink/80 leading-tight whitespace-nowrap mt-0.5">
+        {label}
+      </span>
     </div>
   );
 }
