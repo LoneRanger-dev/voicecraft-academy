@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "build": "cd voicecraft-frontend && npm install && npm run build",
     "frontend:dev": "npm --prefix voicecraft-frontend run dev",
     "frontend:build": "npm --prefix voicecraft-frontend run build",
     "backend:dev": "npm --prefix voicecraft-backend run dev",
