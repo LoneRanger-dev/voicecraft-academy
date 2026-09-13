@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import {
+  Award,
   BookOpen,
   CalendarDays,
+  CheckCircle2,
   ChevronRight,
+  Clock,
   Globe,
   Mail,
   MapPin,
@@ -14,6 +17,7 @@ import {
   Sparkles,
   Star,
   Users,
+  ArrowRight,
 } from "lucide-react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 
@@ -30,7 +34,6 @@ import wa2 from "../assets/gallery/WhatsApp Image 2026-07-27 at 11.04.20 AM (1).
 import wa3 from "../assets/gallery/WhatsApp Image 2026-07-27 at 11.04.20 AM.jpeg";
 import wa4 from "../assets/gallery/WhatsApp Image 2026-07-27 at 11.12.52 AM.jpeg";
 import wa5 from "../assets/gallery/WhatsApp Image 2026-07-27 at 11.12.53 AM.jpeg";
-import heroBg from "../assets/herobg.png";
 import engIcon from "../assets/icons/eng-cropped.png";
 import frIcon from "../assets/icons/fr-cropped.png";
 import ieltsIcon from "../assets/icons/ielts-cropped.png";
@@ -44,28 +47,36 @@ import Navbar from "../components/Navbar.jsx";
 const programs = [
   {
     title: "Eloquence by VoiceCraft",
+    subtitle: "Public Speaking & Youth Leadership",
     description: "Find your voice, speak confidently, and inspire an audience.",
+    highlights: ["Stage Presence", "Audience Engagement", "Speech Structuring", "Overcoming Fear"],
     icon: Mic,
     iconImage: speakIcon,
     tone: "olive",
   },
   {
     title: "EngLingo by VoiceCraft",
+    subtitle: "Spoken English & Fluency",
     description: "Build strong language skills for everyday fluency and professional use.",
+    highlights: ["Grammar Foundation", "Workplace English", "Vocabulary Building", "Writing Skills"],
     icon: BookOpen,
     iconImage: engIcon,
     tone: "purple",
   },
   {
     title: "Bonjour by VoiceCraft",
+    subtitle: "French Language (A1 to B2)",
     description: "Learn French with ease and speak with confidence.",
+    highlights: ["Pronunciation Coaching", "Conversational French", "DELF / TEF Prep", "6 Level Pathway"],
     icon: BookOpen,
     iconImage: frIcon,
     tone: "olive",
   },
   {
     title: "IELTS & PTE Training",
+    subtitle: "Global Proficiency Test Preparation",
     description: "Expert coaching to help you achieve your desired band score.",
+    highlights: ["All 4 Modules Covered", "Mock Speaking Tests", "Writing Evaluations", "Score Strategies"],
     icon: Globe,
     iconImage: ieltsIcon,
     tone: "purple",
@@ -450,7 +461,7 @@ export default function Home() {
       { threshold: [0.25, 0.5] }
     );
 
-    const sectionIds = ["home", "about", "programs", "testimonials", "gallery", "enquiry"];
+    const sectionIds = ["home", "about", "programs", "why-us", "testimonials", "gallery", "enquiry"];
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -470,7 +481,7 @@ export default function Home() {
   };
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-[1440px] overflow-hidden bg-brand-cream pt-[72px] shadow-soft sm:border sm:border-[#e8dfd7] lg:pt-[76px]">
+    <main className="mx-auto min-h-screen w-full max-w-[1440px] overflow-hidden bg-brand-cream pt-[68px] lg:pt-[114px] shadow-soft sm:border sm:border-[#e8dfd7]">
       <Navbar
         programs={programs.map((program) => program.title)}
         onSelectProgram={selectProgram}
@@ -480,9 +491,11 @@ export default function Home() {
         isAnimated={activeSection === "home"}
         animKey={navKey}
       />
+      <FeatureHighlightStrip />
       <About
         isAnimated={activeSection === "about"}
         animKey={navKey}
+        onSelectProgram={selectProgram}
       />
       <Programs
         selectedCourse={selectedCourse}
@@ -490,8 +503,9 @@ export default function Home() {
         isAnimated={activeSection === "programs"}
         animKey={navKey}
       />
+      <CounterStrip />
       <WhyChoose
-        isAnimated={activeSection === "programs" || activeSection === "about"}
+        isAnimated={activeSection === "why-us" || activeSection === "about"}
         animKey={navKey}
       />
       <Testimonials
@@ -511,207 +525,331 @@ export default function Home() {
   );
 }
 
-// 1. HERO SECTION (Locked to 1672/941 aspect ratio on desktop so stats align perfectly with circle graphics)
+// 1. HERO SECTION (Consen IT Solution 03-2 Two-Column Modern Layout)
 function HeroSection({ isAnimated, animKey }) {
   return (
     <section
       id="home"
       data-section="home"
       aria-label="Home section"
-      className="relative w-full overflow-hidden bg-brand-cream scroll-mt-24 px-4 py-14 sm:px-6 md:aspect-[1672/941] md:py-0 md:px-0 flex items-center"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-[#FAF6EE] to-[#F5EFE6] scroll-mt-28 px-4 sm:px-6 lg:px-10 py-12 lg:py-20 flex items-center"
     >
-      {/* Background Graphic (Identical 1672/941 aspect ratio: zero cropping, 100% locked alignment) */}
-      <img
-        src={heroBg}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 hidden h-full w-full select-none object-cover md:block pointer-events-none"
-        draggable="false"
-      />
+      {/* Decorative ambient background glows */}
+      <div className="absolute top-10 left-1/4 w-72 h-72 rounded-full bg-brand-purple/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-80 h-80 rounded-full bg-brand-gold/10 blur-3xl pointer-events-none" />
 
-      {/* Main Hero Content (Left Column) */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
-        <div key={`hero-content-${animKey}`} className="max-w-xl md:max-w-md lg:max-w-lg xl:max-w-xl">
-          <p className="inline-block px-4 py-1.5 rounded-full bg-brand-olive/15 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-3 anim-hero-badge">
-            MANY PATHS TO ONE CONFIDENT VOICE
-          </p>
+      <div className="relative z-10 mx-auto w-full max-w-[1280px]">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
+          {/* Left Column: Consen Typography, Headline, Buttons & Trust Badges */}
+          <div key={`hero-content-${animKey}`} className="flex flex-col items-start text-left max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-olive/15 border border-brand-olive/30 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 anim-hero-badge shadow-sm">
+              <Sparkles size={14} className="text-brand-gold animate-pulse" />
+              <span>MANY PATHS TO ONE CONFIDENT VOICE</span>
+            </div>
 
-          <h1 className="font-display text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.16] tracking-tight text-brand-purple">
-            <span className="inline-block anim-hero-title-1">Unlock your confidence.</span> <br />
-            <span className="inline-block text-brand-olive anim-hero-title-2">Communicate with power.</span>
-          </h1>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-5xl lg:text-[58px] font-extrabold leading-[1.14] tracking-tight text-brand-purple">
+              <span className="inline-block anim-hero-title-1">Unlock your confidence.</span> <br />
+              <span className="inline-block text-brand-olive anim-hero-title-2">Communicate with power.</span>
+            </h1>
 
-          <div className="mt-3.5 sm:mt-4 h-1 w-20 rounded-full bg-brand-gold anim-hero-line" />
+            <div className="mt-4 h-1.5 w-24 rounded-full bg-gradient-to-r from-brand-gold to-brand-olive anim-hero-line" />
 
-          <p className="mt-3.5 sm:mt-4 text-sm sm:text-base lg:text-lg font-medium leading-relaxed text-brand-ink/90 max-w-lg anim-hero-desc">
-            From confident speaking to developing fluency, we help you express,
-            connect and succeed in every stage of life.
-          </p>
+            <p className="mt-5 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90 max-w-xl anim-hero-desc">
+              From confident speaking to developing fluency, we help you express,
+              connect and succeed in every stage of life.
+            </p>
 
-          {/* Round Buttons (strictly rounded-full) */}
-          <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-4 anim-hero-buttons">
-            <Button
-              href="#enquiry"
-              variant="primary"
-              size="lg"
-              icon={CalendarDays}
-              className="rounded-full shadow-md hover:scale-105 transition-all duration-300"
-            >
-              Join a Session
-            </Button>
-            <Button
-              href="#programs"
-              variant="secondary"
-              size="lg"
-              className="rounded-full shadow-sm hover:scale-105 transition-all duration-300"
-            >
-              Explore Programs
-            </Button>
+            {/* Strict rounded-full action buttons */}
+            <div className="mt-8 flex flex-wrap items-center gap-4 anim-hero-buttons">
+              <Button
+                href="#enquiry"
+                variant="primary"
+                size="lg"
+                icon={CalendarDays}
+                className="rounded-full shadow-lg shadow-brand-purple/20 hover:scale-105 transition-all duration-300"
+              >
+                Join a Session
+              </Button>
+              <Button
+                href="#programs"
+                variant="secondary"
+                size="lg"
+                className="rounded-full shadow-sm hover:scale-105 transition-all duration-300"
+              >
+                Explore Programs
+              </Button>
+            </div>
+
+            {/* Consen Trust Indicators */}
+            <div className="mt-10 pt-6 border-t border-brand-purple/10 flex flex-wrap items-center gap-y-2.5 gap-x-6 text-xs sm:text-sm font-bold text-brand-purple/85">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-brand-olive shrink-0" />
+                <span>1-on-1 & Small Batches</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-brand-olive shrink-0" />
+                <span>Practical Speech Exercises</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-brand-olive shrink-0" />
+                <span>Classroom & Live Online</span>
+              </div>
+            </div>
           </div>
 
-          {/* Mobile Stats (md:hidden) */}
-          <div className="mt-8 flex flex-wrap gap-2.5 md:hidden anim-hero-stats">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-white shadow-sm">
-              <div className="w-6 h-6 rounded-full bg-brand-purple/10 flex items-center justify-center text-brand-purple">
-                <Users size={12} />
-              </div>
-              <div className="flex flex-col text-left">
-                <strong className="text-xs font-extrabold text-brand-purple leading-tight">1000+</strong>
-                <span className="text-[10px] font-semibold text-brand-ink/80 leading-tight">Students Trained</span>
+          {/* Right Column: Hero Portrait of DTM Jothi + 3 Floating Stat Badges */}
+          <div key={`hero-image-${animKey}`} className="relative mx-auto w-full max-w-[420px] lg:max-w-[460px] pt-6 pb-8">
+            {/* Background Aesthetic Ring */}
+            <div className="absolute inset-0 rounded-[42px] bg-gradient-to-tr from-brand-purple/15 via-brand-gold/15 to-brand-olive/15 blur-2xl transform scale-95 pointer-events-none" />
+            <div className="absolute -inset-3 rounded-[40px] border-2 border-dashed border-brand-gold/40 pointer-events-none" />
+
+            {/* Framed DTM Jothi Portrait Card */}
+            <div className="relative z-10 w-full aspect-[4/4.9] overflow-hidden rounded-[32px] border-4 border-white bg-gradient-to-b from-white to-[#F5EFE6] shadow-[0_20px_50px_rgba(74,21,75,0.16)]">
+              <img
+                src={authorpic}
+                alt="DTM Jothi - Founder & Master VoiceCraft Coach"
+                className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-brand-deep/90 via-brand-deep/40 to-transparent flex items-end p-5">
+                <div>
+                  <p className="text-white font-display text-xl font-bold leading-tight">
+                    DTM Jothi
+                  </p>
+                  <p className="text-brand-gold text-xs font-bold uppercase tracking-wider mt-0.5">
+                    Founder & Master Coach
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-white shadow-sm">
-              <div className="w-6 h-6 rounded-full bg-brand-gold/15 flex items-center justify-center text-brand-gold">
-                <Star size={12} />
-              </div>
-              <div className="flex flex-col text-left">
-                <strong className="text-xs font-extrabold text-brand-gold leading-tight">20 years</strong>
-                <span className="text-[10px] font-semibold text-brand-ink/80 leading-tight">Experience</span>
+
+            {/* Floating Stat Badge 1: 1000+ Students Trained (Top Left) */}
+            <div className="absolute -top-2 -left-2 sm:-left-6 z-20 animate-float">
+              <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(74,21,75,0.14)] hover:scale-105 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-purple to-brand-deep flex items-center justify-center text-white shadow-sm shrink-0">
+                  <Users size={18} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <strong className="font-display text-base sm:text-lg font-extrabold text-brand-purple leading-tight">
+                    1000+
+                  </strong>
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 whitespace-nowrap leading-tight">
+                    Students Trained
+                  </span>
+                </div>
               </div>
             </div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-white shadow-sm">
-              <div className="w-6 h-6 rounded-full bg-brand-purple/10 flex items-center justify-center text-brand-purple">
-                <Sparkles size={12} />
+
+            {/* Floating Stat Badge 2: 20+ Years Experience (Mid/Bottom Left) */}
+            <div className="absolute bottom-12 -left-2 sm:-left-8 z-20 animate-float-delayed">
+              <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(179,146,57,0.18)] hover:scale-105 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-[#987625] flex items-center justify-center text-white shadow-sm shrink-0">
+                  <Star size={18} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <strong className="font-display text-base sm:text-lg font-extrabold text-brand-gold leading-tight">
+                    20+ Years
+                  </strong>
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 whitespace-nowrap leading-tight">
+                    Experience
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col text-left">
-                <strong className="text-xs font-extrabold text-brand-purple leading-tight">Personalized</strong>
-                <span className="text-[10px] font-semibold text-brand-ink/80 leading-tight">Mentorship</span>
+            </div>
+
+            {/* Floating Stat Badge 3: Personalized Mentorship (Bottom Right) */}
+            <div className="absolute -bottom-3 -right-2 sm:-right-6 z-20 animate-float">
+              <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(110,137,52,0.18)] hover:scale-105 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-olive to-[#556d25] flex items-center justify-center text-white shadow-sm shrink-0">
+                  <Sparkles size={18} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <strong className="font-display text-base sm:text-lg font-extrabold text-brand-olive leading-tight">
+                    Personalized
+                  </strong>
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 whitespace-nowrap leading-tight">
+                    Mentorship
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Desktop Card Overlay Text (Upper Right Cards in herobg.png) */}
-      <div className="pointer-events-none absolute left-[70.2%] top-[29.2%] z-10 hidden text-left md:block">
-        <p className="text-[clamp(0.85rem,1.1vw,1.15rem)] font-semibold leading-[1.28] text-brand-ink">
-          Speak clearly.
-          <br />
-          Lead confidently.
-        </p>
-      </div>
-
-      <div className="pointer-events-none absolute left-[70.2%] top-[60.2%] z-10 hidden text-left md:block">
-        <p className="text-[clamp(0.85rem,1.1vw,1.15rem)] font-semibold leading-[1.28] text-brand-ink">
-          Fluency. Accuracy.
-          <br />
-          Higher scores.
-        </p>
-      </div>
-
-      {/* Desktop Stat Boxes (Locked in exact reference alignment immediately to the right of each circle icon) */}
-      <div
-        key={`hero-stat-1-${animKey}`}
-        className="absolute left-[31.8%] top-[85.87%] -translate-y-1/2 z-20 hidden md:block anim-hero-stats"
-      >
-        <HeroStat value="1000+" label="Students Trained" tone="purple" />
-      </div>
-
-      <div
-        key={`hero-stat-2-${animKey}`}
-        className="absolute left-[52.8%] top-[85.87%] -translate-y-1/2 z-20 hidden md:block anim-hero-stats"
-      >
-        <HeroStat value="20 years" label="Experience" tone="gold" />
-      </div>
-
-      <div
-        key={`hero-stat-3-${animKey}`}
-        className="absolute left-[74.0%] top-[85.87%] -translate-y-1/2 z-20 hidden md:block anim-hero-stats"
-      >
-        <HeroStat value="Personalized" label="Mentorship" tone="purple" />
       </div>
     </section>
   );
 }
 
-function HeroStat({ value, label, tone }) {
-  const isGold = tone === "gold";
+// 2. CONSEN 3 FEATURE HIGHLIGHT CARDS STRIP (Directly below hero)
+function FeatureHighlightStrip() {
   return (
-    <div className="flex flex-col text-left px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl bg-white/90 backdrop-blur-md border border-white/90 shadow-[0_4px_16px_rgba(74,21,75,0.06)] hover:bg-white hover:scale-105 transition-all duration-300">
-      <strong
-        className={`font-display text-sm sm:text-base lg:text-lg font-extrabold leading-tight tracking-tight ${
-          isGold ? "text-[#a48c34]" : "text-brand-purple"
-        }`}
-      >
-        {value}
-      </strong>
-      <span className="text-[10px] sm:text-xs font-semibold text-brand-ink/80 leading-tight whitespace-nowrap mt-0.5">
-        {label}
-      </span>
-    </div>
+    <section className="relative z-20 -mt-6 sm:-mt-8 px-4 sm:px-6 lg:px-10 pb-16">
+      <div className="mx-auto max-w-[1240px] grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Feature 1 */}
+        <div className="rounded-3xl bg-white p-7 border border-[#eadfcd] shadow-card hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
+          <div className="w-14 h-14 rounded-2xl bg-brand-olive/15 text-brand-olive flex items-center justify-center mb-5 group-hover:bg-brand-olive group-hover:text-white transition-colors">
+            <Presentation size={26} strokeWidth={2.2} />
+          </div>
+          <h3 className="font-display text-xl font-bold text-brand-purple">
+            Classroom & Live Online
+          </h3>
+          <p className="mt-2 text-sm font-medium leading-relaxed text-brand-ink/80">
+            Interactive speaking sessions conducted at Marathahalli, Bangalore, plus interactive live online sessions globally.
+          </p>
+        </div>
+
+        {/* Feature 2 */}
+        <div className="rounded-3xl bg-white p-7 border border-[#eadfcd] shadow-card hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
+          <div className="w-14 h-14 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center mb-5 group-hover:bg-brand-gold group-hover:text-white transition-colors">
+            <Award size={26} strokeWidth={2.2} />
+          </div>
+          <h3 className="font-display text-xl font-bold text-brand-purple">
+            20+ Years of Mentorship
+          </h3>
+          <p className="mt-2 text-sm font-medium leading-relaxed text-brand-ink/80">
+            Guided directly by DTM Jothi, Master VoiceCraft Coach with structured speech frameworks and individualized feedback.
+          </p>
+        </div>
+
+        {/* Feature 3 */}
+        <div className="rounded-3xl bg-white p-7 border border-[#eadfcd] shadow-card hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
+          <div className="w-14 h-14 rounded-2xl bg-brand-purple/15 text-brand-purple flex items-center justify-center mb-5 group-hover:bg-brand-purple group-hover:text-white transition-colors">
+            <Globe size={26} strokeWidth={2.2} />
+          </div>
+          <h3 className="font-display text-xl font-bold text-brand-purple">
+            Global Student Community
+          </h3>
+          <p className="mt-2 text-sm font-medium leading-relaxed text-brand-ink/80">
+            Proud learners across India, Bahrain, and overseas achieving speaking confidence, clarity, and top exam scores.
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }
 
-// 2. ABOUT SECTION
-function About({ isAnimated, animKey }) {
+// 3. ABOUT SECTION (Consen 2-Column Split)
+function About({ isAnimated, animKey, onSelectProgram }) {
   return (
     <section
       id="about"
-      className="scroll-mt-24 bg-brand-cream px-4 py-16 sm:px-6 md:px-10 md:py-24 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-white px-4 py-16 sm:px-6 md:px-10 md:py-24 border-t border-[#eadfcd]"
     >
       <div
         key={`about-${animKey}`}
-        className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center"
+        className="mx-auto grid max-w-[1240px] gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center"
       >
-        <div className={`mx-auto flex flex-col items-center text-center ${isAnimated ? "section-card-enter" : ""}`}>
-          <div className="aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-3xl border border-[#eadfcd] bg-white shadow-lg sm:max-w-[300px]">
+        {/* Left Column: Framed Portrait + Quote */}
+        <div className={`mx-auto w-full max-w-[380px] flex flex-col items-center text-center ${isAnimated ? "section-card-enter" : ""}`}>
+          <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[30px] border-4 border-[#fff] bg-[#f9f5f0] shadow-xl">
             <img
               src={authorpic}
-              alt="Jothi from VoiceCraft"
-              className="h-full w-full object-cover"
+              alt="DTM Jothi from VoiceCraft"
+              className="h-full w-full object-cover object-top"
             />
+            {/* Experience Pill Badge */}
+            <div className="absolute top-4 left-4 z-10">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brand-deep/90 backdrop-blur-md text-white text-xs font-bold shadow-md border border-white/20">
+                <Award size={14} className="text-brand-gold" />
+                20+ Years Mentorship
+              </span>
+            </div>
           </div>
-          <blockquote className="mt-4 text-[17px] font-semibold italic text-brand-olive sm:text-[19px]">
+
+          <blockquote className="mt-5 text-lg font-semibold italic text-brand-olive sm:text-xl">
             “Reading is rewarding”
           </blockquote>
-          <p className="mt-2 font-display text-[28px] font-bold leading-none text-brand-purple sm:text-[32px]">
+          <p className="mt-1 font-display text-3xl font-extrabold text-brand-purple">
             DTM Jothi
           </p>
-          <span className="text-xs font-bold text-brand-gold uppercase tracking-wider mt-1">
+          <span className="text-xs font-bold text-brand-gold uppercase tracking-wider mt-0.5">
             Founder & Master Coach
           </span>
         </div>
+
+        {/* Right Column: Consen Content & Checklist */}
         <div className={isAnimated ? "section-text-enter" : ""}>
-          <span className="px-4 py-1.5 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-extrabold uppercase tracking-wider inline-block mb-3">
-            Founder's Profile
-          </span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-extrabold uppercase tracking-wider mb-4">
+            <span>ABOUT THE FOUNDER & MASTER COACH</span>
+          </div>
+
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-brand-purple">
             About VoiceCraft
           </h2>
-          <p className="mt-5 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90">
+
+          <div className="mt-3 h-1 w-20 rounded-full bg-brand-gold" />
+
+          <p className="mt-6 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90">
             Founded and led by DTM Jothi, VoiceCraft is dedicated to empowering
             individuals to speak with clarity, confidence, and impact. With
             decades of experience in mentoring speakers and language learners,
             her work helps students, professionals, and aspiring leaders communicate
             effectively at every stage of life.
           </p>
+
+          {/* Consen 4 Highlights Checklist */}
+          <div className="mt-8 grid sm:grid-cols-2 gap-4">
+            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-brand-cream border border-[#eadfcd]">
+              <div className="w-8 h-8 rounded-full bg-brand-olive/20 text-brand-olive flex items-center justify-center shrink-0">
+                <CheckCircle2 size={16} strokeWidth={2.6} />
+              </div>
+              <span className="text-xs sm:text-sm font-bold text-brand-purple">
+                Structured & Engaging Curriculum
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-brand-cream border border-[#eadfcd]">
+              <div className="w-8 h-8 rounded-full bg-brand-olive/20 text-brand-olive flex items-center justify-center shrink-0">
+                <CheckCircle2 size={16} strokeWidth={2.6} />
+              </div>
+              <span className="text-xs sm:text-sm font-bold text-brand-purple">
+                Fear-Free Speaking Environment
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-brand-cream border border-[#eadfcd]">
+              <div className="w-8 h-8 rounded-full bg-brand-olive/20 text-brand-olive flex items-center justify-center shrink-0">
+                <CheckCircle2 size={16} strokeWidth={2.6} />
+              </div>
+              <span className="text-xs sm:text-sm font-bold text-brand-purple">
+                Personalized Guidance & Feedback
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-brand-cream border border-[#eadfcd]">
+              <div className="w-8 h-8 rounded-full bg-brand-olive/20 text-brand-olive flex items-center justify-center shrink-0">
+                <CheckCircle2 size={16} strokeWidth={2.6} />
+              </div>
+              <span className="text-xs sm:text-sm font-bold text-brand-purple">
+                Practical Real-World Exercises
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-8 flex items-center gap-4">
+            <Button
+              href="#programs"
+              variant="primary"
+              size="md"
+              className="rounded-full shadow-md hover:scale-105 transition-all"
+            >
+              Explore Our Programs
+            </Button>
+            <Button
+              href="#enquiry"
+              variant="secondary"
+              size="md"
+              className="rounded-full hover:scale-105 transition-all"
+            >
+              Contact Mentor
+            </Button>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-// 3. PROGRAMS SECTION
+// 4. PROGRAMS SECTION (Consen 4-Box Service Layout)
 function Programs({ selectedCourse, setSelectedCourse, isAnimated, animKey }) {
   const detailRef = useRef(null);
   const selectedProgram = selectedCourse ? courseDetails[selectedCourse] : null;
@@ -730,11 +868,20 @@ function Programs({ selectedCourse, setSelectedCourse, isAnimated, animKey }) {
   return (
     <section
       id="programs"
-      className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 md:px-8 md:py-24 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-[#FAF9F6] px-4 py-16 sm:px-6 md:px-8 md:py-24 border-t border-[#eadfcd]"
     >
       <div key={`programs-${animKey}`} className="mx-auto max-w-[1240px]">
-        <SectionHeading title="Our Programs" isAnimated={isAnimated} />
-        <div className={`mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 ${isAnimated ? "section-card-enter" : ""}`}>
+        <SectionHeading
+          eyebrow="OUR SIGNATURE PROGRAMS"
+          title="Tailored Programs for Every Communicator"
+          isAnimated={isAnimated}
+        />
+        <p className="text-center text-sm sm:text-base font-medium text-brand-ink/80 max-w-2xl mx-auto -mt-2 mb-10">
+          Structured courses designed for students, working professionals, and language enthusiasts.
+        </p>
+
+        {/* Consen 4 Service Cards Grid */}
+        <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-4 ${isAnimated ? "section-card-enter" : ""}`}>
           {programs.map((program) => (
             <ProgramCard
               key={program.title}
@@ -744,6 +891,8 @@ function Programs({ selectedCourse, setSelectedCourse, isAnimated, animKey }) {
             />
           ))}
         </div>
+
+        {/* Expandable Course Details Panel */}
         {selectedProgram ? (
           <CourseDetailPanel
             panelRef={detailRef}
@@ -753,6 +902,7 @@ function Programs({ selectedCourse, setSelectedCourse, isAnimated, animKey }) {
                 ?.iconImage
             }
             details={selectedProgram}
+            onClose={() => setSelectedCourse(null)}
           />
         ) : null}
       </div>
@@ -762,7 +912,9 @@ function Programs({ selectedCourse, setSelectedCourse, isAnimated, animKey }) {
 
 function ProgramCard({
   title,
+  subtitle,
   description,
+  highlights = [],
   icon: Icon,
   iconImage,
   isActive,
@@ -770,90 +922,125 @@ function ProgramCard({
 }) {
   return (
     <article
-      className={`flex min-h-[330px] flex-col items-center rounded-3xl border bg-[#FAF9F6] p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${
+      className={`flex min-h-[380px] flex-col items-start rounded-3xl border bg-white p-7 text-left shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-floating ${
         isActive
-          ? "border-brand-olive ring-2 ring-brand-olive/30 bg-white"
+          ? "border-brand-olive ring-2 ring-brand-olive/30 shadow-lg"
           : "border-[#eadfcd]"
       }`}
     >
-      <div className="grid h-[130px] w-full place-items-center justify-items-center">
+      {/* Icon / Official Cropped Logo Container */}
+      <div className="grid h-[100px] w-full place-items-center rounded-2xl bg-brand-cream/80 p-3 mb-5 border border-[#eadfcd]/60">
         {iconImage ? (
           <img
             src={iconImage}
             alt={title}
-            className="max-h-[110px] max-w-[90%] object-contain rounded-2xl bg-white p-2 shadow-sm"
+            className="max-h-[85px] max-w-[90%] object-contain"
           />
         ) : (
-          <Icon className="h-20 w-20 text-brand-purple" />
+          <Icon className="h-16 w-16 text-brand-purple" />
         )}
       </div>
 
-      <h3 className="mt-4 font-display text-xl font-bold text-brand-purple">
+      <span className="text-[11px] font-bold text-brand-olive uppercase tracking-wider">
+        {subtitle}
+      </span>
+
+      <h3 className="mt-1 font-display text-xl font-extrabold text-brand-purple">
         {title}
       </h3>
 
-      <p className="mt-2 min-h-[64px] text-sm font-medium leading-relaxed text-brand-ink/80">
+      <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-brand-ink/80 min-h-[44px]">
         {description}
       </p>
+
+      {/* Syllabus Highlights Badges */}
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        {highlights.slice(0, 3).map((item, i) => (
+          <span
+            key={i}
+            className="px-2.5 py-0.5 rounded-full bg-brand-cream text-[10px] font-semibold text-brand-purple/90 border border-[#eadfcd]"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
 
       {/* Strict rounded-full button */}
       <button
         type="button"
         aria-expanded={isActive}
         onClick={onLearnMore}
-        className={`mt-auto inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm ${
+        className={`mt-auto pt-6 inline-flex items-center justify-center gap-2 rounded-full w-full py-2.5 text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm ${
           isActive
             ? "bg-brand-olive text-white hover:bg-[#5e6b26]"
             : "bg-brand-purple text-white hover:bg-brand-deep"
         }`}
       >
-        <span>{isActive ? "Viewing Details" : "Learn More"}</span>
+        <span>{isActive ? "Viewing Syllabus" : "View Details & Syllabus"}</span>
         <ChevronRight size={16} strokeWidth={2.8} />
       </button>
     </article>
   );
 }
 
-function CourseDetailPanel({ panelRef, title, iconImage, details }) {
+function CourseDetailPanel({ panelRef, title, iconImage, details, onClose }) {
   const [isMoreDetailsOpen, setIsMoreDetailsOpen] = useState(false);
   useEffect(() => setIsMoreDetailsOpen(false), [title]);
 
   return (
     <article
       ref={panelRef}
-      className="mt-10 overflow-hidden rounded-3xl border border-[#d8cc8b] bg-brand-cream shadow-xl"
+      className="mt-10 overflow-hidden rounded-3xl border border-[#d8cc8b] bg-white shadow-2xl transition-all"
     >
       <div className="grid gap-0 lg:grid-cols-[0.95fr_1.4fr]">
-        <div className="relative overflow-hidden bg-brand-deep px-6 py-8 text-white md:px-10 md:py-10">
-          <div className="grid h-[120px] w-[200px] place-items-center overflow-hidden rounded-2xl bg-white p-3 shadow-md">
-            {iconImage ? (
-              <img
-                src={iconImage}
-                alt=""
-                className="max-h-full max-w-full object-contain"
-              />
-            ) : null}
-          </div>
-          <p className="mt-6 text-xs font-bold uppercase tracking-widest text-brand-gold">
-            Course Details
-          </p>
-          <h3 className="mt-2 font-display text-3xl font-bold leading-tight text-white md:text-4xl">
-            {title}
-          </h3>
-          <p className="mt-4 text-sm font-medium leading-relaxed text-white/90">
-            {details.intro}
-          </p>
-          {details.overview.map((paragraph, i) => (
-            <p
-              key={i}
-              className="mt-3 text-xs sm:text-sm font-medium leading-relaxed text-white/80"
-            >
-              {paragraph}
+        <div className="relative overflow-hidden bg-brand-deep px-6 py-8 text-white md:px-10 md:py-10 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <div className="grid h-[100px] w-[180px] place-items-center overflow-hidden rounded-2xl bg-white p-3 shadow-md">
+                {iconImage ? (
+                  <img
+                    src={iconImage}
+                    alt=""
+                    className="max-h-full max-w-full object-contain"
+                  />
+                ) : null}
+              </div>
+              <button
+                type="button"
+                onClick={onClose}
+                className="text-white/70 hover:text-white text-xs font-bold underline cursor-pointer"
+              >
+                Close Syllabus
+              </button>
+            </div>
+
+            <p className="mt-6 text-xs font-bold uppercase tracking-widest text-brand-gold">
+              Course Details & Curriculum
             </p>
-          ))}
+            <h3 className="mt-2 font-display text-3xl font-bold leading-tight text-white md:text-4xl">
+              {title}
+            </h3>
+            <p className="mt-4 text-sm font-medium leading-relaxed text-white/90">
+              {details.intro}
+            </p>
+            {details.overview.map((paragraph, i) => (
+              <p
+                key={i}
+                className="mt-3 text-xs sm:text-sm font-medium leading-relaxed text-white/80"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-white/15">
+            <p className="text-xs text-brand-gold font-semibold">
+              Master Mentorship by DTM Jothi
+            </p>
+          </div>
         </div>
 
-        <div className="bg-[#fffaf1] p-6 md:p-10 flex flex-col justify-between">
+        <div className="bg-[#FFFDF9] p-6 md:p-10 flex flex-col justify-between">
           <div>
             <div className="grid gap-6 md:grid-cols-2">
               <DetailList title="What you will learn" items={details.covers} />
@@ -865,9 +1052,9 @@ function CourseDetailPanel({ panelRef, title, iconImage, details }) {
                 type="button"
                 aria-expanded={isMoreDetailsOpen}
                 onClick={() => setIsMoreDetailsOpen((open) => !open)}
-                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-brand-olive bg-white px-6 py-3 text-xs font-bold text-brand-olive shadow-sm transition hover:bg-brand-cream cursor-pointer"
+                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-brand-olive bg-white px-6 py-2.5 text-xs font-bold text-brand-olive shadow-sm transition hover:bg-brand-cream cursor-pointer"
               >
-                <span>{isMoreDetailsOpen ? "Hide Details" : "More Details"}</span>
+                <span>{isMoreDetailsOpen ? "Hide Advanced Details" : "View Full Course Structure & Options"}</span>
                 <ChevronRight
                   size={16}
                   strokeWidth={2.8}
@@ -890,13 +1077,13 @@ function CourseDetailPanel({ panelRef, title, iconImage, details }) {
             </p>
             <div className="mt-4 flex flex-col gap-3 border-t border-[#eadfcd] pt-4 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm font-bold text-brand-purple">
-                Start your journey with us by filling the enquiry form.
+                Enroll or book a trial class today.
               </p>
               <a
                 href="#enquiry"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-purple px-6 py-3 text-xs font-bold text-white shadow-md hover:bg-brand-deep transition-colors shrink-0"
               >
-                <span>Enquire Now</span>
+                <span>Enquire For This Program</span>
                 <ChevronRight size={16} strokeWidth={3} />
               </a>
             </div>
@@ -911,7 +1098,7 @@ function MoreDetails({ details }) {
   return (
     <div className="mb-6 rounded-2xl border border-[#eadfcd] bg-white p-6 shadow-sm">
       <h4 className="font-display text-xl font-bold text-brand-purple mb-4">
-        More Details
+        Course Structure & Modules
       </h4>
       <div className="grid gap-5">
         {details.map((section, idx) => (
@@ -965,17 +1152,53 @@ function CoursePoint({ children }) {
   );
 }
 
-// 4. WHY CHOOSE SECTION
+// 5. CONSEN DARK COUNTER / METRICS STRIP
+function CounterStrip() {
+  const metrics = [
+    { value: "1000+", label: "Students Trained", icon: Users },
+    { value: "20+", label: "Years Coaching Experience", icon: Award },
+    { value: "4", label: "Specialized Signature Programs", icon: BookOpen },
+    { value: "100%", label: "Interactive Live Practice", icon: Sparkles },
+  ];
+
+  return (
+    <section className="bg-brand-deep py-14 px-4 sm:px-6 lg:px-10 border-t border-brand-purple/30 text-white relative overflow-hidden">
+      {/* Decorative ambient light */}
+      <div className="absolute top-0 right-1/4 w-96 h-32 rounded-full bg-brand-gold/10 blur-3xl pointer-events-none" />
+
+      <div className="mx-auto max-w-[1240px] grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative z-10">
+        {metrics.map((item, idx) => {
+          const Icon = item.icon;
+          return (
+            <div key={idx} className="flex flex-col items-center">
+              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-brand-gold mb-3">
+                <Icon size={22} />
+              </div>
+              <strong className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-gold">
+                {item.value}
+              </strong>
+              <span className="mt-2 text-xs sm:text-sm font-semibold text-white/80">
+                {item.label}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+// 6. WHY CHOOSE SECTION (Consen 6-Grid Feature Section)
 function WhyChoose({ isAnimated, animKey }) {
   const benefits = [
     {
       title: "Stage Presence",
-      description: "To overcome the 'phobia' of speaking in public, build stage presence, Engage any audience with confidence and poise.",
+      description: "To overcome the 'phobia' of speaking in public, build stage presence, engage any audience with confidence and poise.",
       icon: Presentation,
     },
     {
       title: "Build Confidence",
-      description: "To build confidence. Speak without fear, self-doubt, or hesitation.",
+      description: "To build confidence. Speak without fear, self-doubt, or hesitation in any setting.",
       icon: Star,
     },
     {
@@ -1001,30 +1224,32 @@ function WhyChoose({ isAnimated, animKey }) {
   ];
 
   return (
-    <section className="bg-brand-deep px-5 py-14 text-center text-white md:px-8 md:py-20 border-t border-[#e6dfd4]">
-      <div key={`why-${animKey}`} className="mx-auto max-w-[1280px]">
-        <div className={`mb-10 flex items-center justify-center gap-4 ${isAnimated ? "section-text-enter" : ""}`}>
-          <span className="hidden h-px w-16 bg-brand-gold md:block" />
-          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#f6f0ec]">
-            Why Choose VoiceCraft?
-          </h2>
-          <span className="hidden h-px w-16 bg-brand-gold md:block" />
-        </div>
-        <div className={`grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 ${isAnimated ? "section-card-enter" : ""}`}>
-          {benefits.map((benefit, index) => {
+    <section id="why-us" className="scroll-mt-28 bg-white px-5 py-16 text-center text-brand-ink md:px-8 md:py-24 border-t border-[#eadfcd]">
+      <div key={`why-${animKey}`} className="mx-auto max-w-[1240px]">
+        <SectionHeading
+          eyebrow="THE VOICECRAFT ADVANTAGE"
+          title="Why Choose VoiceCraft?"
+          isAnimated={isAnimated}
+        />
+        <p className="text-center text-sm sm:text-base font-medium text-brand-ink/80 max-w-2xl mx-auto -mt-2 mb-12">
+          Transform from a hesitant speaker into a captivating communicator through proven methodology.
+        </p>
+
+        <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 ${isAnimated ? "section-card-enter" : ""}`}>
+          {benefits.map((benefit) => {
             const Icon = benefit.icon;
             return (
               <article
                 key={benefit.title}
-                className={`flex flex-col items-center px-4 ${index > 0 ? "lg:border-l lg:border-white/15" : ""}`}
+                className="flex flex-col items-center rounded-3xl border border-[#eadfcd] bg-brand-cream/60 p-6 text-center shadow-sm hover:bg-white hover:shadow-floating hover:-translate-y-1.5 transition-all duration-300"
               >
-                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-3">
-                  <Icon className="h-8 w-8 text-brand-gold" strokeWidth={2} />
+                <div className="w-14 h-14 rounded-2xl bg-brand-purple/10 flex items-center justify-center mb-4 text-brand-purple">
+                  <Icon className="h-7 w-7" strokeWidth={2} />
                 </div>
-                <h3 className="font-display text-lg font-bold text-brand-gold">
+                <h3 className="font-display text-base font-bold text-brand-purple">
                   {benefit.title}
                 </h3>
-                <p className="mt-2 text-xs font-medium leading-relaxed text-[#efe9f2]/85">
+                <p className="mt-2 text-xs font-medium leading-relaxed text-brand-ink/80">
                   {benefit.description}
                 </p>
               </article>
@@ -1036,15 +1261,16 @@ function WhyChoose({ isAnimated, animKey }) {
   );
 }
 
-// 5. TESTIMONIALS SECTION
+// 7. TESTIMONIALS SECTION (Consen 3-Column Grid)
 function Testimonials({ isAnimated, animKey }) {
   return (
     <section
       id="testimonials"
-      className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 md:px-10 md:py-24 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-[#FAF9F6] px-4 py-16 sm:px-6 md:px-10 md:py-24 border-t border-[#eadfcd]"
     >
       <div key={`testi-${animKey}`} className="mx-auto max-w-[1240px]">
         <SectionHeading
+          eyebrow="STUDENT SUCCESS STORIES"
           title="From her years of teaching across Bahrain and India, her students say..."
           isAnimated={isAnimated}
         />
@@ -1068,13 +1294,13 @@ function TestimonialCard({ quote, name }) {
     .toUpperCase();
 
   return (
-    <figure className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-[#fffaf1] p-6 sm:p-7 shadow-sm hover:scale-[1.02] transition-transform duration-300">
+    <figure className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-7 shadow-card hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300">
       <div>
-        <div className="flex gap-1 mb-3" aria-label="5 star rating">
+        <div className="flex gap-1 mb-4" aria-label="5 star rating">
           {[1, 2, 3, 4, 5].map((star) => (
             <Star
               key={star}
-              className="h-5 w-5 fill-brand-gold text-brand-gold"
+              className="h-4 w-4 fill-brand-gold text-brand-gold"
             />
           ))}
         </div>
@@ -1083,7 +1309,7 @@ function TestimonialCard({ quote, name }) {
         </blockquote>
       </div>
       <figcaption className="mt-6 flex items-center gap-3.5 pt-4 border-t border-brand-purple/10">
-        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-[#d8cc8b] bg-white text-base font-extrabold uppercase text-brand-purple shadow-sm">
+        <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-purple/10 text-brand-purple text-sm font-extrabold uppercase shadow-sm">
           {initials}
         </div>
         <strong className="text-sm font-bold text-brand-purple">
@@ -1094,15 +1320,19 @@ function TestimonialCard({ quote, name }) {
   );
 }
 
-// 6. GALLERY SECTION
+// 8. GALLERY SECTION (Consen Showcase Marquee)
 function Gallery({ isAnimated, animKey }) {
   return (
     <section
       id="gallery"
-      className="scroll-mt-24 bg-brand-cream px-4 py-16 sm:px-6 md:px-10 md:py-20 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-white px-4 py-16 sm:px-6 md:px-10 md:py-20 border-t border-[#eadfcd]"
     >
       <div key={`gallery-${animKey}`} className="mx-auto max-w-[1240px]">
-        <SectionHeading title="Gallery" isAnimated={isAnimated} />
+        <SectionHeading
+          eyebrow="OUR CLASSROOM MOMENTS"
+          title="Life at VoiceCraft Academy"
+          isAnimated={isAnimated}
+        />
         <div className={`marquee-wrapper mt-8 overflow-hidden py-4 ${isAnimated ? "section-card-enter" : ""}`}>
           <div className="marquee-track flex gap-6 w-max">
             {[...galleryMoments, ...galleryMoments].map((moment, index) => (
@@ -1124,54 +1354,77 @@ function Gallery({ isAnimated, animKey }) {
   );
 }
 
-// 7. ENQUIRY SECTION
+// 9. ENQUIRY SECTION (Consen Split Layout)
 function Enquiry({ isAnimated, animKey }) {
   return (
     <section
       id="enquiry"
-      className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 md:px-8 md:py-24 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-[#FAF9F6] px-4 py-16 sm:px-6 md:px-8 md:py-24 border-t border-[#eadfcd]"
     >
-      <div key={`enquiry-${animKey}`} className={`mx-auto max-w-[1180px] rounded-3xl border border-[#eadfcd] bg-brand-cream p-6 sm:p-8 md:p-10 shadow-lg ${isAnimated ? "section-card-enter" : ""}`}>
-        <div className={`mb-8 text-center ${isAnimated ? "section-text-enter" : ""}`}>
-          <div className="mb-3 inline-flex rounded-full border border-[#eadfcd] bg-white px-6 py-2">
+      <div key={`enquiry-${animKey}`} className={`mx-auto max-w-[1240px] rounded-3xl border border-[#eadfcd] bg-brand-cream p-6 sm:p-8 md:p-12 shadow-lg ${isAnimated ? "section-card-enter" : ""}`}>
+        <div className={`mb-10 text-center ${isAnimated ? "section-text-enter" : ""}`}>
+          <div className="mb-3 inline-flex rounded-full border border-[#eadfcd] bg-white px-6 py-2 shadow-sm">
             <img src={logo} alt="VoiceCraft" className="h-8 w-auto" />
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-brand-purple">
+          <p className="text-xs font-bold uppercase tracking-widest text-brand-olive mb-1">
+            GET IN TOUCH WITH OUR MASTER COACH
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-purple">
             Enquire Now
           </h2>
+          <div className="w-16 h-1 rounded-full bg-brand-gold mx-auto mt-3" />
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-start">
           <ProgramEnquiryForm />
 
-          <aside className="flex flex-col justify-between rounded-2xl border border-[#eadfcd] bg-white p-6 sm:p-7 shadow-sm h-full">
+          {/* Consen Contact Info Card */}
+          <aside className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-7 sm:p-8 shadow-sm h-full">
             <div>
               <h3 className="font-display text-2xl font-bold text-brand-olive">
                 Need to talk?
               </h3>
               <p className="mt-1 text-sm font-bold text-brand-ink">
-                We're here to help.
+                We're here to help guide your communication journey.
               </p>
               <div className="mt-6 space-y-4">
                 <EnquiryContactItem
                   icon={Phone}
-                  label="Phone"
-                  value="+91 9919911027"
+                  label="Phone / WhatsApp"
+                  value="+91 99199 11027"
+                  href="tel:+919919911027"
                 />
                 <EnquiryContactItem
                   icon={Mail}
                   label="Email"
                   value="voicecraftwithjothi@gmail.com"
+                  href="mailto:voicecraftwithjothi@gmail.com"
+                />
+                <EnquiryContactItem
+                  icon={MapPin}
+                  label="Classroom Location"
+                  value="Marathahalli, Bangalore, India"
+                />
+                <EnquiryContactItem
+                  icon={Clock}
+                  label="Operating Hours"
+                  value="Mon – Sat: 9:00 AM – 7:00 PM"
                 />
               </div>
             </div>
 
-            <div className="mt-8 flex items-center gap-3 border-t border-[#e5d8bd] pt-5">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#25D366] text-white">
-                <MessageCircle size={20} />
-              </span>
-              <p className="text-xs sm:text-sm font-bold text-brand-ink">
-                We usually respond within 24 hours.
+            <div className="mt-8 pt-6 border-t border-brand-purple/10">
+              <a
+                href="https://wa.me/919919911027"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2.5 py-3 rounded-full bg-[#25D366] text-white font-bold text-xs shadow-md hover:bg-[#20bd5a] transition-all duration-200"
+              >
+                <MessageCircle size={18} />
+                <span>Chat Instantly on WhatsApp</span>
+              </a>
+              <p className="mt-2 text-center text-[11px] font-semibold text-brand-ink/70">
+                Direct reply within 24 hours.
               </p>
             </div>
           </aside>
@@ -1240,7 +1493,7 @@ function ProgramEnquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-[#e9e2d8] bg-white p-6 shadow-sm"
+      className="rounded-3xl border border-[#e9e2d8] bg-white p-7 sm:p-8 shadow-sm"
     >
       <h3 className="font-display text-2xl font-bold text-brand-purple mb-5">
         Choose your course
@@ -1268,19 +1521,19 @@ function ProgramEnquiryForm() {
         <FormSelect
           name="mode"
           label="Preferred Mode"
-          options={["Select preferred mode", "Online", "Offline"]}
+          options={["Select preferred mode", "Classroom (Marathahalli, Bangalore)", "Live Online"]}
           required
         />
       </div>
 
       <label className="mt-4 block">
         <span className="mb-1.5 block text-xs font-bold text-brand-ink">
-          Message
+          Message (Optional)
         </span>
         <textarea
           name="message"
           rows="3"
-          placeholder="Type your message here..."
+          placeholder="Tell us about your learning goals..."
           className="w-full resize-none rounded-2xl border border-[#dcd8df] bg-white px-4 py-3 text-xs sm:text-sm font-medium text-brand-ink outline-none transition placeholder:text-slate-400 focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15"
         />
       </label>
@@ -1289,7 +1542,7 @@ function ProgramEnquiryForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="mt-5 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-brand-purple px-6 text-sm font-bold text-white shadow-md hover:bg-brand-deep transition-all duration-200 cursor-pointer disabled:opacity-60"
+        className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-brand-purple px-6 text-sm font-bold text-white shadow-md hover:bg-brand-deep hover:scale-[1.01] transition-all duration-200 cursor-pointer disabled:opacity-60"
       >
         <span>{isSubmitting ? "Sending..." : "Submit Enquiry"}</span>
         <ChevronRight size={18} strokeWidth={2.8} />
@@ -1361,80 +1614,131 @@ function FormSelect({ name, label, options, required = false }) {
   );
 }
 
-function EnquiryContactItem({ icon: Icon, label, value }) {
-  return (
+function EnquiryContactItem({ icon: Icon, label, value, href }) {
+  const content = (
     <div className="flex items-center gap-3.5">
-      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-purple text-white shadow-sm">
-        <Icon size={20} strokeWidth={2.4} />
+      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand-cream border border-[#eadfcd] text-brand-purple shadow-sm">
+        <Icon size={19} strokeWidth={2.2} />
       </span>
       <div>
-        <strong className="block text-xs font-bold text-brand-purple uppercase tracking-wider">
+        <strong className="block text-[11px] font-bold text-brand-olive uppercase tracking-wider">
           {label}
         </strong>
-        <span className="block text-sm font-bold text-brand-purple/90">
+        <span className="block text-xs sm:text-sm font-bold text-brand-purple">
           {value}
         </span>
       </div>
     </div>
   );
+
+  if (href) {
+    return (
+      <a href={href} className="block hover:opacity-80 transition-opacity">
+        {content}
+      </a>
+    );
+  }
+  return content;
 }
 
-// 8. FOOTER
+// 10. FOOTER (Consen 4-Column Modern Footer)
 function Footer() {
   return (
     <footer className="bg-brand-deep text-white border-t border-brand-purple/20">
-      <div className="mx-auto flex max-w-[1240px] flex-col justify-between gap-8 px-6 py-12 sm:flex-row sm:items-center">
-        <div>
-          <a href="#home" className="inline-flex">
-            <img
-              src={logo}
-              alt="VoiceCraft"
-              className="h-10 w-auto brightness-110"
-            />
-          </a>
-          <p className="mt-3 text-xs text-white/70 max-w-xs">
-            Empowering individuals to speak with confidence, express with clarity, and lead with impact.
-          </p>
-        </div>
-
-        <div className="flex flex-col items-start sm:items-end gap-2.5 text-xs text-white/80">
-          <h4 className="text-sm font-bold text-brand-gold uppercase tracking-wider mb-1">
-            Contact Us
-          </h4>
-          <div className="flex items-center gap-2">
-            <Phone size={14} className="text-brand-gold" />
-            <span>+91 9919911027</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Mail size={14} className="text-brand-gold" />
-            <span>voicecraftwithjothi@gmail.com</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <MapPin size={14} className="text-brand-gold" />
-            <span>Marathahalli, Bangalore, India</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center justify-center px-4 pb-8 pt-2 text-center">
-        <div className="flex items-center justify-center gap-3 mb-4">
-          {socialLinks.map(({ label, icon: Icon, href }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/40 text-white transition hover:border-brand-gold hover:text-brand-gold"
-            >
-              <Icon className="h-4 w-4" />
+      <div className="mx-auto max-w-[1240px] px-6 py-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* Column 1: Brand Info */}
+          <div>
+            <a href="#home" className="inline-flex">
+              <img
+                src={logo}
+                alt="VoiceCraft"
+                className="h-11 w-auto brightness-110"
+              />
             </a>
-          ))}
+            <p className="mt-4 text-xs sm:text-sm text-white/75 leading-relaxed">
+              Empowering individuals to speak with confidence, express with clarity, and lead with impact across every stage of life.
+            </p>
+            <div className="flex items-center gap-3 mt-5">
+              {socialLinks.map(({ label, icon: Icon, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-gold hover:text-brand-deep flex items-center justify-center text-white transition-all text-xs"
+                >
+                  <Icon size={14} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 2: Quick Links */}
+          <div>
+            <h4 className="text-xs font-bold text-brand-gold uppercase tracking-widest mb-4">
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5 text-xs sm:text-sm text-white/80">
+              <li><a href="#home" className="hover:text-brand-gold transition-colors">Home</a></li>
+              <li><a href="#about" className="hover:text-brand-gold transition-colors">About VoiceCraft</a></li>
+              <li><a href="#programs" className="hover:text-brand-gold transition-colors">Our Programs</a></li>
+              <li><a href="#why-us" className="hover:text-brand-gold transition-colors">Why Choose Us</a></li>
+              <li><a href="#testimonials" className="hover:text-brand-gold transition-colors">Student Reviews</a></li>
+              <li><a href="#gallery" className="hover:text-brand-gold transition-colors">Classroom Gallery</a></li>
+              <li><a href="#enquiry" className="hover:text-brand-gold transition-colors">Enquire Now</a></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Our Programs */}
+          <div>
+            <h4 className="text-xs font-bold text-brand-gold uppercase tracking-widest mb-4">
+              Our Programs
+            </h4>
+            <ul className="space-y-2.5 text-xs sm:text-sm text-white/80">
+              <li><a href="#programs" className="hover:text-brand-gold transition-colors">Eloquence by VoiceCraft</a></li>
+              <li><a href="#programs" className="hover:text-brand-gold transition-colors">EngLingo by VoiceCraft</a></li>
+              <li><a href="#programs" className="hover:text-brand-gold transition-colors">Bonjour by VoiceCraft</a></li>
+              <li><a href="#programs" className="hover:text-brand-gold transition-colors">IELTS & PTE Training</a></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Contact Info */}
+          <div>
+            <h4 className="text-xs font-bold text-brand-gold uppercase tracking-widest mb-4">
+              Get In Touch
+            </h4>
+            <div className="space-y-3 text-xs sm:text-sm text-white/80">
+              <div className="flex items-start gap-2.5">
+                <MapPin size={16} className="text-brand-gold shrink-0 mt-0.5" />
+                <span>Marathahalli, Bangalore, India</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Phone size={16} className="text-brand-gold shrink-0" />
+                <a href="tel:+919919911027" className="hover:text-brand-gold transition-colors">
+                  +91 99199 11027
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Mail size={16} className="text-brand-gold shrink-0" />
+                <a href="mailto:voicecraftwithjothi@gmail.com" className="hover:text-brand-gold transition-colors break-all">
+                  voicecraftwithjothi@gmail.com
+                </a>
+              </div>
+              <div className="pt-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[11px] font-semibold text-brand-gold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
+                  Classroom & Live Online
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="bg-brand-olive px-6 py-3.5 text-center text-xs font-bold text-white/90">
-        &copy; 2025 VoiceCraft. All Rights Reserved.
+      <div className="border-t border-white/10 bg-[#1b051c] px-6 py-4 text-center text-xs text-white/60">
+        &copy; 2025 VoiceCraft Academy. All Rights Reserved. Master Coaching by DTM Jothi.
       </div>
     </footer>
   );

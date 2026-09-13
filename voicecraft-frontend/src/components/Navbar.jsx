@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, X, Phone, MessageCircle } from "lucide-react";
+import { ChevronDown, Menu, X, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import Button from "./Button.jsx";
 
@@ -7,6 +8,7 @@ const navItems = [
   { label: "Home", id: "home" },
   { label: "About", id: "about" },
   { label: "Programs", id: "programs" },
+  { label: "Why Us", id: "why-us" },
   { label: "Testimonials", id: "testimonials" },
   { label: "Gallery", id: "gallery" },
   { label: "Enquiry", id: "enquiry" },
@@ -21,13 +23,13 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 30);
 
       const sections = navItems
         .map((item) => document.getElementById(item.id))
         .filter(Boolean);
 
-      const scrollPosition = window.scrollY + 120;
+      const scrollPosition = window.scrollY + 140;
       const current = sections
         .filter((sec) => sec.offsetTop <= scrollPosition)
         .at(-1);
@@ -76,159 +78,219 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full z-50 border-b border-[#eadfcd]/80 bg-white/92 backdrop-blur-2xl shadow-[0_4px_25px_rgba(74,21,75,0.06)] transition-all duration-300">
-      <nav className="mx-auto flex min-h-[72px] lg:min-h-[76px] w-full max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10">
-        {/* Logo */}
-        <a
-          href="#home"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection("home");
-          }}
-          className="flex items-center shrink-0"
-        >
-          <img
-            src={logo}
-            alt="VoiceCraft Academy"
-            className="h-9 sm:h-11 w-auto object-contain"
-          />
-        </a>
+    <header className="fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300">
+      {/* 1. Consen Top Contact Info Strip */}
+      <div
+        className={`bg-brand-deep text-white border-b border-white/10 text-xs transition-all duration-300 ${
+          isScrolled ? "hidden md:hidden" : "block"
+        }`}
+      >
+        <div className="mx-auto flex h-10 max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10">
+          {/* Contact Details */}
+          <div className="flex items-center gap-4 sm:gap-6 text-white/85 text-[11px] sm:text-xs">
+            <a
+              href="tel:+919919911027"
+              className="flex items-center gap-1.5 hover:text-brand-gold transition-colors"
+            >
+              <Phone size={13} className="text-brand-gold shrink-0" />
+              <span>+91 99199 11027</span>
+            </a>
+            <a
+              href="mailto:voicecraftwithjothi@gmail.com"
+              className="hidden sm:flex items-center gap-1.5 hover:text-brand-gold transition-colors"
+            >
+              <Mail size={13} className="text-brand-gold shrink-0" />
+              <span>voicecraftwithjothi@gmail.com</span>
+            </a>
+            <div className="hidden lg:flex items-center gap-1.5 text-white/70">
+              <MapPin size={13} className="text-brand-gold shrink-0" />
+              <span>Marathahalli, Bangalore, India</span>
+            </div>
+          </div>
 
-        {/* Desktop Nav Links */}
-        <div className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-semibold text-brand-ink/80">
-          {navItems.map((item) => {
-            const isActive = activeSection === item.id;
-            const isPrograms = item.id === "programs";
-
-            return (
-              <div key={item.id} className="relative" ref={isPrograms ? programsMenuRef : undefined}>
-                <a
-                  href={`#${item.id}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.id);
-                  }}
-                  className={`px-3.5 py-1.5 rounded-full text-xs xl:text-sm transition-all duration-200 cursor-pointer ${
-                    isActive
-                      ? "bg-brand-purple text-white shadow-sm font-bold"
-                      : "hover:bg-brand-purple/10 hover:text-brand-purple"
-                  }`}
-                >
-                  {item.label}
-                </a>
-
-                {/* Dropdown for Programs */}
-                {isPrograms && programs.length > 0 && (
-                  <div className="inline-block ml-0.5">
-                    <button
-                      type="button"
-                      onClick={() => setIsProgramsOpen((prev) => !prev)}
-                      className="w-5 h-5 rounded-full hover:bg-brand-purple/10 flex items-center justify-center text-brand-purple cursor-pointer transition-transform"
-                      aria-label="Toggle programs menu"
-                    >
-                      <ChevronDown
-                        size={14}
-                        className={`transition-transform duration-200 ${isProgramsOpen ? "rotate-180" : ""}`}
-                      />
-                    </button>
-
-                    {isProgramsOpen && (
-                      <div className="absolute top-10 left-0 w-64 rounded-2xl bg-white/95 backdrop-blur-xl border border-brand-purple/10 shadow-xl py-2 z-50">
-                        {programs.map((prog) => (
-                          <button
-                            key={prog}
-                            type="button"
-                            onClick={() => handleProgramClick(prog)}
-                            className="w-full text-left px-4 py-2.5 text-xs font-semibold text-brand-ink hover:bg-brand-purple/10 hover:text-brand-purple transition-colors cursor-pointer"
-                          >
-                            {prog}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          {/* Social Links & Mode Badge */}
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/10 text-[11px] font-semibold text-brand-gold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
+              Classroom & Live Online
+            </span>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://www.facebook.com/profile.php?id=61591796930292"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-6 h-6 rounded-full bg-white/10 hover:bg-brand-gold hover:text-brand-deep flex items-center justify-center text-white/80 transition-all text-[11px]"
+              >
+                <FaFacebookF size={11} />
+              </a>
+              <a
+                href="https://www.instagram.com/voicecraftacademy_india"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-6 h-6 rounded-full bg-white/10 hover:bg-brand-gold hover:text-brand-deep flex items-center justify-center text-white/80 transition-all text-[11px]"
+              >
+                <FaInstagram size={11} />
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
 
-        {/* Header CTA Buttons (strictly rounded-full) */}
-        <div className="hidden sm:flex items-center gap-2.5">
+      {/* 2. Main Sticky Navigation Bar */}
+      <nav className="border-b border-[#eadfcd]/80 bg-white/95 backdrop-blur-2xl shadow-[0_4px_25px_rgba(74,21,75,0.06)] transition-all duration-300">
+        <div className="mx-auto flex min-h-[68px] lg:min-h-[74px] w-full max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10">
+          {/* Logo */}
           <a
-            href="https://wa.me/919919911027"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#25D366]/15 text-[#1eab52] hover:bg-[#25D366] hover:text-white transition-all duration-200 shadow-sm"
-            aria-label="WhatsApp VoiceCraft"
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("home");
+            }}
+            className="flex items-center gap-3 shrink-0"
           >
-            <MessageCircle size={18} />
+            <img
+              src={logo}
+              alt="VoiceCraft Academy"
+              className="h-10 sm:h-12 w-auto object-contain"
+            />
           </a>
 
-          <Button
-            href="#enquiry"
-            variant="primary"
-            size="sm"
-            className="shadow-sm"
-          >
-            Free Trial Class
-          </Button>
-        </div>
+          {/* Desktop Nav Links */}
+          <div className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-semibold text-brand-ink/85">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.id;
+              const isPrograms = item.id === "programs";
 
-        {/* Mobile Hamburger Toggle */}
-        <button
-          type="button"
-          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          className="lg:hidden w-10 h-10 rounded-full bg-brand-purple/10 text-brand-purple flex items-center justify-center hover:bg-brand-purple/20 transition-colors"
-          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </nav>
+              return (
+                <div key={item.id} className="relative" ref={isPrograms ? programsMenuRef : undefined}>
+                  <a
+                    href={`#${item.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(item.id);
+                    }}
+                    className={`px-3.5 py-1.5 rounded-full text-xs xl:text-sm transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? "bg-brand-purple text-white shadow-sm font-bold"
+                        : "hover:bg-brand-purple/10 hover:text-brand-purple"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
 
-      {/* Mobile Drawer */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden mt-2 p-4 rounded-3xl bg-white/95 backdrop-blur-2xl border border-brand-purple/15 shadow-2xl flex flex-col gap-2">
-          {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection(item.id);
-              }}
-              className={`px-4 py-2.5 rounded-full text-sm font-bold transition-colors ${
-                activeSection === item.id
-                  ? "bg-brand-purple text-white"
-                  : "text-brand-ink hover:bg-brand-purple/10 hover:text-brand-purple"
-              }`}
-            >
-              {item.label}
-            </a>
-          ))}
+                  {/* Dropdown for Programs */}
+                  {isPrograms && programs.length > 0 && (
+                    <div className="inline-block ml-0.5">
+                      <button
+                        type="button"
+                        onClick={() => setIsProgramsOpen((prev) => !prev)}
+                        className="w-5 h-5 rounded-full hover:bg-brand-purple/10 flex items-center justify-center text-brand-purple cursor-pointer transition-transform"
+                        aria-label="Toggle programs menu"
+                      >
+                        <ChevronDown
+                          size={14}
+                          className={`transition-transform duration-200 ${isProgramsOpen ? "rotate-180" : ""}`}
+                        />
+                      </button>
 
-          <div className="pt-3 border-t border-brand-purple/10 flex flex-col gap-2">
-            <Button
-              href="#enquiry"
-              variant="primary"
-              size="md"
-              className="w-full"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Book Free Trial Class
-            </Button>
+                      {isProgramsOpen && (
+                        <div className="absolute top-10 left-0 w-64 rounded-2xl bg-white/98 backdrop-blur-xl border border-brand-purple/15 shadow-2xl py-2 z-50">
+                          {programs.map((prog) => (
+                            <button
+                              key={prog}
+                              type="button"
+                              onClick={() => handleProgramClick(prog)}
+                              className="w-full text-left px-4 py-2.5 text-xs font-semibold text-brand-ink hover:bg-brand-purple/10 hover:text-brand-purple transition-colors cursor-pointer"
+                            >
+                              {prog}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Header CTA Buttons (strictly rounded-full) */}
+          <div className="hidden sm:flex items-center gap-3">
             <a
               href="https://wa.me/919919911027"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#25D366] text-white text-sm font-bold shadow-md hover:bg-[#20bd5a] transition-all"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#25D366]/15 text-[#1eab52] hover:bg-[#25D366] hover:text-white transition-all duration-200 shadow-sm"
+              aria-label="WhatsApp VoiceCraft"
             >
               <MessageCircle size={18} />
-              <span>Chat on WhatsApp (+91 99199 11027)</span>
             </a>
+
+            <Button
+              href="#enquiry"
+              variant="primary"
+              size="sm"
+              className="rounded-full shadow-md hover:scale-105 transition-all"
+            >
+              Join a Session
+            </Button>
           </div>
+
+          {/* Mobile Hamburger Toggle */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="lg:hidden w-10 h-10 rounded-full bg-brand-purple/10 text-brand-purple flex items-center justify-center hover:bg-brand-purple/20 transition-colors"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
-      )}
+
+        {/* Mobile Drawer */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden p-4 mx-3 mb-3 rounded-3xl bg-white/98 backdrop-blur-2xl border border-brand-purple/15 shadow-2xl flex flex-col gap-2">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.id);
+                }}
+                className={`px-4 py-2.5 rounded-full text-sm font-bold transition-colors ${
+                  activeSection === item.id
+                    ? "bg-brand-purple text-white shadow-sm"
+                    : "text-brand-ink/90 hover:bg-brand-purple/10 hover:text-brand-purple"
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
+
+            <div className="pt-3 border-t border-brand-purple/10 flex flex-col gap-2">
+              <a
+                href="https://wa.me/919919911027"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-2.5 rounded-full bg-[#25D366] text-white text-xs font-bold shadow-sm"
+              >
+                <MessageCircle size={16} />
+                <span>Chat on WhatsApp (+91 99199 11027)</span>
+              </a>
+              <a
+                href="#enquiry"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-center py-2.5 rounded-full bg-brand-purple text-white text-xs font-bold shadow-sm"
+              >
+                Join a Session
+              </a>
+            </div>
+          </div>
+        )}
+      </nav>
     </header>
   );
 }
