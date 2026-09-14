@@ -709,56 +709,70 @@ function HeroSection({ isAnimated, animKey }) {
 function FeatureHighlightStrip() {
   return (
     <section className="relative z-20 -mt-6 sm:-mt-8 px-4 sm:px-8 lg:px-14 pb-16">
-      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Feature 1 */}
-        <div className="rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
-          <div className="w-14 h-14 rounded-2xl bg-brand-olive/15 text-brand-olive flex items-center justify-center mb-5 group-hover:bg-brand-olive group-hover:text-white transition-colors">
-            <Presentation size={26} strokeWidth={2.2} />
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+          {/* Feature 1 */}
+          <div className="h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:shadow-floating hover:border-brand-olive/40 transition-all duration-300 flex flex-col justify-between group">
+            <div className="flex flex-col items-start">
+              <div className="w-14 h-14 rounded-2xl bg-brand-olive/15 text-brand-olive flex items-center justify-center mb-5 group-hover:bg-brand-olive group-hover:text-white transition-colors shrink-0">
+                <Presentation size={26} strokeWidth={2.2} />
+              </div>
+              <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
+                Classroom & Live Online
+              </h3>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
+                Interactive speaking sessions conducted at Marathahalli, Bangalore, plus interactive live online sessions globally.
+              </p>
+            </div>
+            <div className="mt-6 pt-2">
+              <a href="#programs" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-olive group-hover:text-brand-purple transition-colors">
+                <span>Explore Options</span>
+                <ChevronRight size={14} />
+              </a>
+            </div>
           </div>
-          <h3 className="font-display font-serif text-2xl font-bold text-brand-purple">
-            Classroom & Live Online
-          </h3>
-          <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
-            Interactive speaking sessions conducted at Marathahalli, Bangalore, plus interactive live online sessions globally.
-          </p>
-          <a href="#programs" className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-olive group-hover:text-brand-purple transition-colors">
-            <span>Explore Options</span>
-            <ChevronRight size={14} />
-          </a>
-        </div>
 
-        {/* Feature 2 */}
-        <div className="rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
-          <div className="w-14 h-14 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center mb-5 group-hover:bg-brand-gold group-hover:text-white transition-colors">
-            <Award size={26} strokeWidth={2.2} />
+          {/* Feature 2 */}
+          <div className="h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:shadow-floating hover:border-brand-gold/50 transition-all duration-300 flex flex-col justify-between group">
+            <div className="flex flex-col items-start">
+              <div className="w-14 h-14 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center mb-5 group-hover:bg-brand-gold group-hover:text-white transition-colors shrink-0">
+                <Award size={26} strokeWidth={2.2} />
+              </div>
+              <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
+                20+ Years of Mentorship
+              </h3>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
+                Guided directly by DTM Jothi, Master VoiceCraft Coach with structured speech frameworks and individualized feedback.
+              </p>
+            </div>
+            <div className="mt-6 pt-2">
+              <a href="#about" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-gold group-hover:text-brand-purple transition-colors">
+                <span>Meet Founder</span>
+                <ChevronRight size={14} />
+              </a>
+            </div>
           </div>
-          <h3 className="font-display font-serif text-2xl font-bold text-brand-purple">
-            20+ Years of Mentorship
-          </h3>
-          <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
-            Guided directly by DTM Jothi, Master VoiceCraft Coach with structured speech frameworks and individualized feedback.
-          </p>
-          <a href="#about" className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-gold group-hover:text-brand-purple transition-colors">
-            <span>Meet Founder</span>
-            <ChevronRight size={14} />
-          </a>
-        </div>
 
-        {/* Feature 3 */}
-        <div className="rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
-          <div className="w-14 h-14 rounded-2xl bg-brand-purple/15 text-brand-purple flex items-center justify-center mb-5 group-hover:bg-brand-purple group-hover:text-white transition-colors">
-            <Globe size={26} strokeWidth={2.2} />
+          {/* Feature 3 */}
+          <div className="h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:shadow-floating hover:border-brand-purple/40 transition-all duration-300 flex flex-col justify-between group">
+            <div className="flex flex-col items-start">
+              <div className="w-14 h-14 rounded-2xl bg-brand-purple/15 text-brand-purple flex items-center justify-center mb-5 group-hover:bg-brand-purple group-hover:text-white transition-colors shrink-0">
+                <Globe size={26} strokeWidth={2.2} />
+              </div>
+              <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
+                Global Student Community
+              </h3>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
+                Proud learners across India, Bahrain, and overseas achieving speaking confidence, clarity, and top exam scores.
+              </p>
+            </div>
+            <div className="mt-6 pt-2">
+              <a href="#testimonials" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-purple group-hover:text-brand-gold transition-colors">
+                <span>Read Stories</span>
+                <ChevronRight size={14} />
+              </a>
+            </div>
           </div>
-          <h3 className="font-display font-serif text-2xl font-bold text-brand-purple">
-            Global Student Community
-          </h3>
-          <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
-            Proud learners across India, Bahrain, and overseas achieving speaking confidence, clarity, and top exam scores.
-          </p>
-          <a href="#testimonials" className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-purple group-hover:text-brand-gold transition-colors">
-            <span>Read Stories</span>
-            <ChevronRight size={14} />
-          </a>
         </div>
       </div>
     </section>
