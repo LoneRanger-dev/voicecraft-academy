@@ -708,13 +708,17 @@ function HeroSection({ isAnimated, animKey }) {
 // 2. CONSEN IT SOLUTION 02 "OUR FEATURES" STRIP (Style 6 Cards)
 function FeatureHighlightStrip() {
   return (
-    <section className="relative z-20 -mt-6 sm:-mt-8 px-4 sm:px-8 lg:px-14 pb-16">
+    <section className="relative z-20 pt-10 sm:pt-14 pb-16 px-4 sm:px-8 lg:px-14">
       <div className="w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {/* Feature 1 */}
-          <div className="h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:shadow-floating hover:border-brand-olive/40 transition-all duration-300 flex flex-col justify-between group">
-            <div className="flex flex-col items-start">
-              <div className="w-14 h-14 rounded-2xl bg-brand-olive/15 text-brand-olive flex items-center justify-center mb-5 group-hover:bg-brand-olive group-hover:text-white transition-colors shrink-0">
+          <div className="relative overflow-hidden h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating hover:border-brand-olive/60 transition-all duration-300 flex flex-col justify-between group">
+            {/* Subtle Animated Hover Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.06] via-brand-olive/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
+            <div className="relative z-10 flex flex-col items-start">
+              <div className="w-14 h-14 rounded-2xl bg-brand-olive/15 text-brand-olive flex items-center justify-center mb-5 group-hover:bg-brand-olive group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300 shrink-0">
                 <Presentation size={26} strokeWidth={2.2} />
               </div>
               <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
@@ -724,18 +728,22 @@ function FeatureHighlightStrip() {
                 Interactive speaking sessions conducted at Marathahalli, Bangalore, plus interactive live online sessions globally.
               </p>
             </div>
-            <div className="mt-6 pt-2">
+            <div className="relative z-10 mt-6 pt-2">
               <a href="#programs" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-olive group-hover:text-brand-purple transition-colors">
                 <span>Explore Options</span>
-                <ChevronRight size={14} />
+                <ChevronRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
               </a>
             </div>
           </div>
 
           {/* Feature 2 */}
-          <div className="h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:shadow-floating hover:border-brand-gold/50 transition-all duration-300 flex flex-col justify-between group">
-            <div className="flex flex-col items-start">
-              <div className="w-14 h-14 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center mb-5 group-hover:bg-brand-gold group-hover:text-white transition-colors shrink-0">
+          <div className="relative overflow-hidden h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating hover:border-brand-gold/70 transition-all duration-300 flex flex-col justify-between group">
+            {/* Subtle Animated Hover Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.07] via-brand-gold/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-brand-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
+            <div className="relative z-10 flex flex-col items-start">
+              <div className="w-14 h-14 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center mb-5 group-hover:bg-brand-gold group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300 shrink-0">
                 <Award size={26} strokeWidth={2.2} />
               </div>
               <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
@@ -745,18 +753,22 @@ function FeatureHighlightStrip() {
                 Guided directly by DTM Jothi, Master VoiceCraft Coach with structured speech frameworks and individualized feedback.
               </p>
             </div>
-            <div className="mt-6 pt-2">
+            <div className="relative z-10 mt-6 pt-2">
               <a href="#about" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-gold group-hover:text-brand-purple transition-colors">
                 <span>Meet Founder</span>
-                <ChevronRight size={14} />
+                <ChevronRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
               </a>
             </div>
           </div>
 
           {/* Feature 3 */}
-          <div className="h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:shadow-floating hover:border-brand-purple/40 transition-all duration-300 flex flex-col justify-between group">
-            <div className="flex flex-col items-start">
-              <div className="w-14 h-14 rounded-2xl bg-brand-purple/15 text-brand-purple flex items-center justify-center mb-5 group-hover:bg-brand-purple group-hover:text-white transition-colors shrink-0">
+          <div className="relative overflow-hidden h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating hover:border-brand-purple/60 transition-all duration-300 flex flex-col justify-between group">
+            {/* Subtle Animated Hover Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-purple/[0.06] via-brand-purple/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-brand-purple transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
+            <div className="relative z-10 flex flex-col items-start">
+              <div className="w-14 h-14 rounded-2xl bg-brand-purple/15 text-brand-purple flex items-center justify-center mb-5 group-hover:bg-brand-purple group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300 shrink-0">
                 <Globe size={26} strokeWidth={2.2} />
               </div>
               <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
@@ -766,10 +778,10 @@ function FeatureHighlightStrip() {
                 Proud learners across India, Bahrain, and overseas achieving speaking confidence, clarity, and top exam scores.
               </p>
             </div>
-            <div className="mt-6 pt-2">
+            <div className="relative z-10 mt-6 pt-2">
               <a href="#testimonials" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-purple group-hover:text-brand-gold transition-colors">
                 <span>Read Stories</span>
-                <ChevronRight size={14} />
+                <ChevronRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
               </a>
             </div>
           </div>
