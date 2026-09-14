@@ -565,9 +565,9 @@ function HeroSection({ isAnimated, animKey }) {
       <div className="absolute bottom-10 right-1/4 w-96 h-96 rounded-full bg-brand-gold/10 blur-3xl pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-10 items-center">
-          {/* Left Column: Consen 02 Typography in Times New Roman */}
-          <div key={`hero-content-${animKey}`} className="flex flex-col items-start text-left max-w-2xl">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-10 items-center">
+          {/* Content Column: 2nd on mobile, 1st on desktop */}
+          <div key={`hero-content-${animKey}`} className="order-2 lg:order-1 flex flex-col items-start text-left max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-olive/15 border border-brand-olive/30 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-5 anim-hero-badge shadow-sm">
               <Sparkles size={14} className="text-brand-gold animate-pulse" />
               <span>✦ ONLY HIGH QUALITY COACHING</span>
@@ -623,8 +623,8 @@ function HeroSection({ isAnimated, animKey }) {
             </div>
           </div>
 
-          {/* Right Column: Student Girl Hero Image + Floating Stat Badges */}
-          <div key={`hero-image-${animKey}`} className="relative mx-auto w-full max-w-[420px] lg:max-w-[460px] pt-6 pb-12">
+          {/* Student Girl Image Column: 1st on mobile, 2nd on desktop */}
+          <div key={`hero-image-${animKey}`} className="order-1 lg:order-2 relative mx-auto w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[460px] pt-4 lg:pt-6 pb-10 lg:pb-12">
             {/* Background Aesthetic Ring */}
             <div className="absolute inset-0 rounded-[44px] bg-gradient-to-tr from-brand-purple/15 via-brand-gold/15 to-brand-olive/15 blur-2xl transform scale-95 pointer-events-none" />
             <div className="absolute -inset-3.5 rounded-[42px] border-2 border-dashed border-brand-gold/40 pointer-events-none" />
