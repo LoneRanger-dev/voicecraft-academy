@@ -852,41 +852,49 @@ function About({ isAnimated, animKey, onSelectProgram }) {
 
           {/* Consen 02 Checkmark Features (style10) */}
           <div className="mt-8 grid sm:grid-cols-2 gap-4">
-            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream border border-[#eadfcd]">
-              <div className="w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream/70 hover:bg-white border border-[#eadfcd] hover:border-brand-olive/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <div className="relative z-10 w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
                 <Check size={14} strokeWidth={3} />
               </div>
-              <div>
+              <div className="relative z-10">
                 <strong className="block text-sm font-bold text-brand-purple">Structured Curriculum</strong>
                 <p className="text-xs text-brand-ink/80 mt-0.5">Engaging frameworks tailored to each learner's age and goals.</p>
               </div>
             </div>
 
-            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream border border-[#eadfcd]">
-              <div className="w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream/70 hover:bg-white border border-[#eadfcd] hover:border-brand-olive/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <div className="relative z-10 w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
                 <Check size={14} strokeWidth={3} />
               </div>
-              <div>
+              <div className="relative z-10">
                 <strong className="block text-sm font-bold text-brand-purple">Fear-Free Environment</strong>
                 <p className="text-xs text-brand-ink/80 mt-0.5">A safe, encouraging space to practice without hesitation.</p>
               </div>
             </div>
 
-            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream border border-[#eadfcd]">
-              <div className="w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream/70 hover:bg-white border border-[#eadfcd] hover:border-brand-olive/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <div className="relative z-10 w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
                 <Check size={14} strokeWidth={3} />
               </div>
-              <div>
+              <div className="relative z-10">
                 <strong className="block text-sm font-bold text-brand-purple">Personalized Mentorship</strong>
                 <p className="text-xs text-brand-ink/80 mt-0.5">Direct guidance and evaluation from DTM Jothi herself.</p>
               </div>
             </div>
 
-            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream border border-[#eadfcd]">
-              <div className="w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream/70 hover:bg-white border border-[#eadfcd] hover:border-brand-olive/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <div className="relative z-10 w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
                 <Check size={14} strokeWidth={3} />
               </div>
-              <div>
+              <div className="relative z-10">
                 <strong className="block text-sm font-bold text-brand-purple">Real-World Exercises</strong>
                 <p className="text-xs text-brand-ink/80 mt-0.5">Practical speeches, debates, workplace meetings, and mocks.</p>
               </div>
@@ -1019,26 +1027,30 @@ function ConsenProgramCard({ program, isActive, onLearnMore }) {
 
   return (
     <article
-      className={`relative flex flex-col justify-between rounded-[32px] border bg-white p-7 sm:p-9 shadow-card hover:-translate-y-2 hover:shadow-floating transition-all duration-300 ${
+      className={`relative overflow-hidden group flex flex-col justify-between rounded-[32px] border bg-white p-7 sm:p-9 shadow-card hover:-translate-y-2 hover:shadow-floating hover:border-brand-olive/60 transition-all duration-300 ${
         isActive
           ? "border-brand-olive ring-2 ring-brand-olive/30 shadow-lg"
           : "border-[#eadfcd]"
       }`}
     >
+      {/* Subtle Animated Hover Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.05] via-brand-olive/[0.01] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
       {/* Top Meta Bar with Number Tag */}
-      <div className="flex items-center justify-between pb-5 border-b border-[#eadfcd]/60">
+      <div className="relative z-10 flex items-center justify-between pb-5 border-b border-[#eadfcd]/60">
         <span className="text-xs font-extrabold uppercase tracking-wider text-brand-olive">
           {subtitle}
         </span>
-        <span className="font-display font-serif text-2xl font-bold text-brand-purple/20">
+        <span className="font-display font-serif text-2xl font-bold text-brand-purple/20 group-hover:text-brand-olive/40 transition-colors">
           {number}
         </span>
       </div>
 
       {/* Main Content Area: Split Logo + Info */}
-      <div className="mt-6 flex flex-col sm:flex-row items-start gap-6">
+      <div className="relative z-10 mt-6 flex flex-col sm:flex-row items-start gap-6">
         {/* Logo Container */}
-        <div className="grid h-[100px] w-[150px] shrink-0 place-items-center rounded-2xl bg-brand-cream/80 p-3 border border-[#eadfcd]/70 shadow-sm">
+        <div className="grid h-[100px] w-[150px] shrink-0 place-items-center rounded-2xl bg-brand-cream/80 p-3 border border-[#eadfcd]/70 shadow-sm group-hover:scale-105 group-hover:shadow-md transition-all duration-300">
           <img
             src={iconImage}
             alt={title}
@@ -1058,7 +1070,7 @@ function ConsenProgramCard({ program, isActive, onLearnMore }) {
       </div>
 
       {/* Core Syllabus Checklist */}
-      <div className="mt-6 grid sm:grid-cols-2 gap-2.5 py-4 border-y border-[#eadfcd]/60">
+      <div className="relative z-10 mt-6 grid sm:grid-cols-2 gap-2.5 py-4 border-y border-[#eadfcd]/60">
         {highlights.map((item, i) => (
           <div key={i} className="flex items-center gap-2 text-xs font-semibold text-brand-ink/85">
             <CheckCircle2 size={14} className="text-brand-olive shrink-0" />
@@ -1068,7 +1080,7 @@ function ConsenProgramCard({ program, isActive, onLearnMore }) {
       </div>
 
       {/* Format strip & Action Button */}
-      <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="relative z-10 mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="text-[11px] text-brand-ink/70">
           <span className="font-bold text-brand-purple">Format: </span>
           <span>{duration}</span>
@@ -1085,7 +1097,7 @@ function ConsenProgramCard({ program, isActive, onLearnMore }) {
           }`}
         >
           <span>{isActive ? "Viewing Syllabus" : "View Details & Syllabus"}</span>
-          <ArrowRight size={15} />
+          <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
     </article>
@@ -1380,17 +1392,23 @@ function WhyChooseSection({ isAnimated, animKey }) {
               return (
                 <article
                   key={benefit.title}
-                  className="flex flex-col items-start rounded-3xl border border-[#eadfcd] bg-[#FAF9F6] p-6 shadow-sm hover:bg-white hover:shadow-floating hover:-translate-y-1.5 transition-all duration-300 group"
+                  className="relative overflow-hidden flex flex-col items-start rounded-3xl border border-[#eadfcd] bg-white p-6 shadow-sm hover:shadow-floating hover:-translate-y-2 hover:border-brand-purple/50 transition-all duration-300 group"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-brand-purple/10 text-brand-purple flex items-center justify-center mb-4 group-hover:bg-brand-purple group-hover:text-white transition-colors">
-                    <Icon size={22} strokeWidth={2.2} />
+                  {/* Subtle Animated Hover Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-brand-purple/[0.06] via-brand-purple/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-brand-purple transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
+                  <div className="relative z-10 w-full">
+                    <div className="w-12 h-12 rounded-2xl bg-brand-purple/10 text-brand-purple flex items-center justify-center mb-4 group-hover:bg-brand-purple group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
+                      <Icon size={22} strokeWidth={2.2} />
+                    </div>
+                    <h3 className="font-display font-serif text-xl font-bold text-brand-purple">
+                      {benefit.title}
+                    </h3>
+                    <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-brand-ink/80">
+                      {benefit.description}
+                    </p>
                   </div>
-                  <h3 className="font-display font-serif text-xl font-bold text-brand-purple">
-                    {benefit.title}
-                  </h3>
-                  <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-brand-ink/80">
-                    {benefit.description}
-                  </p>
                 </article>
               );
             })}
@@ -1467,13 +1485,17 @@ function TestimonialCard({ quote, name }) {
     .toUpperCase();
 
   return (
-    <figure className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-8 shadow-card hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300">
-      <div>
+    <figure className="relative overflow-hidden flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-8 shadow-card hover:-translate-y-2 hover:shadow-floating hover:border-brand-gold/60 transition-all duration-300 group">
+      {/* Subtle Animated Hover Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.06] via-brand-gold/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-brand-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
+      <div className="relative z-10">
         <div className="flex gap-1 mb-4" aria-label="5 star rating">
           {[1, 2, 3, 4, 5].map((star) => (
             <Star
               key={star}
-              className="h-4 w-4 fill-brand-gold text-brand-gold"
+              className="h-4 w-4 fill-brand-gold text-brand-gold group-hover:scale-110 transition-transform duration-300"
             />
           ))}
         </div>
@@ -1481,8 +1503,8 @@ function TestimonialCard({ quote, name }) {
           "{quote}"
         </blockquote>
       </div>
-      <figcaption className="mt-6 flex items-center gap-3.5 pt-4 border-t border-brand-purple/10">
-        <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-purple/10 text-brand-purple text-sm font-extrabold uppercase shadow-sm">
+      <figcaption className="relative z-10 mt-6 flex items-center gap-3.5 pt-4 border-t border-brand-purple/10">
+        <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-purple/10 text-brand-purple text-sm font-extrabold uppercase shadow-sm group-hover:scale-110 group-hover:bg-brand-purple group-hover:text-white group-hover:shadow-md transition-all duration-300">
           {initials}
         </div>
         <strong className="text-sm font-bold text-brand-purple">
@@ -1552,8 +1574,12 @@ function Enquiry({ isAnimated, animKey }) {
           <ProgramEnquiryForm />
 
           {/* Consen Contact Info Card */}
-          <aside className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-7 sm:p-8 shadow-sm h-full">
-            <div>
+          <aside className="relative overflow-hidden flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-7 sm:p-8 shadow-sm hover:shadow-floating hover:border-brand-olive/50 transition-all duration-300 h-full group">
+            {/* Subtle Animated Hover Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.04] via-brand-olive/[0.01] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
+            <div className="relative z-10">
               <h3 className="font-display font-serif text-2xl font-bold text-brand-olive">
                 Need to talk?
               </h3>
