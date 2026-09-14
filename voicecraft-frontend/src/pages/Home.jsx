@@ -624,7 +624,7 @@ function HeroSection({ isAnimated, animKey }) {
           </div>
 
           {/* Right Column: Student Girl Hero Image + Floating Stat Badges */}
-          <div key={`hero-image-${animKey}`} className="relative mx-auto w-full max-w-[420px] lg:max-w-[460px] pt-6 pb-8">
+          <div key={`hero-image-${animKey}`} className="relative mx-auto w-full max-w-[420px] lg:max-w-[460px] pt-6 pb-12">
             {/* Background Aesthetic Ring */}
             <div className="absolute inset-0 rounded-[44px] bg-gradient-to-tr from-brand-purple/15 via-brand-gold/15 to-brand-olive/15 blur-2xl transform scale-95 pointer-events-none" />
             <div className="absolute -inset-3.5 rounded-[42px] border-2 border-dashed border-brand-gold/40 pointer-events-none" />
@@ -636,12 +636,12 @@ function HeroSection({ isAnimated, animKey }) {
                 alt="VoiceCraft Academy Student"
                 className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brand-deep/90 via-brand-deep/40 to-transparent flex items-end p-5">
+              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-brand-deep/95 via-brand-deep/50 to-transparent flex items-end justify-center p-4 pb-8 sm:pb-9 text-center">
                 <div>
-                  <p className="text-white font-display font-serif text-lg font-bold leading-tight">
+                  <p className="text-white font-display font-serif text-base sm:text-lg font-bold leading-tight drop-shadow-sm">
                     Empowering Confident Voices
                   </p>
-                  <p className="text-brand-gold text-xs font-semibold tracking-wide mt-0.5">
+                  <p className="text-brand-gold text-[11px] sm:text-xs font-semibold tracking-wide mt-0.5 drop-shadow-sm">
                     Students • Teenagers • Professionals
                   </p>
                 </div>
@@ -665,8 +665,8 @@ function HeroSection({ isAnimated, animKey }) {
               </div>
             </div>
 
-            {/* Floating Stat Badge 2: 20+ Years Experience (Mid/Bottom Left) */}
-            <div className="absolute bottom-12 -left-3 sm:-left-8 z-20 animate-float-delayed">
+            {/* Floating Stat Badge 2: 20+ Years Experience (Bottom Left - Placed below to avoid overlapping text) */}
+            <div className="absolute -bottom-4 sm:-bottom-6 -left-3 sm:-left-8 z-20 animate-float-delayed">
               <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(179,146,57,0.18)] hover:scale-105 transition-transform">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-[#987625] flex items-center justify-center text-white shadow-sm shrink-0">
                   <Star size={18} />
@@ -683,7 +683,7 @@ function HeroSection({ isAnimated, animKey }) {
             </div>
 
             {/* Floating Stat Badge 3: Personalized Mentorship (Bottom Right) */}
-            <div className="absolute -bottom-3 -right-3 sm:-right-6 z-20 animate-float">
+            <div className="absolute -bottom-4 sm:-bottom-6 -right-3 sm:-right-6 z-20 animate-float">
               <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(110,137,52,0.18)] hover:scale-105 transition-transform">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-olive to-[#556d25] flex items-center justify-center text-white shadow-sm shrink-0">
                   <Sparkles size={18} />
