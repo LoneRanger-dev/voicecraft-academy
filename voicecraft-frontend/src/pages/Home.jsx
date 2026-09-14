@@ -3,6 +3,7 @@ import {
   Award,
   BookOpen,
   CalendarDays,
+  Check,
   CheckCircle2,
   ChevronRight,
   Clock,
@@ -22,6 +23,7 @@ import {
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 
 // Assets
+import studentHero from "../assets/gallery/student_hero.jpg";
 import authorpic from "../assets/gallery/authorpic.png";
 import gallery1 from "../assets/gallery/g1.jpeg";
 import gallery2 from "../assets/gallery/g2.jpeg";
@@ -46,40 +48,60 @@ import Navbar from "../components/Navbar.jsx";
 
 const programs = [
   {
+    id: "eloquence",
+    number: "01",
     title: "Eloquence by VoiceCraft",
     subtitle: "Public Speaking & Youth Leadership",
     description: "Find your voice, speak confidently, and inspire an audience.",
-    highlights: ["Stage Presence", "Audience Engagement", "Speech Structuring", "Overcoming Fear"],
+    highlights: ["Audience Engagement & Poise", "Speech Structuring & Delivery", "Overcoming Stage Fright", "Voice Modulation & Body Language"],
+    duration: "3 Months Fast Track / 1 Year Pathway",
+    mode: "1-on-1 & Small Batches • Offline & Online",
+    category: "Public Speaking",
     icon: Mic,
     iconImage: speakIcon,
-    tone: "olive",
+    accent: "olive",
   },
   {
+    id: "englingo",
+    number: "02",
     title: "EngLingo by VoiceCraft",
     subtitle: "Spoken English & Fluency",
     description: "Build strong language skills for everyday fluency and professional use.",
-    highlights: ["Grammar Foundation", "Workplace English", "Vocabulary Building", "Writing Skills"],
+    highlights: ["Wren & Martin Grammar Foundations", "Workplace Communication & Meetings", "Vocabulary Expansion & Articulation", "Professional Email & Writing Skills"],
+    duration: "Customized Pace & Modules",
+    mode: "School Students, Homemakers & Working Professionals",
+    category: "Spoken English",
     icon: BookOpen,
     iconImage: engIcon,
-    tone: "purple",
+    accent: "purple",
   },
   {
+    id: "bonjour",
+    number: "03",
     title: "Bonjour by VoiceCraft",
     subtitle: "French Language (A1 to B2)",
     description: "Learn French with ease and speak with confidence.",
-    highlights: ["Pronunciation Coaching", "Conversational French", "DELF / TEF Prep", "6 Level Pathway"],
-    icon: BookOpen,
+    highlights: ["Pronunciation & Phonetics Coaching", "Practical Conversational French", "DELF & TEF Canada Exam Readiness", "6 Progressive Skill Levels"],
+    duration: "6 Progressive Modular Levels",
+    mode: "Study Abroad, Relocation, Work & Cultural Learning",
+    category: "French Language",
+    icon: Globe,
     iconImage: frIcon,
-    tone: "olive",
+    accent: "gold",
   },
   {
+    id: "ielts",
+    number: "04",
     title: "IELTS & PTE Training",
-    subtitle: "Global Proficiency Test Preparation",
+    subtitle: "Global Test Preparation",
     description: "Expert coaching to help you achieve your desired band score.",
-    highlights: ["All 4 Modules Covered", "Mock Speaking Tests", "Writing Evaluations", "Score Strategies"],
-    icon: Globe,
+    highlights: ["All 4 Modules (Listening, Reading, Writing, Speaking)", "Individual Speaking Mock Evaluations", "Detailed Essay & Writing Structure Reviews", "Proven Band 7.5+ Strategies"],
+    duration: "Targeted Intensive & Comprehensive Batches",
+    mode: "Study Abroad & Immigration Applicants",
+    category: "IELTS & PTE",
+    icon: Award,
     iconImage: ieltsIcon,
-    tone: "purple",
+    accent: "plum",
   },
 ];
 
@@ -421,6 +443,7 @@ const socialLinks = [
 
 export default function Home() {
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("all");
   const [activeSection, setActiveSection] = useState("home");
   const [navKey, setNavKey] = useState(0);
   const currentSectionRef = useRef("home");
@@ -481,7 +504,7 @@ export default function Home() {
   };
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-[1440px] overflow-hidden bg-brand-cream pt-[68px] lg:pt-[114px] shadow-soft sm:border sm:border-[#e8dfd7]">
+    <main className="w-full min-h-screen overflow-hidden bg-brand-cream pt-[68px] lg:pt-[114px]">
       <Navbar
         programs={programs.map((program) => program.title)}
         onSelectProgram={selectProgram}
@@ -497,17 +520,20 @@ export default function Home() {
         animKey={navKey}
         onSelectProgram={selectProgram}
       />
-      <Programs
+      <ProgramsSection
         selectedCourse={selectedCourse}
         setSelectedCourse={setSelectedCourse}
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
         isAnimated={activeSection === "programs"}
         animKey={navKey}
       />
-      <CounterStrip />
-      <WhyChoose
+      <CallToActionStrip />
+      <WhyChooseSection
         isAnimated={activeSection === "why-us" || activeSection === "about"}
         animKey={navKey}
       />
+      <CounterStrip />
       <Testimonials
         isAnimated={activeSection === "testimonials"}
         animKey={navKey}
@@ -525,34 +551,34 @@ export default function Home() {
   );
 }
 
-// 1. HERO SECTION (Consen IT Solution 03-2 Two-Column Modern Layout)
+// 1. HERO SECTION (Consen IT Solution 02 Style: Student Girl Hero Image + Floating Stats + Times New Roman)
 function HeroSection({ isAnimated, animKey }) {
   return (
     <section
       id="home"
       data-section="home"
       aria-label="Home section"
-      className="relative w-full overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-[#FAF6EE] to-[#F5EFE6] scroll-mt-28 px-4 sm:px-6 lg:px-10 py-12 lg:py-20 flex items-center"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-[#FAF6EE] to-[#F5EFE6] scroll-mt-28 px-4 sm:px-8 lg:px-14 py-12 lg:py-24 flex items-center"
     >
       {/* Decorative ambient background glows */}
-      <div className="absolute top-10 left-1/4 w-72 h-72 rounded-full bg-brand-purple/5 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-80 h-80 rounded-full bg-brand-gold/10 blur-3xl pointer-events-none" />
+      <div className="absolute top-10 left-1/4 w-80 h-80 rounded-full bg-brand-purple/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-96 h-96 rounded-full bg-brand-gold/10 blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1280px]">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
-          {/* Left Column: Consen Typography, Headline, Buttons & Trust Badges */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-10 items-center">
+          {/* Left Column: Consen 02 Typography in Times New Roman */}
           <div key={`hero-content-${animKey}`} className="flex flex-col items-start text-left max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-olive/15 border border-brand-olive/30 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 anim-hero-badge shadow-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-olive/15 border border-brand-olive/30 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-5 anim-hero-badge shadow-sm">
               <Sparkles size={14} className="text-brand-gold animate-pulse" />
-              <span>MANY PATHS TO ONE CONFIDENT VOICE</span>
+              <span>✦ ONLY HIGH QUALITY COACHING</span>
             </div>
 
-            <h1 className="font-display text-4xl sm:text-5xl md:text-5xl lg:text-[58px] font-extrabold leading-[1.14] tracking-tight text-brand-purple">
+            <h1 className="font-display font-serif text-4xl sm:text-5xl md:text-5xl lg:text-[62px] font-bold leading-[1.12] tracking-tight text-brand-purple">
               <span className="inline-block anim-hero-title-1">Unlock your confidence.</span> <br />
               <span className="inline-block text-brand-olive anim-hero-title-2">Communicate with power.</span>
             </h1>
 
-            <div className="mt-4 h-1.5 w-24 rounded-full bg-gradient-to-r from-brand-gold to-brand-olive anim-hero-line" />
+            <div className="mt-5 h-1.5 w-24 rounded-full bg-gradient-to-r from-brand-gold to-brand-olive anim-hero-line" />
 
             <p className="mt-5 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90 max-w-xl anim-hero-desc">
               From confident speaking to developing fluency, we help you express,
@@ -597,39 +623,39 @@ function HeroSection({ isAnimated, animKey }) {
             </div>
           </div>
 
-          {/* Right Column: Hero Portrait of DTM Jothi + 3 Floating Stat Badges */}
+          {/* Right Column: Student Girl Hero Image + Floating Stat Badges */}
           <div key={`hero-image-${animKey}`} className="relative mx-auto w-full max-w-[420px] lg:max-w-[460px] pt-6 pb-8">
             {/* Background Aesthetic Ring */}
-            <div className="absolute inset-0 rounded-[42px] bg-gradient-to-tr from-brand-purple/15 via-brand-gold/15 to-brand-olive/15 blur-2xl transform scale-95 pointer-events-none" />
-            <div className="absolute -inset-3 rounded-[40px] border-2 border-dashed border-brand-gold/40 pointer-events-none" />
+            <div className="absolute inset-0 rounded-[44px] bg-gradient-to-tr from-brand-purple/15 via-brand-gold/15 to-brand-olive/15 blur-2xl transform scale-95 pointer-events-none" />
+            <div className="absolute -inset-3.5 rounded-[42px] border-2 border-dashed border-brand-gold/40 pointer-events-none" />
 
-            {/* Framed DTM Jothi Portrait Card */}
-            <div className="relative z-10 w-full aspect-[4/4.9] overflow-hidden rounded-[32px] border-4 border-white bg-gradient-to-b from-white to-[#F5EFE6] shadow-[0_20px_50px_rgba(74,21,75,0.16)]">
+            {/* Framed Student Girl Portrait Card */}
+            <div className="relative z-10 w-full aspect-[3/4] overflow-hidden rounded-[36px] border-4 border-white bg-gradient-to-b from-white to-[#F5EFE6] shadow-[0_20px_50px_rgba(74,21,75,0.16)]">
               <img
-                src={authorpic}
-                alt="DTM Jothi - Founder & Master VoiceCraft Coach"
+                src={studentHero}
+                alt="VoiceCraft Academy Student"
                 className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-brand-deep/90 via-brand-deep/40 to-transparent flex items-end p-5">
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brand-deep/90 via-brand-deep/40 to-transparent flex items-end p-5">
                 <div>
-                  <p className="text-white font-display text-xl font-bold leading-tight">
-                    DTM Jothi
+                  <p className="text-white font-display font-serif text-lg font-bold leading-tight">
+                    Empowering Confident Voices
                   </p>
-                  <p className="text-brand-gold text-xs font-bold uppercase tracking-wider mt-0.5">
-                    Founder & Master Coach
+                  <p className="text-brand-gold text-xs font-semibold tracking-wide mt-0.5">
+                    Students • Teenagers • Professionals
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Floating Stat Badge 1: 1000+ Students Trained (Top Left) */}
-            <div className="absolute -top-2 -left-2 sm:-left-6 z-20 animate-float">
+            <div className="absolute -top-3 -left-3 sm:-left-6 z-20 animate-float">
               <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(74,21,75,0.14)] hover:scale-105 transition-transform">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-purple to-brand-deep flex items-center justify-center text-white shadow-sm shrink-0">
                   <Users size={18} />
                 </div>
                 <div className="flex flex-col text-left">
-                  <strong className="font-display text-base sm:text-lg font-extrabold text-brand-purple leading-tight">
+                  <strong className="font-display font-serif text-base sm:text-lg font-bold text-brand-purple leading-tight">
                     1000+
                   </strong>
                   <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 whitespace-nowrap leading-tight">
@@ -640,13 +666,13 @@ function HeroSection({ isAnimated, animKey }) {
             </div>
 
             {/* Floating Stat Badge 2: 20+ Years Experience (Mid/Bottom Left) */}
-            <div className="absolute bottom-12 -left-2 sm:-left-8 z-20 animate-float-delayed">
+            <div className="absolute bottom-12 -left-3 sm:-left-8 z-20 animate-float-delayed">
               <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(179,146,57,0.18)] hover:scale-105 transition-transform">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-[#987625] flex items-center justify-center text-white shadow-sm shrink-0">
                   <Star size={18} />
                 </div>
                 <div className="flex flex-col text-left">
-                  <strong className="font-display text-base sm:text-lg font-extrabold text-brand-gold leading-tight">
+                  <strong className="font-display font-serif text-base sm:text-lg font-bold text-brand-gold leading-tight">
                     20+ Years
                   </strong>
                   <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 whitespace-nowrap leading-tight">
@@ -657,13 +683,13 @@ function HeroSection({ isAnimated, animKey }) {
             </div>
 
             {/* Floating Stat Badge 3: Personalized Mentorship (Bottom Right) */}
-            <div className="absolute -bottom-3 -right-2 sm:-right-6 z-20 animate-float">
+            <div className="absolute -bottom-3 -right-3 sm:-right-6 z-20 animate-float">
               <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(110,137,52,0.18)] hover:scale-105 transition-transform">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-olive to-[#556d25] flex items-center justify-center text-white shadow-sm shrink-0">
                   <Sparkles size={18} />
                 </div>
                 <div className="flex flex-col text-left">
-                  <strong className="font-display text-base sm:text-lg font-extrabold text-brand-olive leading-tight">
+                  <strong className="font-display font-serif text-base sm:text-lg font-bold text-brand-olive leading-tight">
                     Personalized
                   </strong>
                   <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 whitespace-nowrap leading-tight">
@@ -679,68 +705,80 @@ function HeroSection({ isAnimated, animKey }) {
   );
 }
 
-// 2. CONSEN 3 FEATURE HIGHLIGHT CARDS STRIP (Directly below hero)
+// 2. CONSEN IT SOLUTION 02 "OUR FEATURES" STRIP (Style 6 Cards)
 function FeatureHighlightStrip() {
   return (
-    <section className="relative z-20 -mt-6 sm:-mt-8 px-4 sm:px-6 lg:px-10 pb-16">
-      <div className="mx-auto max-w-[1240px] grid grid-cols-1 md:grid-cols-3 gap-6">
+    <section className="relative z-20 -mt-6 sm:-mt-8 px-4 sm:px-8 lg:px-14 pb-16">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Feature 1 */}
-        <div className="rounded-3xl bg-white p-7 border border-[#eadfcd] shadow-card hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
+        <div className="rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
           <div className="w-14 h-14 rounded-2xl bg-brand-olive/15 text-brand-olive flex items-center justify-center mb-5 group-hover:bg-brand-olive group-hover:text-white transition-colors">
             <Presentation size={26} strokeWidth={2.2} />
           </div>
-          <h3 className="font-display text-xl font-bold text-brand-purple">
+          <h3 className="font-display font-serif text-2xl font-bold text-brand-purple">
             Classroom & Live Online
           </h3>
-          <p className="mt-2 text-sm font-medium leading-relaxed text-brand-ink/80">
+          <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
             Interactive speaking sessions conducted at Marathahalli, Bangalore, plus interactive live online sessions globally.
           </p>
+          <a href="#programs" className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-olive group-hover:text-brand-purple transition-colors">
+            <span>Explore Options</span>
+            <ChevronRight size={14} />
+          </a>
         </div>
 
         {/* Feature 2 */}
-        <div className="rounded-3xl bg-white p-7 border border-[#eadfcd] shadow-card hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
+        <div className="rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
           <div className="w-14 h-14 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center mb-5 group-hover:bg-brand-gold group-hover:text-white transition-colors">
             <Award size={26} strokeWidth={2.2} />
           </div>
-          <h3 className="font-display text-xl font-bold text-brand-purple">
+          <h3 className="font-display font-serif text-2xl font-bold text-brand-purple">
             20+ Years of Mentorship
           </h3>
-          <p className="mt-2 text-sm font-medium leading-relaxed text-brand-ink/80">
+          <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
             Guided directly by DTM Jothi, Master VoiceCraft Coach with structured speech frameworks and individualized feedback.
           </p>
+          <a href="#about" className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-gold group-hover:text-brand-purple transition-colors">
+            <span>Meet Founder</span>
+            <ChevronRight size={14} />
+          </a>
         </div>
 
         {/* Feature 3 */}
-        <div className="rounded-3xl bg-white p-7 border border-[#eadfcd] shadow-card hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
+        <div className="rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating transition-all duration-300 flex flex-col items-start group">
           <div className="w-14 h-14 rounded-2xl bg-brand-purple/15 text-brand-purple flex items-center justify-center mb-5 group-hover:bg-brand-purple group-hover:text-white transition-colors">
             <Globe size={26} strokeWidth={2.2} />
           </div>
-          <h3 className="font-display text-xl font-bold text-brand-purple">
+          <h3 className="font-display font-serif text-2xl font-bold text-brand-purple">
             Global Student Community
           </h3>
-          <p className="mt-2 text-sm font-medium leading-relaxed text-brand-ink/80">
+          <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
             Proud learners across India, Bahrain, and overseas achieving speaking confidence, clarity, and top exam scores.
           </p>
+          <a href="#testimonials" className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-purple group-hover:text-brand-gold transition-colors">
+            <span>Read Stories</span>
+            <ChevronRight size={14} />
+          </a>
         </div>
       </div>
     </section>
   );
 }
 
-// 3. ABOUT SECTION (Consen 2-Column Split)
+// 3. ABOUT US SECTION (Consen IT Solution 02 Style: DTM Jothi Portrait + Bio + Credentials + Quote)
 function About({ isAnimated, animKey, onSelectProgram }) {
   return (
     <section
       id="about"
-      className="scroll-mt-28 bg-white px-4 py-16 sm:px-6 md:px-10 md:py-24 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-white px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]"
     >
       <div
         key={`about-${animKey}`}
-        className="mx-auto grid max-w-[1240px] gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center"
+        className="w-full max-w-7xl mx-auto grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-center"
       >
-        {/* Left Column: Framed Portrait + Quote */}
-        <div className={`mx-auto w-full max-w-[380px] flex flex-col items-center text-center ${isAnimated ? "section-card-enter" : ""}`}>
-          <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[30px] border-4 border-[#fff] bg-[#f9f5f0] shadow-xl">
+        {/* Left Column: Framed DTM Jothi Portrait + Badges */}
+        <div className={`mx-auto w-full max-w-[400px] flex flex-col items-center text-center ${isAnimated ? "section-card-enter" : ""}`}>
+          <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[34px] border-4 border-white bg-gradient-to-b from-white to-[#F5EFE6] shadow-xl">
             <img
               src={authorpic}
               alt="DTM Jothi from VoiceCraft"
@@ -748,35 +786,35 @@ function About({ isAnimated, animKey, onSelectProgram }) {
             />
             {/* Experience Pill Badge */}
             <div className="absolute top-4 left-4 z-10">
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brand-deep/90 backdrop-blur-md text-white text-xs font-bold shadow-md border border-white/20">
+              <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-brand-deep/90 backdrop-blur-md text-white text-xs font-bold shadow-md border border-white/20">
                 <Award size={14} className="text-brand-gold" />
                 20+ Years Mentorship
               </span>
             </div>
           </div>
 
-          <blockquote className="mt-5 text-lg font-semibold italic text-brand-olive sm:text-xl">
+          <blockquote className="mt-5 font-serif text-xl font-semibold italic text-brand-olive sm:text-2xl">
             “Reading is rewarding”
           </blockquote>
-          <p className="mt-1 font-display text-3xl font-extrabold text-brand-purple">
+          <p className="mt-1 font-display font-serif text-3xl sm:text-4xl font-bold text-brand-purple">
             DTM Jothi
           </p>
-          <span className="text-xs font-bold text-brand-gold uppercase tracking-wider mt-0.5">
+          <span className="text-xs font-bold text-brand-gold uppercase tracking-wider mt-1">
             Founder & Master Coach
           </span>
         </div>
 
-        {/* Right Column: Consen Content & Checklist */}
+        {/* Right Column: Consen 02 Content & Checklist */}
         <div className={isAnimated ? "section-text-enter" : ""}>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-extrabold uppercase tracking-wider mb-4">
             <span>ABOUT THE FOUNDER & MASTER COACH</span>
           </div>
 
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-brand-purple">
-            About VoiceCraft
+          <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-brand-purple">
+            Fastest Pathway Reaching <br className="hidden sm:inline" />Communication Mastery
           </h2>
 
-          <div className="mt-3 h-1 w-20 rounded-full bg-brand-gold" />
+          <div className="mt-4 h-1 w-20 rounded-full bg-brand-gold" />
 
           <p className="mt-6 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90">
             Founded and led by DTM Jothi, VoiceCraft is dedicated to empowering
@@ -786,42 +824,46 @@ function About({ isAnimated, animKey, onSelectProgram }) {
             effectively at every stage of life.
           </p>
 
-          {/* Consen 4 Highlights Checklist */}
+          {/* Consen 02 Checkmark Features (style10) */}
           <div className="mt-8 grid sm:grid-cols-2 gap-4">
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-brand-cream border border-[#eadfcd]">
-              <div className="w-8 h-8 rounded-full bg-brand-olive/20 text-brand-olive flex items-center justify-center shrink-0">
-                <CheckCircle2 size={16} strokeWidth={2.6} />
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream border border-[#eadfcd]">
+              <div className="w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                <Check size={14} strokeWidth={3} />
               </div>
-              <span className="text-xs sm:text-sm font-bold text-brand-purple">
-                Structured & Engaging Curriculum
-              </span>
+              <div>
+                <strong className="block text-sm font-bold text-brand-purple">Structured Curriculum</strong>
+                <p className="text-xs text-brand-ink/80 mt-0.5">Engaging frameworks tailored to each learner's age and goals.</p>
+              </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-brand-cream border border-[#eadfcd]">
-              <div className="w-8 h-8 rounded-full bg-brand-olive/20 text-brand-olive flex items-center justify-center shrink-0">
-                <CheckCircle2 size={16} strokeWidth={2.6} />
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream border border-[#eadfcd]">
+              <div className="w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                <Check size={14} strokeWidth={3} />
               </div>
-              <span className="text-xs sm:text-sm font-bold text-brand-purple">
-                Fear-Free Speaking Environment
-              </span>
+              <div>
+                <strong className="block text-sm font-bold text-brand-purple">Fear-Free Environment</strong>
+                <p className="text-xs text-brand-ink/80 mt-0.5">A safe, encouraging space to practice without hesitation.</p>
+              </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-brand-cream border border-[#eadfcd]">
-              <div className="w-8 h-8 rounded-full bg-brand-olive/20 text-brand-olive flex items-center justify-center shrink-0">
-                <CheckCircle2 size={16} strokeWidth={2.6} />
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream border border-[#eadfcd]">
+              <div className="w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                <Check size={14} strokeWidth={3} />
               </div>
-              <span className="text-xs sm:text-sm font-bold text-brand-purple">
-                Personalized Guidance & Feedback
-              </span>
+              <div>
+                <strong className="block text-sm font-bold text-brand-purple">Personalized Mentorship</strong>
+                <p className="text-xs text-brand-ink/80 mt-0.5">Direct guidance and evaluation from DTM Jothi herself.</p>
+              </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-brand-cream border border-[#eadfcd]">
-              <div className="w-8 h-8 rounded-full bg-brand-olive/20 text-brand-olive flex items-center justify-center shrink-0">
-                <CheckCircle2 size={16} strokeWidth={2.6} />
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream border border-[#eadfcd]">
+              <div className="w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                <Check size={14} strokeWidth={3} />
               </div>
-              <span className="text-xs sm:text-sm font-bold text-brand-purple">
-                Practical Real-World Exercises
-              </span>
+              <div>
+                <strong className="block text-sm font-bold text-brand-purple">Real-World Exercises</strong>
+                <p className="text-xs text-brand-ink/80 mt-0.5">Practical speeches, debates, workplace meetings, and mocks.</p>
+              </div>
             </div>
           </div>
 
@@ -849,8 +891,15 @@ function About({ isAnimated, animKey, onSelectProgram }) {
   );
 }
 
-// 4. PROGRAMS SECTION (Consen 4-Box Service Layout)
-function Programs({ selectedCourse, setSelectedCourse, isAnimated, animKey }) {
+// 4. "WHAT WE DO" / OUR PROGRAMS SECTION (Consen IT Solution 02 Style 7 Program Grid)
+function ProgramsSection({
+  selectedCourse,
+  setSelectedCourse,
+  activeCategory,
+  setActiveCategory,
+  isAnimated,
+  animKey,
+}) {
   const detailRef = useRef(null);
   const selectedProgram = selectedCourse ? courseDetails[selectedCourse] : null;
 
@@ -865,14 +914,19 @@ function Programs({ selectedCourse, setSelectedCourse, isAnimated, animKey }) {
     }
   }, [selectedCourse]);
 
+  const filteredPrograms =
+    activeCategory === "all"
+      ? programs
+      : programs.filter((p) => p.category === activeCategory);
+
   return (
     <section
       id="programs"
-      className="scroll-mt-28 bg-[#FAF9F6] px-4 py-16 sm:px-6 md:px-8 md:py-24 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-[#FAF9F6] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]"
     >
-      <div key={`programs-${animKey}`} className="mx-auto max-w-[1240px]">
+      <div key={`programs-${animKey}`} className="w-full max-w-7xl mx-auto">
         <SectionHeading
-          eyebrow="OUR SIGNATURE PROGRAMS"
+          eyebrow="WHAT WE DO"
           title="Tailored Programs for Every Communicator"
           isAnimated={isAnimated}
         />
@@ -880,12 +934,36 @@ function Programs({ selectedCourse, setSelectedCourse, isAnimated, animKey }) {
           Structured courses designed for students, working professionals, and language enthusiasts.
         </p>
 
-        {/* Consen 4 Service Cards Grid */}
-        <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-4 ${isAnimated ? "section-card-enter" : ""}`}>
-          {programs.map((program) => (
-            <ProgramCard
+        {/* Interactive Category Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-12">
+          {[
+            { label: "✦ All Programs", value: "all" },
+            { label: "Public Speaking", value: "Public Speaking" },
+            { label: "Spoken English", value: "Spoken English" },
+            { label: "French Language", value: "French Language" },
+            { label: "IELTS & PTE", value: "IELTS & PTE" },
+          ].map((cat) => (
+            <button
+              key={cat.value}
+              type="button"
+              onClick={() => setActiveCategory(cat.value)}
+              className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm ${
+                activeCategory === cat.value
+                  ? "bg-brand-purple text-white shadow-md scale-105"
+                  : "bg-white text-brand-ink/80 border border-[#eadfcd] hover:bg-brand-cream hover:text-brand-purple"
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Consen IT Solution 02 Style 7 Spacious 2x2 Bento Program Cards */}
+        <div className={`grid gap-8 md:grid-cols-2 ${isAnimated ? "section-card-enter" : ""}`}>
+          {filteredPrograms.map((program) => (
+            <ConsenProgramCard
               key={program.title}
-              {...program}
+              program={program}
               isActive={selectedCourse === program.title}
               onLearnMore={() => setSelectedCourse(program.title)}
             />
@@ -910,75 +988,80 @@ function Programs({ selectedCourse, setSelectedCourse, isAnimated, animKey }) {
   );
 }
 
-function ProgramCard({
-  title,
-  subtitle,
-  description,
-  highlights = [],
-  icon: Icon,
-  iconImage,
-  isActive,
-  onLearnMore,
-}) {
+function ConsenProgramCard({ program, isActive, onLearnMore }) {
+  const { number, title, subtitle, description, highlights, duration, mode, iconImage } = program;
+
   return (
     <article
-      className={`flex min-h-[380px] flex-col items-start rounded-3xl border bg-white p-7 text-left shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-floating ${
+      className={`relative flex flex-col justify-between rounded-[32px] border bg-white p-7 sm:p-9 shadow-card hover:-translate-y-2 hover:shadow-floating transition-all duration-300 ${
         isActive
           ? "border-brand-olive ring-2 ring-brand-olive/30 shadow-lg"
           : "border-[#eadfcd]"
       }`}
     >
-      {/* Icon / Official Cropped Logo Container */}
-      <div className="grid h-[100px] w-full place-items-center rounded-2xl bg-brand-cream/80 p-3 mb-5 border border-[#eadfcd]/60">
-        {iconImage ? (
+      {/* Top Meta Bar with Number Tag */}
+      <div className="flex items-center justify-between pb-5 border-b border-[#eadfcd]/60">
+        <span className="text-xs font-extrabold uppercase tracking-wider text-brand-olive">
+          {subtitle}
+        </span>
+        <span className="font-display font-serif text-2xl font-bold text-brand-purple/20">
+          {number}
+        </span>
+      </div>
+
+      {/* Main Content Area: Split Logo + Info */}
+      <div className="mt-6 flex flex-col sm:flex-row items-start gap-6">
+        {/* Logo Container */}
+        <div className="grid h-[100px] w-[150px] shrink-0 place-items-center rounded-2xl bg-brand-cream/80 p-3 border border-[#eadfcd]/70 shadow-sm">
           <img
             src={iconImage}
             alt={title}
             className="max-h-[85px] max-w-[90%] object-contain"
           />
-        ) : (
-          <Icon className="h-16 w-16 text-brand-purple" />
-        )}
+        </div>
+
+        {/* Title & Description */}
+        <div className="flex-1">
+          <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
+            {title}
+          </h3>
+          <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-brand-ink/80">
+            {description}
+          </p>
+        </div>
       </div>
 
-      <span className="text-[11px] font-bold text-brand-olive uppercase tracking-wider">
-        {subtitle}
-      </span>
-
-      <h3 className="mt-1 font-display text-xl font-extrabold text-brand-purple">
-        {title}
-      </h3>
-
-      <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-brand-ink/80 min-h-[44px]">
-        {description}
-      </p>
-
-      {/* Syllabus Highlights Badges */}
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {highlights.slice(0, 3).map((item, i) => (
-          <span
-            key={i}
-            className="px-2.5 py-0.5 rounded-full bg-brand-cream text-[10px] font-semibold text-brand-purple/90 border border-[#eadfcd]"
-          >
-            {item}
-          </span>
+      {/* Core Syllabus Checklist */}
+      <div className="mt-6 grid sm:grid-cols-2 gap-2.5 py-4 border-y border-[#eadfcd]/60">
+        {highlights.map((item, i) => (
+          <div key={i} className="flex items-center gap-2 text-xs font-semibold text-brand-ink/85">
+            <CheckCircle2 size={14} className="text-brand-olive shrink-0" />
+            <span>{item}</span>
+          </div>
         ))}
       </div>
 
-      {/* Strict rounded-full button */}
-      <button
-        type="button"
-        aria-expanded={isActive}
-        onClick={onLearnMore}
-        className={`mt-auto pt-6 inline-flex items-center justify-center gap-2 rounded-full w-full py-2.5 text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm ${
-          isActive
-            ? "bg-brand-olive text-white hover:bg-[#5e6b26]"
-            : "bg-brand-purple text-white hover:bg-brand-deep"
-        }`}
-      >
-        <span>{isActive ? "Viewing Syllabus" : "View Details & Syllabus"}</span>
-        <ChevronRight size={16} strokeWidth={2.8} />
-      </button>
+      {/* Format strip & Action Button */}
+      <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="text-[11px] text-brand-ink/70">
+          <span className="font-bold text-brand-purple">Format: </span>
+          <span>{duration}</span>
+        </div>
+
+        <button
+          type="button"
+          aria-expanded={isActive}
+          onClick={onLearnMore}
+          className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm shrink-0 ${
+            isActive
+              ? "bg-brand-olive text-white hover:bg-[#5e6b26]"
+              : "bg-brand-purple text-white hover:bg-brand-deep hover:scale-105"
+          }`}
+        >
+          <span>{isActive ? "Viewing Syllabus" : "View Details & Syllabus"}</span>
+          <ArrowRight size={15} />
+        </button>
+      </div>
     </article>
   );
 }
@@ -990,7 +1073,7 @@ function CourseDetailPanel({ panelRef, title, iconImage, details, onClose }) {
   return (
     <article
       ref={panelRef}
-      className="mt-10 overflow-hidden rounded-3xl border border-[#d8cc8b] bg-white shadow-2xl transition-all"
+      className="mt-12 overflow-hidden rounded-3xl border border-[#d8cc8b] bg-white shadow-2xl transition-all"
     >
       <div className="grid gap-0 lg:grid-cols-[0.95fr_1.4fr]">
         <div className="relative overflow-hidden bg-brand-deep px-6 py-8 text-white md:px-10 md:py-10 flex flex-col justify-between">
@@ -1017,7 +1100,7 @@ function CourseDetailPanel({ panelRef, title, iconImage, details, onClose }) {
             <p className="mt-6 text-xs font-bold uppercase tracking-widest text-brand-gold">
               Course Details & Curriculum
             </p>
-            <h3 className="mt-2 font-display text-3xl font-bold leading-tight text-white md:text-4xl">
+            <h3 className="mt-2 font-display font-serif text-3xl font-bold leading-tight text-white md:text-4xl">
               {title}
             </h3>
             <p className="mt-4 text-sm font-medium leading-relaxed text-white/90">
@@ -1097,7 +1180,7 @@ function CourseDetailPanel({ panelRef, title, iconImage, details, onClose }) {
 function MoreDetails({ details }) {
   return (
     <div className="mb-6 rounded-2xl border border-[#eadfcd] bg-white p-6 shadow-sm">
-      <h4 className="font-display text-xl font-bold text-brand-purple mb-4">
+      <h4 className="font-display font-serif text-xl font-bold text-brand-purple mb-4">
         Course Structure & Modules
       </h4>
       <div className="grid gap-5">
@@ -1152,7 +1235,147 @@ function CoursePoint({ children }) {
   );
 }
 
-// 5. CONSEN DARK COUNTER / METRICS STRIP
+// 5. CALL TO ACTION STRIP (Consen IT Solution 02 "Need Service?" Style)
+function CallToActionStrip() {
+  return (
+    <section className="bg-brand-deep py-12 px-4 sm:px-8 lg:px-14 border-t border-brand-purple/30 text-white relative overflow-hidden">
+      <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-widest text-brand-gold mb-1.5">
+            READY TO TRANSFORM YOUR VOICE?
+          </p>
+          <h3 className="font-display font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+            Book Your Free Trial Session with DTM Jothi
+          </h3>
+        </div>
+        <Button
+          href="#enquiry"
+          variant="gold"
+          size="lg"
+          className="rounded-full shadow-lg hover:scale-105 transition-all shrink-0"
+        >
+          Join a Session Now
+        </Button>
+      </div>
+    </section>
+  );
+}
+
+// 6. WHY CHOOSE SECTION (Consen IT Solution 02 Split Masterclass Pattern)
+function WhyChooseSection({ isAnimated, animKey }) {
+  const benefits = [
+    {
+      title: "Stage Presence",
+      description: "To overcome the 'phobia' of speaking in public, build stage presence, engage any audience with confidence and poise.",
+      icon: Presentation,
+    },
+    {
+      title: "Build Confidence",
+      description: "To build confidence. Speak without fear, self-doubt, or hesitation in any personal or professional setting.",
+      icon: Star,
+    },
+    {
+      title: "Improve Fluency",
+      description: "To improve fluency. Express your thoughts clearly, naturally, and precisely with rich vocabulary.",
+      icon: MessageCircle,
+    },
+    {
+      title: "Conquer Fear",
+      description: "To overcome stage fear. Conquer anxiety and stand tall in front of any crowd with structured breathing and modulation.",
+      icon: Shield,
+    },
+    {
+      title: "Speak & Lead",
+      description: "To speak, lead and be heard. Inspire others and command attention with executive speech delivery.",
+      icon: Users,
+    },
+    {
+      title: "Unleash Potential",
+      description: "To unleash your potential. Unlock new personal, academic, and global professional opportunities.",
+      icon: Sparkles,
+    },
+  ];
+
+  return (
+    <section id="why-us" className="scroll-mt-28 bg-white px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]">
+      <div key={`why-${animKey}`} className="w-full max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-14 items-start">
+          {/* Left Column: Master Coach Quote & Rating Banner */}
+          <div className="flex flex-col items-start">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-olive/15 text-brand-olive text-xs font-bold uppercase tracking-wider mb-4">
+              <span>✦ THE VOICECRAFT ADVANTAGE</span>
+            </div>
+
+            <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-brand-purple">
+              Why Choose <br />VoiceCraft Academy?
+            </h2>
+
+            <div className="mt-4 h-1.5 w-20 rounded-full bg-brand-gold" />
+
+            {/* Quote Card */}
+            <blockquote className="mt-6 p-6 rounded-3xl bg-brand-cream border border-[#eadfcd] text-brand-ink/90 font-serif italic text-base leading-relaxed">
+              “Language learning should fit the learner's needs rather than being the other way around. We build for every learner a bespoke learning pathway that fits their goals.”
+              <span className="block not-italic font-sans text-xs font-bold text-brand-purple mt-3">
+                — DTM Jothi • Founder & Master Coach
+              </span>
+            </blockquote>
+
+            {/* Rating Stat Card */}
+            <div className="mt-6 w-full p-5 rounded-3xl bg-[#FAF6EE] border border-[#eadfcd] flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-brand-gold/20 flex items-center justify-center text-brand-gold shrink-0">
+                <Star size={24} className="fill-brand-gold" />
+              </div>
+              <div>
+                <strong className="block text-base font-bold text-brand-purple">
+                  4.9 / 5.0 Star Rating
+                </strong>
+                <span className="text-xs font-semibold text-brand-ink/75">
+                  Over 150+ verified student success reviews
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <Button
+                href="#enquiry"
+                variant="primary"
+                size="md"
+                className="rounded-full shadow-md hover:scale-105 transition-all"
+              >
+                Enroll For Next Batch
+              </Button>
+            </div>
+          </div>
+
+          {/* Right Column: Spacious 2x3 Benefit Cards Grid */}
+          <div className="grid sm:grid-cols-2 gap-5">
+            {benefits.map((benefit) => {
+              const Icon = benefit.icon;
+              return (
+                <article
+                  key={benefit.title}
+                  className="flex flex-col items-start rounded-3xl border border-[#eadfcd] bg-[#FAF9F6] p-6 shadow-sm hover:bg-white hover:shadow-floating hover:-translate-y-1.5 transition-all duration-300 group"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-brand-purple/10 text-brand-purple flex items-center justify-center mb-4 group-hover:bg-brand-purple group-hover:text-white transition-colors">
+                    <Icon size={22} strokeWidth={2.2} />
+                  </div>
+                  <h3 className="font-display font-serif text-xl font-bold text-brand-purple">
+                    {benefit.title}
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-brand-ink/80">
+                    {benefit.description}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// 7. COUNTER STRIP (Consen Metrics Banner)
 function CounterStrip() {
   const metrics = [
     { value: "1000+", label: "Students Trained", icon: Users },
@@ -1162,11 +1385,8 @@ function CounterStrip() {
   ];
 
   return (
-    <section className="bg-brand-deep py-14 px-4 sm:px-6 lg:px-10 border-t border-brand-purple/30 text-white relative overflow-hidden">
-      {/* Decorative ambient light */}
-      <div className="absolute top-0 right-1/4 w-96 h-32 rounded-full bg-brand-gold/10 blur-3xl pointer-events-none" />
-
-      <div className="mx-auto max-w-[1240px] grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative z-10">
+    <section className="bg-brand-deep py-14 px-4 sm:px-8 lg:px-14 border-t border-brand-purple/30 text-white relative overflow-hidden">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative z-10">
         {metrics.map((item, idx) => {
           const Icon = item.icon;
           return (
@@ -1174,7 +1394,7 @@ function CounterStrip() {
               <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-brand-gold mb-3">
                 <Icon size={22} />
               </div>
-              <strong className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-gold">
+              <strong className="font-display font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-gold">
                 {item.value}
               </strong>
               <span className="mt-2 text-xs sm:text-sm font-semibold text-white/80">
@@ -1188,89 +1408,16 @@ function CounterStrip() {
   );
 }
 
-// 6. WHY CHOOSE SECTION (Consen 6-Grid Feature Section)
-function WhyChoose({ isAnimated, animKey }) {
-  const benefits = [
-    {
-      title: "Stage Presence",
-      description: "To overcome the 'phobia' of speaking in public, build stage presence, engage any audience with confidence and poise.",
-      icon: Presentation,
-    },
-    {
-      title: "Build Confidence",
-      description: "To build confidence. Speak without fear, self-doubt, or hesitation in any setting.",
-      icon: Star,
-    },
-    {
-      title: "Improve Fluency",
-      description: "To improve fluency. Express your thoughts clearly, naturally, and precisely.",
-      icon: MessageCircle,
-    },
-    {
-      title: "Conquer Fear",
-      description: "To overcome stage fear. Conquer anxiety and stand tall in front of any crowd.",
-      icon: Shield,
-    },
-    {
-      title: "Speak & Lead",
-      description: "To speak, lead and be heard. Inspire others and command attention with your voice.",
-      icon: Users,
-    },
-    {
-      title: "Unleash Potential",
-      description: "To unleash your potential. Unlock new personal and professional opportunities.",
-      icon: Sparkles,
-    },
-  ];
-
-  return (
-    <section id="why-us" className="scroll-mt-28 bg-white px-5 py-16 text-center text-brand-ink md:px-8 md:py-24 border-t border-[#eadfcd]">
-      <div key={`why-${animKey}`} className="mx-auto max-w-[1240px]">
-        <SectionHeading
-          eyebrow="THE VOICECRAFT ADVANTAGE"
-          title="Why Choose VoiceCraft?"
-          isAnimated={isAnimated}
-        />
-        <p className="text-center text-sm sm:text-base font-medium text-brand-ink/80 max-w-2xl mx-auto -mt-2 mb-12">
-          Transform from a hesitant speaker into a captivating communicator through proven methodology.
-        </p>
-
-        <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 ${isAnimated ? "section-card-enter" : ""}`}>
-          {benefits.map((benefit) => {
-            const Icon = benefit.icon;
-            return (
-              <article
-                key={benefit.title}
-                className="flex flex-col items-center rounded-3xl border border-[#eadfcd] bg-brand-cream/60 p-6 text-center shadow-sm hover:bg-white hover:shadow-floating hover:-translate-y-1.5 transition-all duration-300"
-              >
-                <div className="w-14 h-14 rounded-2xl bg-brand-purple/10 flex items-center justify-center mb-4 text-brand-purple">
-                  <Icon className="h-7 w-7" strokeWidth={2} />
-                </div>
-                <h3 className="font-display text-base font-bold text-brand-purple">
-                  {benefit.title}
-                </h3>
-                <p className="mt-2 text-xs font-medium leading-relaxed text-brand-ink/80">
-                  {benefit.description}
-                </p>
-              </article>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// 7. TESTIMONIALS SECTION (Consen 3-Column Grid)
+// 8. TESTIMONIALS SECTION (Consen IT Solution 02 Style 3)
 function Testimonials({ isAnimated, animKey }) {
   return (
     <section
       id="testimonials"
-      className="scroll-mt-28 bg-[#FAF9F6] px-4 py-16 sm:px-6 md:px-10 md:py-24 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-[#FAF9F6] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]"
     >
-      <div key={`testi-${animKey}`} className="mx-auto max-w-[1240px]">
+      <div key={`testi-${animKey}`} className="w-full max-w-7xl mx-auto">
         <SectionHeading
-          eyebrow="STUDENT SUCCESS STORIES"
+          eyebrow="STUDENT TESTIMONIALS"
           title="From her years of teaching across Bahrain and India, her students say..."
           isAnimated={isAnimated}
         />
@@ -1294,7 +1441,7 @@ function TestimonialCard({ quote, name }) {
     .toUpperCase();
 
   return (
-    <figure className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-7 shadow-card hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300">
+    <figure className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-8 shadow-card hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300">
       <div>
         <div className="flex gap-1 mb-4" aria-label="5 star rating">
           {[1, 2, 3, 4, 5].map((star) => (
@@ -1304,7 +1451,7 @@ function TestimonialCard({ quote, name }) {
             />
           ))}
         </div>
-        <blockquote className="text-sm font-medium italic leading-relaxed text-brand-ink/90">
+        <blockquote className="font-serif italic text-sm sm:text-base font-medium leading-relaxed text-brand-ink/90">
           "{quote}"
         </blockquote>
       </div>
@@ -1320,14 +1467,14 @@ function TestimonialCard({ quote, name }) {
   );
 }
 
-// 8. GALLERY SECTION (Consen Showcase Marquee)
+// 9. GALLERY SECTION
 function Gallery({ isAnimated, animKey }) {
   return (
     <section
       id="gallery"
-      className="scroll-mt-28 bg-white px-4 py-16 sm:px-6 md:px-10 md:py-20 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-white px-4 sm:px-8 lg:px-14 py-20 border-t border-[#eadfcd]"
     >
-      <div key={`gallery-${animKey}`} className="mx-auto max-w-[1240px]">
+      <div key={`gallery-${animKey}`} className="w-full max-w-7xl mx-auto">
         <SectionHeading
           eyebrow="OUR CLASSROOM MOMENTS"
           title="Life at VoiceCraft Academy"
@@ -1354,14 +1501,14 @@ function Gallery({ isAnimated, animKey }) {
   );
 }
 
-// 9. ENQUIRY SECTION (Consen Split Layout)
+// 10. ENQUIRY SECTION (Consen Split Layout)
 function Enquiry({ isAnimated, animKey }) {
   return (
     <section
       id="enquiry"
-      className="scroll-mt-28 bg-[#FAF9F6] px-4 py-16 sm:px-6 md:px-8 md:py-24 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-[#FAF9F6] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]"
     >
-      <div key={`enquiry-${animKey}`} className={`mx-auto max-w-[1240px] rounded-3xl border border-[#eadfcd] bg-brand-cream p-6 sm:p-8 md:p-12 shadow-lg ${isAnimated ? "section-card-enter" : ""}`}>
+      <div key={`enquiry-${animKey}`} className={`w-full max-w-7xl mx-auto rounded-3xl border border-[#eadfcd] bg-brand-cream p-7 sm:p-10 md:p-14 shadow-lg ${isAnimated ? "section-card-enter" : ""}`}>
         <div className={`mb-10 text-center ${isAnimated ? "section-text-enter" : ""}`}>
           <div className="mb-3 inline-flex rounded-full border border-[#eadfcd] bg-white px-6 py-2 shadow-sm">
             <img src={logo} alt="VoiceCraft" className="h-8 w-auto" />
@@ -1369,19 +1516,19 @@ function Enquiry({ isAnimated, animKey }) {
           <p className="text-xs font-bold uppercase tracking-widest text-brand-olive mb-1">
             GET IN TOUCH WITH OUR MASTER COACH
           </p>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-purple">
+          <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-brand-purple">
             Enquire Now
           </h2>
           <div className="w-16 h-1 rounded-full bg-brand-gold mx-auto mt-3" />
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-start">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-start">
           <ProgramEnquiryForm />
 
           {/* Consen Contact Info Card */}
           <aside className="flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-7 sm:p-8 shadow-sm h-full">
             <div>
-              <h3 className="font-display text-2xl font-bold text-brand-olive">
+              <h3 className="font-display font-serif text-2xl font-bold text-brand-olive">
                 Need to talk?
               </h3>
               <p className="mt-1 text-sm font-bold text-brand-ink">
@@ -1418,7 +1565,7 @@ function Enquiry({ isAnimated, animKey }) {
                 href="https://wa.me/919919911027"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2.5 py-3 rounded-full bg-[#25D366] text-white font-bold text-xs shadow-md hover:bg-[#20bd5a] transition-all duration-200"
+                className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 rounded-full bg-[#25D366] text-white font-bold text-xs shadow-md hover:bg-[#20bd5a] transition-all duration-200"
               >
                 <MessageCircle size={18} />
                 <span>Chat Instantly on WhatsApp</span>
@@ -1493,9 +1640,9 @@ function ProgramEnquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-3xl border border-[#e9e2d8] bg-white p-7 sm:p-8 shadow-sm"
+      className="rounded-3xl border border-[#e9e2d8] bg-white p-7 sm:p-9 shadow-sm"
     >
-      <h3 className="font-display text-2xl font-bold text-brand-purple mb-5">
+      <h3 className="font-display font-serif text-2xl font-bold text-brand-purple mb-5">
         Choose your course
       </h3>
 
@@ -1641,11 +1788,11 @@ function EnquiryContactItem({ icon: Icon, label, value, href }) {
   return content;
 }
 
-// 10. FOOTER (Consen 4-Column Modern Footer)
+// 11. FOOTER (Consen IT Solution 02 Style 4-Column Footer)
 function Footer() {
   return (
     <footer className="bg-brand-deep text-white border-t border-brand-purple/20">
-      <div className="mx-auto max-w-[1240px] px-6 py-14">
+      <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Column 1: Brand Info */}
           <div>
@@ -1677,8 +1824,8 @@ function Footer() {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-xs font-bold text-brand-gold uppercase tracking-widest mb-4">
-              Quick Links
+            <h4 className="font-serif text-sm font-bold text-brand-gold uppercase tracking-widest mb-4">
+              Explore
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-white/80">
               <li><a href="#home" className="hover:text-brand-gold transition-colors">Home</a></li>
@@ -1686,15 +1833,15 @@ function Footer() {
               <li><a href="#programs" className="hover:text-brand-gold transition-colors">Our Programs</a></li>
               <li><a href="#why-us" className="hover:text-brand-gold transition-colors">Why Choose Us</a></li>
               <li><a href="#testimonials" className="hover:text-brand-gold transition-colors">Student Reviews</a></li>
-              <li><a href="#gallery" className="hover:text-brand-gold transition-colors">Classroom Gallery</a></li>
+              <li><a href="#gallery" className="hover:text-brand-gold transition-colors">Classroom Moments</a></li>
               <li><a href="#enquiry" className="hover:text-brand-gold transition-colors">Enquire Now</a></li>
             </ul>
           </div>
 
           {/* Column 3: Our Programs */}
           <div>
-            <h4 className="text-xs font-bold text-brand-gold uppercase tracking-widest mb-4">
-              Our Programs
+            <h4 className="font-serif text-sm font-bold text-brand-gold uppercase tracking-widest mb-4">
+              Our Services
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-white/80">
               <li><a href="#programs" className="hover:text-brand-gold transition-colors">Eloquence by VoiceCraft</a></li>
@@ -1706,8 +1853,8 @@ function Footer() {
 
           {/* Column 4: Contact Info */}
           <div>
-            <h4 className="text-xs font-bold text-brand-gold uppercase tracking-widest mb-4">
-              Get In Touch
+            <h4 className="font-serif text-sm font-bold text-brand-gold uppercase tracking-widest mb-4">
+              Contact Info
             </h4>
             <div className="space-y-3 text-xs sm:text-sm text-white/80">
               <div className="flex items-start gap-2.5">
@@ -1752,7 +1899,7 @@ function SectionHeading({ eyebrow, title, isAnimated }) {
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-brand-purple">
+      <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-brand-purple">
         {title}
       </h2>
       <div className="w-16 h-1 rounded-full bg-brand-gold mx-auto mt-4" />

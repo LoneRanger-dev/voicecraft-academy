@@ -79,15 +79,19 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
 
   return (
     <header className="fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300">
-      {/* 1. Consen Top Contact Info Strip */}
+      {/* 1. Consen IT Solution 02 Top Contact Info Strip */}
       <div
         className={`bg-brand-deep text-white border-b border-white/10 text-xs transition-all duration-300 ${
           isScrolled ? "hidden md:hidden" : "block"
         }`}
       >
-        <div className="mx-auto flex h-10 max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10">
-          {/* Contact Details */}
+        <div className="w-full flex h-10 items-center justify-between px-4 sm:px-8 lg:px-14">
+          {/* Welcome Message & Contact Details */}
           <div className="flex items-center gap-4 sm:gap-6 text-white/85 text-[11px] sm:text-xs">
+            <span className="hidden xl:inline-flex items-center gap-1.5 text-brand-gold font-semibold">
+              <span>👋 Welcome! To VoiceCraft Academy</span>
+              <span className="text-white/40">•</span>
+            </span>
             <a
               href="tel:+919919911027"
               className="flex items-center gap-1.5 hover:text-brand-gold transition-colors"
@@ -115,6 +119,7 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
               Classroom & Live Online
             </span>
             <div className="flex items-center gap-2">
+              <span className="text-[11px] text-white/60 hidden md:inline">Follow Us:</span>
               <a
                 href="https://www.facebook.com/profile.php?id=61591796930292"
                 target="_blank"
@@ -140,7 +145,7 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
 
       {/* 2. Main Sticky Navigation Bar */}
       <nav className="border-b border-[#eadfcd]/80 bg-white/95 backdrop-blur-2xl shadow-[0_4px_25px_rgba(74,21,75,0.06)] transition-all duration-300">
-        <div className="mx-auto flex min-h-[68px] lg:min-h-[74px] w-full max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10">
+        <div className="w-full flex min-h-[68px] lg:min-h-[74px] items-center justify-between px-4 sm:px-8 lg:px-14">
           {/* Logo */}
           <a
             href="#home"

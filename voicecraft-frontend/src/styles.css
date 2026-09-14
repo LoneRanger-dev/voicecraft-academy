@@ -25,6 +25,10 @@
     line-height: 1.6;
     overflow-x: hidden;
   }
+
+  h1, h2, h3, h4, h5, h6, .font-display, .font-serif {
+    font-family: "Times New Roman", Times, Georgia, serif;
+  }
 }
 
 @layer components {

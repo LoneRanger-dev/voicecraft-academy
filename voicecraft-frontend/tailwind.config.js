@@ -20,7 +20,8 @@ export default {
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', '"Montserrat"', '"Poppins"', "system-ui", "sans-serif"],
-        display: ['"Playfair Display"', '"Cormorant Garamond"', "Georgia", "serif"],
+        display: ['"Times New Roman"', "Times", "Georgia", "serif"],
+        serif: ['"Times New Roman"', "Times", "Georgia", "serif"],
       },
       boxShadow: {
         glass: "0 8px 32px 0 rgba(74, 21, 75, 0.07)",
