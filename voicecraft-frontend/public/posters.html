@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoiceCraft Academy – Instagram Posters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-purple: #4A154B;
+      --brand-deep: #320D33;
+      --brand-plum: #210922;
+      --brand-gold: #D4AF37;
+      --brand-olive: #6E8934;
+      --brand-cream: #FAF9F6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #180B1A;
+      color: #FFFDF9;
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--brand-gold);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-family: 'Times New Roman', serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 16px;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 36px;
+      align-items: start;
+    }
+    .poster-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 24px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .poster-card:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .poster-img-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      background: #000;
+    }
+    .poster-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .poster-card:hover .poster-img-wrap img {
+      transform: scale(1.02);
+    }
+    .poster-title {
+      font-family: 'Times New Roman', serif;
+      font-size: 24px;
+      color: var(--brand-gold);
+      margin-bottom: 6px;
+    }
+    .poster-meta {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 18px;
+    }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: auto;
+      flex-wrap: wrap;
+    }
+    .btn {
+      flex: 1;
+      min-width: 130px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #D4AF37, #B39239);
+      color: #210922;
+      border: none;
+    }
+    .btn-gold:hover {
+      filter: brightness(1.1);
+      transform: scale(1.02);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(212, 175, 55, 0.5);
+    }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #25D366;
+      color: #FFF;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 700;
+      display: none;
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Official Brand Assets</span>
+      <h1>VoiceCraft Academy – Instagram Post Creatives</h1>
+      <p class="subtitle">Designed to exact website color grading (Royal Plum Purple, Metallic Gold, Olive Green, Studio Cream) with Times New Roman editorial typography.</p>
+    </header>
+
+    <div class="grid">
+      <!-- Card 1 -->
+      <div class="poster-card">
+        <div class="poster-img-wrap">
+          <img src="/posters/poster_1_speak_better.jpg" alt="Poster 1 - Speak Better. Go Further." />
+        </div>
+        <h2 class="poster-title">Poster 1: Speak Better. Go Further.</h2>
+        <p class="poster-meta">Square 1:1 (1080×1080) • IELTS, English, French, Public Speaking • Student Hero Edition</p>
+        <div class="btn-row">
+          <a href="/posters/poster_1_speak_better.jpg" download="VoiceCraft_Poster_1_Speak_Better.jpg" class="btn btn-gold">Download HD</a>
+          <button class="btn btn-outline" onclick="copyCaption(1)">Copy Caption</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="poster-card">
+        <div class="poster-img-wrap">
+          <img src="/posters/poster_2_learn_practice_speak.jpg" alt="Poster 2 - Learn. Practice. Speak with Confidence." />
+        </div>
+        <h2 class="poster-title">Poster 2: Learn. Practice. Speak.</h2>
+        <p class="poster-meta">Square 1:1 (1080×1080) • 5 Master Pillars • Leadership & Master Coach Edition</p>
+        <div class="btn-row">
+          <a href="/posters/poster_2_learn_practice_speak.jpg" download="VoiceCraft_Poster_2_Learn_Practice_Speak.jpg" class="btn btn-gold">Download HD</a>
+          <button class="btn btn-outline" onclick="copyCaption(2)">Copy Caption</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="poster-card">
+        <div class="poster-img-wrap">
+          <img src="/posters/poster_1_portrait.jpg" alt="Poster 1 - Portrait Edition" />
+        </div>
+        <h2 class="poster-title">Poster 1: Vertical Portrait Edition</h2>
+        <p class="poster-meta">Portrait 3:4 / 4:5 (1080×1350) • Feed & Story Optimized</p>
+        <div class="btn-row">
+          <a href="/posters/poster_1_portrait.jpg" download="VoiceCraft_Poster_1_Portrait.jpg" class="btn btn-gold">Download HD</a>
+          <button class="btn btn-outline" onclick="copyCaption(1)">Copy Caption</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Caption copied to clipboard!</div>
+
+  <script>
+    const captions = {
+      1: `Speak Better. Go Further. ✨
+
+Better communication doesn’t just improve conversations — it unlocks bigger career, academic, and global opportunities.
+
+Join VoiceCraft Academy in Marathahalli, Bengaluru, for personalized mentorship across:
+🎯 IELTS Coaching
+🗣️ Spoken English
+🇫🇷 French Language
+🎤 Public Speaking & Stage Poise
+
+📍 Classroom: Marathahalli, Bengaluru (Live Online batches also available)
+📲 Call / WhatsApp: +91 99199 11027
+🌐 Visit: https://voicecraft-academy.vercel.app
+
+#VoiceCraftAcademy #PublicSpeaking #IELTSPreparation #SpokenEnglish #FrenchClasses #BangaloreEducation #Marathahalli #ConfidenceInSpeaking`,
+      2: `Learn. Practice. Speak with confidence. 🎙️
+
+Your voice is your greatest leadership asset. Whether you’re preparing for a high-stakes job interview, leading meetings, or speaking on stage, structured practice changes everything.
+
+✨ What we coach at VoiceCraft Academy:
+• Spoken English & Fluent Articulation
+• Personality Development & Executive Presence
+• Voice & Accent Training
+• Public Speaking & Stage Fear Removal
+• Placement & Corporate Interview Preparation
+
+Guided directly by Master Coach DTM Jothi (20+ Years Mentorship).
+
+📍 Marathahalli, Bengaluru | Classroom & Live Online
+📲 Book Free Trial Class: +91 99199 11027
+🌐 Visit: https://voicecraft-academy.vercel.app
+
+#PublicSpeakingCoach #VoiceAndAccent #InterviewPrep #PersonalityDevelopment #ExecutiveCommunication #BangaloreEvents #VoiceCraft`
+    };
+
+    function copyCaption(id) {
+      navigator.clipboard.writeText(captions[id]).then(() => {
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2500);
+      });
+    }
+  </script>
+</body>
+</html>
