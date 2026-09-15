@@ -1580,7 +1580,7 @@ function Enquiry({ isAnimated, animKey }) {
       id="enquiry"
       className="scroll-mt-28 bg-[#FAF9F6] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]"
     >
-      <div key={`enquiry-${animKey}`} className={`w-full max-w-7xl mx-auto rounded-3xl border border-[#eadfcd] bg-brand-cream p-7 sm:p-10 md:p-14 shadow-lg ${isAnimated ? "section-card-enter" : ""}`}>
+      <div key={`enquiry-${animKey}`} className={`w-full max-w-7xl mx-auto rounded-3xl border border-[#eadfcd] bg-brand-cream p-5 sm:p-10 md:p-14 shadow-lg ${isAnimated ? "section-card-enter" : ""}`}>
         <div className={`mb-10 text-center ${isAnimated ? "section-text-enter" : ""}`}>
           <div className="mb-3 inline-flex rounded-full border border-[#eadfcd] bg-white px-6 py-2 shadow-sm">
             <img src={logo} alt="VoiceCraft" className="h-8 w-auto" />
@@ -1594,11 +1594,11 @@ function Enquiry({ isAnimated, animKey }) {
           <div className="w-16 h-1 rounded-full bg-brand-gold mx-auto mt-3" />
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-start">
+        <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1.2fr_0.8fr] items-start">
           <ProgramEnquiryForm />
 
           {/* Consen Contact Info Card */}
-          <aside className="relative overflow-hidden flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-7 sm:p-8 shadow-sm hover:shadow-floating hover:border-brand-olive/50 transition-all duration-300 h-full group">
+          <aside className="relative overflow-hidden flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-5 sm:p-7 md:p-8 shadow-sm hover:shadow-floating hover:border-brand-olive/50 transition-all duration-300 h-full group">
             {/* Subtle Animated Hover Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.04] via-brand-olive/[0.01] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             <div className="absolute top-0 left-0 right-0 h-1 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -1641,7 +1641,7 @@ function Enquiry({ isAnimated, animKey }) {
                 href="https://wa.me/919919911027"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 rounded-full bg-[#25D366] text-white font-bold text-xs shadow-md hover:bg-[#20bd5a] transition-all duration-200"
+                className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-3 sm:px-4 rounded-full bg-[#25D366] text-white font-bold text-xs shadow-md hover:bg-[#20bd5a] transition-all duration-200"
               >
                 <MessageCircle size={18} />
                 <span>Chat Instantly on WhatsApp</span>
@@ -1716,7 +1716,7 @@ function ProgramEnquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-3xl border border-[#e9e2d8] bg-white p-7 sm:p-9 shadow-sm"
+      className="rounded-3xl border border-[#e9e2d8] bg-white p-5 sm:p-8 md:p-9 shadow-sm"
     >
       <h3 className="font-display font-serif text-2xl font-bold text-brand-purple mb-5">
         Choose your course
@@ -1838,17 +1838,30 @@ function FormSelect({ name, label, options, required = false }) {
 }
 
 function EnquiryContactItem({ icon: Icon, label, value, href }) {
+  const isEmail = typeof value === "string" && value.includes("@") && !value.includes(" ");
+
+  // Natural break opportunity at @ for narrow mobile screens without changing underlying text
+  const displayValue = isEmail ? (
+    <>
+      {value.slice(0, value.indexOf("@") + 1)}
+      <wbr />
+      {value.slice(value.indexOf("@") + 1)}
+    </>
+  ) : (
+    value
+  );
+
   const content = (
-    <div className="flex items-center gap-3.5">
-      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand-cream border border-[#eadfcd] text-brand-purple shadow-sm">
-        <Icon size={19} strokeWidth={2.2} />
+    <div className="flex items-center gap-3 sm:gap-3.5">
+      <span className="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-2xl bg-brand-cream border border-[#eadfcd] text-brand-purple shadow-sm">
+        <Icon size={18} strokeWidth={2.2} className="sm:w-[19px] sm:h-[19px]" />
       </span>
-      <div>
-        <strong className="block text-[11px] font-bold text-brand-olive uppercase tracking-wider">
+      <div className="min-w-0 flex-1">
+        <strong className="block text-[10px] sm:text-[11px] font-bold text-brand-olive uppercase tracking-wider">
           {label}
         </strong>
-        <span className="block text-xs sm:text-sm font-bold text-brand-purple">
-          {value}
+        <span className="contact-email-text block text-xs sm:text-sm font-bold text-brand-purple break-words [overflow-wrap:anywhere] [word-break:break-word] leading-snug">
+          {displayValue}
         </span>
       </div>
     </div>
@@ -1945,8 +1958,8 @@ function Footer() {
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail size={16} className="text-brand-gold shrink-0" />
-                <a href="mailto:voicecraftwithjothi@gmail.com" className="hover:text-brand-gold transition-colors break-all">
-                  voicecraftwithjothi@gmail.com
+                <a href="mailto:voicecraftwithjothi@gmail.com" className="contact-email-text hover:text-brand-gold transition-colors break-words [overflow-wrap:anywhere] [word-break:break-word]">
+                  voicecraftwithjothi@<wbr />gmail.com
                 </a>
               </div>
               <div className="pt-2">
