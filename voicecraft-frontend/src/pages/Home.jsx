@@ -19,6 +19,7 @@ import {
   Star,
   Users,
   ArrowRight,
+  ArrowUp,
 } from "lucide-react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 
@@ -505,6 +506,7 @@ export default function Home() {
 
   return (
     <main className="w-full min-h-screen overflow-hidden bg-brand-cream pt-[68px] lg:pt-[114px]">
+      <ReadingProgressBar />
       <Navbar
         programs={programs.map((program) => program.title)}
         onSelectProgram={selectProgram}
@@ -547,6 +549,8 @@ export default function Home() {
         animKey={navKey}
       />
       <Footer />
+      <ScrollToTopButton />
+      <FloatingWhatsApp />
     </main>
   );
 }
@@ -1276,24 +1280,44 @@ function CoursePoint({ children }) {
 // 5. CALL TO ACTION STRIP (Consen IT Solution 02 "Need Service?" Style)
 function CallToActionStrip() {
   return (
-    <section className="bg-brand-deep py-12 px-4 sm:px-8 lg:px-14 border-t border-brand-purple/30 text-white relative overflow-hidden">
-      <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-brand-gold mb-1.5">
-            READY TO TRANSFORM YOUR VOICE?
-          </p>
-          <h3 className="font-display font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+    <section className="bg-brand-deep py-14 lg:py-16 px-4 sm:px-8 lg:px-14 border-t border-brand-purple/30 text-white relative overflow-hidden">
+      {/* Decorative ambient background glows */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-brand-purple/40 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-brand-gold/20 blur-3xl pointer-events-none" />
+
+      <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
+        <div className="text-center lg:text-left max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-brand-gold text-xs font-bold uppercase tracking-wider mb-3 shadow-sm">
+            <Sparkles size={13} className="text-brand-gold" />
+            <span>READY TO TRANSFORM YOUR VOICE?</span>
+          </div>
+          <h3 className="font-display font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
             Book Your Free Trial Session with DTM Jothi
           </h3>
+          <p className="mt-3 text-sm sm:text-base text-white/80 font-medium">
+            Personalized 1-on-1 speech assessment, structured feedback, and a tailored learning roadmap.
+          </p>
         </div>
-        <Button
-          href="#enquiry"
-          variant="gold"
-          size="lg"
-          className="rounded-full shadow-lg hover:scale-105 transition-all shrink-0"
-        >
-          Join a Session Now
-        </Button>
+
+        <div className="flex flex-wrap items-center justify-center gap-4 shrink-0">
+          <Button
+            href="#enquiry"
+            variant="gold"
+            size="lg"
+            className="rounded-full shadow-lg hover:scale-105 transition-all"
+          >
+            Book Free Trial Class
+          </Button>
+          <a
+            href="https://wa.me/919919911027"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/30 hover:border-white text-white font-bold text-xs transition-all hover:bg-white/10"
+          >
+            <MessageCircle size={16} />
+            <span>Chat on WhatsApp</span>
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -1947,14 +1971,89 @@ function SectionHeading({ eyebrow, title, isAnimated }) {
   return (
     <div className={`text-center max-w-3xl mx-auto mb-4 ${isAnimated ? "section-text-enter" : ""}`}>
       {eyebrow ? (
-        <p className="text-xs font-bold uppercase tracking-widest text-brand-olive mb-2">
-          {eyebrow}
-        </p>
+        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-brand-olive/15 text-brand-olive text-xs font-bold uppercase tracking-wider mb-3 border border-brand-olive/25 shadow-sm">
+          <Sparkles size={13} className="text-brand-gold shrink-0" />
+          <span>{eyebrow}</span>
+        </div>
       ) : null}
       <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-brand-purple">
         {title}
       </h2>
-      <div className="w-16 h-1 rounded-full bg-brand-gold mx-auto mt-4" />
+      <div className="w-20 h-1 rounded-full bg-gradient-to-r from-brand-gold to-brand-olive mx-auto mt-4" />
     </div>
+  );
+}
+
+// Consen 02 Luxury Reading Progress Bar
+function ReadingProgressBar() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) {
+        setProgress((scrollTop / docHeight) * 100);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div
+      className="fixed top-[68px] lg:top-[114px] left-0 h-[3px] bg-gradient-to-r from-brand-gold via-brand-olive to-brand-gold z-50 transition-[width] duration-150 ease-out pointer-events-none"
+      style={{ width: `${progress}%` }}
+      role="progressbar"
+      aria-valuenow={Math.round(progress)}
+      aria-valuemin="0"
+      aria-valuemax="100"
+    />
+  );
+}
+
+// Consen 02 Floating Scroll-to-Top Button
+function ScrollToTopButton() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsVisible(window.scrollY > 320);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <button
+      type="button"
+      onClick={scrollToTop}
+      aria-label="Scroll to top"
+      className="fixed bottom-6 right-6 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-brand-purple hover:bg-brand-deep text-brand-gold border-2 border-brand-gold/40 shadow-floating flex items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer animate-fade-in"
+    >
+      <ArrowUp size={20} strokeWidth={2.5} />
+    </button>
+  );
+}
+
+// Floating WhatsApp Direct Access
+function FloatingWhatsApp() {
+  return (
+    <a
+      href="https://wa.me/919919911027"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat on WhatsApp"
+      className="fixed bottom-6 left-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-floating transition-all duration-300 hover:scale-105 group"
+    >
+      <MessageCircle size={18} className="animate-pulse shrink-0" />
+      <span className="hidden sm:inline">WhatsApp Us</span>
+    </a>
   );
 }
