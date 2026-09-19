@@ -1878,25 +1878,25 @@ function EnquiryContactItem({ icon: Icon, label, value, href }) {
   return content;
 }
 
-// 11. FOOTER (Executive Masterclass 4-Column Footer)
+// 11. FOOTER (Executive Masterclass 4-Column Balanced Grid)
 function Footer() {
   return (
     <footer className="bg-[#0A020C] text-white border-t border-brand-gold/20">
-      <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Column 1: Brand Info */}
-          <div>
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 lg:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 items-start">
+          {/* Column 1: Brand Info (col-span-4 on desktop) */}
+          <div className="lg:col-span-4 flex flex-col items-start">
             <a href="#home" className="inline-flex">
               <img
                 src={logo}
                 alt="VoiceCraft"
-                className="h-11 w-auto brightness-110"
+                className="h-10 sm:h-11 w-auto brightness-110"
               />
             </a>
-            <p className="mt-4 text-xs sm:text-sm text-white/75 leading-relaxed">
+            <p className="mt-4 text-xs sm:text-sm text-white/75 leading-relaxed max-w-sm">
               Empowering individuals to speak with confidence, express with clarity, and lead with impact across every stage of life.
             </p>
-            <div className="flex items-center gap-3 mt-5">
+            <div className="flex items-center gap-3 mt-6">
               {socialLinks.map(({ label, icon: Icon, href }) => (
                 <a
                   key={label}
@@ -1904,7 +1904,7 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-gold hover:text-brand-deep border border-brand-gold/20 flex items-center justify-center text-white transition-all text-xs"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-gold hover:text-brand-deep border border-brand-gold/25 flex items-center justify-center text-white transition-all duration-200 text-xs shadow-sm hover:scale-110"
                 >
                   <Icon size={14} />
                 </a>
@@ -1912,41 +1912,85 @@ function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div>
-            <h4 className="font-serif text-sm font-bold text-brand-gold uppercase tracking-widest mb-4">
+          {/* Column 2: Quick Links (col-span-2 on desktop) */}
+          <div className="lg:col-span-2">
+            <h4 className="font-serif text-xs sm:text-sm font-bold text-brand-gold uppercase tracking-widest mb-5">
               Explore
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-white/80">
-              <li><a href="#home" className="hover:text-brand-gold transition-colors">Home</a></li>
-              <li><a href="#about" className="hover:text-brand-gold transition-colors">About VoiceCraft</a></li>
-              <li><a href="#programs" className="hover:text-brand-gold transition-colors">Our Programs</a></li>
-              <li><a href="#why-us" className="hover:text-brand-gold transition-colors">Why Choose Us</a></li>
-              <li><a href="#testimonials" className="hover:text-brand-gold transition-colors">Student Reviews</a></li>
-              <li><a href="#gallery" className="hover:text-brand-gold transition-colors">Classroom Moments</a></li>
-              <li><a href="#enquiry" className="hover:text-brand-gold transition-colors">Enquire Now</a></li>
+            <ul className="space-y-3 text-xs sm:text-sm text-white/80">
+              <li>
+                <a href="#home" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#about" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  About VoiceCraft
+                </a>
+              </li>
+              <li>
+                <a href="#programs" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  Our Programs
+                </a>
+              </li>
+              <li>
+                <a href="#why-us" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  Why Choose Us
+                </a>
+              </li>
+              <li>
+                <a href="#testimonials" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  Student Reviews
+                </a>
+              </li>
+              <li>
+                <a href="#gallery" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  Classroom Moments
+                </a>
+              </li>
+              <li>
+                <a href="#enquiry" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  Enquire Now
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Column 3: Our Programs */}
-          <div>
-            <h4 className="font-serif text-sm font-bold text-brand-gold uppercase tracking-widest mb-4">
+          {/* Column 3: Our Programs (col-span-3 on desktop) */}
+          <div className="lg:col-span-3">
+            <h4 className="font-serif text-xs sm:text-sm font-bold text-brand-gold uppercase tracking-widest mb-5">
               Our Services
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-white/80">
-              <li><a href="#programs" className="hover:text-brand-gold transition-colors">Eloquence by VoiceCraft</a></li>
-              <li><a href="#programs" className="hover:text-brand-gold transition-colors">EngLingo by VoiceCraft</a></li>
-              <li><a href="#programs" className="hover:text-brand-gold transition-colors">Bonjour by VoiceCraft</a></li>
-              <li><a href="#programs" className="hover:text-brand-gold transition-colors">IELTS & PTE Training</a></li>
+            <ul className="space-y-3 text-xs sm:text-sm text-white/80">
+              <li>
+                <a href="#programs" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  Eloquence by VoiceCraft
+                </a>
+              </li>
+              <li>
+                <a href="#programs" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  EngLingo by VoiceCraft
+                </a>
+              </li>
+              <li>
+                <a href="#programs" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  Bonjour by VoiceCraft
+                </a>
+              </li>
+              <li>
+                <a href="#programs" className="hover:text-brand-gold hover:translate-x-1 transition-all inline-block">
+                  IELTS & PTE Training
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Column 4: Contact Info */}
-          <div>
-            <h4 className="font-serif text-sm font-bold text-brand-gold uppercase tracking-widest mb-4">
+          {/* Column 4: Contact Info (col-span-3 on desktop) */}
+          <div className="lg:col-span-3">
+            <h4 className="font-serif text-xs sm:text-sm font-bold text-brand-gold uppercase tracking-widest mb-5">
               Contact Info
             </h4>
-            <div className="space-y-3 text-xs sm:text-sm text-white/80">
+            <div className="space-y-3.5 text-xs sm:text-sm text-white/80">
               <div className="flex items-start gap-2.5">
                 <MapPin size={16} className="text-brand-gold shrink-0 mt-0.5" />
                 <span>Marathahalli, Bangalore, India</span>
@@ -1964,7 +2008,7 @@ function Footer() {
                 </a>
               </div>
               <div className="pt-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[11px] font-semibold text-brand-gold border border-brand-gold/25">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 text-[11px] font-semibold text-brand-gold border border-brand-gold/25">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
                   Classroom & Live Online
                 </span>
