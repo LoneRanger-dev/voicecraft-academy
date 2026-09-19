@@ -16,8 +16,8 @@
   body {
     min-height: 100vh;
     margin: 0;
-    background-color: #120614;
-    color: #F8F5EE;
+    background-color: #FAF9F6;
+    color: #1D1420;
     font-family: theme("fontFamily.sans");
     -webkit-font-smoothing: antialiased;
     text-rendering: geometricPrecision;
@@ -30,12 +30,6 @@
     font-family: "Times New Roman", Times, Georgia, serif;
   }
 
-  .gold-text-gradient {
-    background: linear-gradient(135deg, #FFFDF9 0%, #F5E5C9 30%, #D4AF37 70%, #B39239 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
   .contact-email-text {
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -43,13 +37,13 @@
 }
 
 @layer components {
-  /* Masterclass Dark Luxury Glassmorphism Cards */
+  /* Liquid Glassmorphism Cards */
   .glass-card {
-    background: rgba(26, 8, 28, 0.75);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(212, 175, 55, 0.22);
-    box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.45);
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 32px 0 rgba(74, 21, 75, 0.06), inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
   }
 
   .glass-card-hover {
@@ -58,31 +52,31 @@
 
   .glass-card-hover:hover {
     transform: translateY(-5px);
-    background: rgba(38, 12, 42, 0.9);
-    border-color: rgba(212, 175, 55, 0.55);
-    box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.65), 0 0 20px rgba(212, 175, 55, 0.12);
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(179, 146, 57, 0.35);
+    box-shadow: 0 20px 40px -10px rgba(74, 21, 75, 0.12), inset 0 1px 1px 0 rgba(255, 255, 255, 1);
   }
 
-  /* Masterclass Dark Glass Pill */
+  /* Liquid Glass Pill */
   .glass-pill {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 16px rgba(74, 21, 75, 0.05);
   }
 
   /* Neomorphic & Liquid Accents */
   .liquid-orb-purple {
-    background: radial-gradient(circle at center, rgba(110, 25, 115, 0.28) 0%, rgba(74, 21, 75, 0.08) 50%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(74, 21, 75, 0.18) 0%, rgba(74, 21, 75, 0.04) 50%, transparent 70%);
   }
 
   .liquid-orb-gold {
-    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.22) 0%, rgba(179, 146, 57, 0.06) 50%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(179, 146, 57, 0.18) 0%, rgba(179, 146, 57, 0.04) 50%, transparent 70%);
   }
 
   .liquid-orb-olive {
-    background: radial-gradient(circle at center, rgba(110, 137, 52, 0.25) 0%, rgba(110, 137, 52, 0.06) 50%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(110, 137, 52, 0.18) 0%, rgba(110, 137, 52, 0.04) 50%, transparent 70%);
   }
 
   /* Marquee for Gallery / Logos */
@@ -114,14 +108,14 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #120614;
+  background: #FAF9F6;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3B1344;
+  background: #D5CAD8;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D4AF37;
+  background: #B39239;
 }
 
 /* ===================================================
@@ -189,31 +183,31 @@
 
 /* Hero Opening Animations */
 .anim-hero-badge {
-  animation: textRevealScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: textRevealScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
 }
 
 .anim-hero-title-1 {
-  animation: textRevealUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+  animation: textRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 
 .anim-hero-title-2 {
-  animation: textRevealUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  animation: textRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
 }
 
 .anim-hero-line {
-  animation: lineExpand 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  animation: lineExpand 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
 }
 
 .anim-hero-desc {
-  animation: textRevealUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  animation: textRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
 }
 
 .anim-hero-buttons {
-  animation: textRevealScale 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+  animation: textRevealScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.72s both;
 }
 
 .anim-hero-stats {
-  animation: textRevealScale 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  animation: textRevealScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
 }
 
 /* Page / Section Click Animations */

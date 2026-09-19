@@ -144,7 +144,7 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
       </div>
 
       {/* 2. Main Sticky Navigation Bar */}
-      <nav className="border-b border-brand-gold/20 bg-[#120614]/92 backdrop-blur-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-all duration-300">
+      <nav className="border-b border-[#eadfcd]/80 bg-white/95 backdrop-blur-2xl shadow-[0_4px_25px_rgba(74,21,75,0.06)] transition-all duration-300">
         <div className="w-full flex min-h-[68px] lg:min-h-[74px] items-center justify-between px-4 sm:px-8 lg:px-14">
           {/* Logo */}
           <a
@@ -158,12 +158,12 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
             <img
               src={logo}
               alt="VoiceCraft Academy"
-              className="h-10 sm:h-12 w-auto object-contain brightness-110"
+              className="h-10 sm:h-12 w-auto object-contain"
             />
           </a>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-semibold text-white/80">
+          <div className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-semibold text-brand-ink/85">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               const isPrograms = item.id === "programs";
@@ -178,8 +178,8 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
                     }}
                     className={`px-3.5 py-1.5 rounded-full text-xs xl:text-sm transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? "bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-gold text-brand-deep shadow-md font-bold"
-                        : "text-white/80 hover:bg-white/10 hover:text-brand-gold"
+                        ? "bg-brand-purple text-white shadow-sm font-bold"
+                        : "hover:bg-brand-purple/10 hover:text-brand-purple"
                     }`}
                   >
                     {item.label}
@@ -191,7 +191,7 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
                       <button
                         type="button"
                         onClick={() => setIsProgramsOpen((prev) => !prev)}
-                        className="w-5 h-5 rounded-full hover:bg-white/10 flex items-center justify-center text-brand-gold cursor-pointer transition-transform"
+                        className="w-5 h-5 rounded-full hover:bg-brand-purple/10 flex items-center justify-center text-brand-purple cursor-pointer transition-transform"
                         aria-label="Toggle programs menu"
                       >
                         <ChevronDown
@@ -201,13 +201,13 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
                       </button>
 
                       {isProgramsOpen && (
-                        <div className="absolute top-10 left-0 w-64 rounded-2xl bg-[#1D0A20]/98 backdrop-blur-xl border border-brand-gold/25 shadow-2xl py-2 z-50">
+                        <div className="absolute top-10 left-0 w-64 rounded-2xl bg-white/98 backdrop-blur-xl border border-brand-purple/15 shadow-2xl py-2 z-50">
                           {programs.map((prog) => (
                             <button
                               key={prog}
                               type="button"
                               onClick={() => handleProgramClick(prog)}
-                              className="w-full text-left px-4 py-2.5 text-xs font-semibold text-white/90 hover:bg-brand-gold/15 hover:text-brand-gold transition-colors cursor-pointer"
+                              className="w-full text-left px-4 py-2.5 text-xs font-semibold text-brand-ink hover:bg-brand-purple/10 hover:text-brand-purple transition-colors cursor-pointer"
                             >
                               {prog}
                             </button>
@@ -227,25 +227,27 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
               href="https://wa.me/919919911027"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all duration-200 shadow-sm border border-[#25D366]/30"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#25D366]/15 text-[#1eab52] hover:bg-[#25D366] hover:text-white transition-all duration-200 shadow-sm"
               aria-label="WhatsApp VoiceCraft"
             >
               <MessageCircle size={18} />
             </a>
 
-            <a
+            <Button
               href="#enquiry"
-              className="px-5 py-2 rounded-full text-xs xl:text-sm font-bold bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-gold text-brand-deep shadow-md hover:scale-105 transition-all cursor-pointer"
+              variant="primary"
+              size="sm"
+              className="rounded-full shadow-md hover:scale-105 transition-all"
             >
               Join a Session
-            </a>
+            </Button>
           </div>
 
           {/* Mobile Hamburger Toggle */}
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            className="lg:hidden w-10 h-10 rounded-full bg-white/10 text-brand-gold flex items-center justify-center hover:bg-white/20 transition-colors"
+            className="lg:hidden w-10 h-10 rounded-full bg-brand-purple/10 text-brand-purple flex items-center justify-center hover:bg-brand-purple/20 transition-colors"
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -254,7 +256,7 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
 
         {/* Mobile Drawer */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden p-4 mx-3 mb-3 rounded-3xl bg-[#180B1A]/98 backdrop-blur-2xl border border-brand-gold/25 shadow-2xl flex flex-col gap-2">
+          <div className="lg:hidden p-4 mx-3 mb-3 rounded-3xl bg-white/98 backdrop-blur-2xl border border-brand-purple/15 shadow-2xl flex flex-col gap-2">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -265,15 +267,15 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
                 }}
                 className={`px-4 py-2.5 rounded-full text-sm font-bold transition-colors ${
                   activeSection === item.id
-                    ? "bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-gold text-brand-deep shadow-sm"
-                    : "text-white/85 hover:bg-white/10 hover:text-brand-gold"
+                    ? "bg-brand-purple text-white shadow-sm"
+                    : "text-brand-ink/90 hover:bg-brand-purple/10 hover:text-brand-purple"
                 }`}
               >
                 {item.label}
               </a>
             ))}
 
-            <div className="pt-3 border-t border-brand-gold/15 flex flex-col gap-2">
+            <div className="pt-3 border-t border-brand-purple/10 flex flex-col gap-2">
               <a
                 href="https://wa.me/919919911027"
                 target="_blank"
@@ -286,7 +288,7 @@ export default function Navbar({ programs = [], onSelectProgram, onNavigateSecti
               <a
                 href="#enquiry"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center py-2.5 rounded-full bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-gold text-brand-deep text-xs font-bold shadow-sm"
+                className="flex items-center justify-center py-2.5 rounded-full bg-brand-purple text-white text-xs font-bold shadow-sm"
               >
                 Join a Session
               </a>
