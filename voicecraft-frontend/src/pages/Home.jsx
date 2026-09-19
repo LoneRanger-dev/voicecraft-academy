@@ -1888,9 +1888,9 @@ function Footer() {
   return (
     <footer className="bg-brand-deep text-white border-t border-brand-purple/20">
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
-          {/* Column 1: Brand Info (col-span-4) */}
-          <div className="lg:col-span-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 xl:gap-12">
+          {/* Column 1: Brand Info */}
+          <div>
             <a href="#home" className="inline-flex">
               <img
                 src={logo}
@@ -1898,7 +1898,7 @@ function Footer() {
                 className="h-11 w-auto brightness-110"
               />
             </a>
-            <p className="mt-4 text-xs sm:text-sm text-white/75 leading-relaxed max-w-sm">
+            <p className="mt-4 text-xs sm:text-sm text-white/75 leading-relaxed">
               Empowering individuals to speak with confidence, express with clarity, and lead with impact across every stage of life.
             </p>
             <div className="flex items-center gap-3 mt-5">
@@ -1917,8 +1917,8 @@ function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Quick Links (col-span-2) */}
-          <div className="lg:col-span-2">
+          {/* Column 2: Quick Links */}
+          <div>
             <h4 className="font-serif text-sm font-bold text-brand-gold uppercase tracking-widest mb-4">
               Explore
             </h4>
@@ -1933,8 +1933,8 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Our Programs (col-span-3) */}
-          <div className="lg:col-span-3">
+          {/* Column 3: Our Programs */}
+          <div>
             <h4 className="font-serif text-sm font-bold text-brand-gold uppercase tracking-widest mb-4">
               Our Services
             </h4>
@@ -1946,8 +1946,8 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Contact Info (col-span-3) */}
-          <div className="lg:col-span-3">
+          {/* Column 4: Contact Info */}
+          <div>
             <h4 className="font-serif text-sm font-bold text-brand-gold uppercase tracking-widest mb-4">
               Contact Info
             </h4>
