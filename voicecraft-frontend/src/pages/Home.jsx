@@ -5,6 +5,7 @@ import {
   CalendarDays,
   Check,
   CheckCircle2,
+  ChevronDown,
   ChevronRight,
   Clock,
   Globe,
@@ -506,7 +507,6 @@ export default function Home() {
 
   return (
     <main className="w-full min-h-screen overflow-hidden bg-[#120614] text-[#F8F5EE] pt-[68px] lg:pt-[114px]">
-      <ReadingProgressBar />
       <Navbar
         programs={programs.map((program) => program.title)}
         onSelectProgram={selectProgram}
@@ -1578,10 +1578,10 @@ function Enquiry({ isAnimated, animKey }) {
   return (
     <section
       id="enquiry"
-      className="scroll-mt-28 bg-[#120614] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-brand-gold/15 text-white"
+      className="scroll-mt-28 bg-[#120614] px-4 sm:px-6 lg:px-10 py-20 lg:py-28 border-t border-brand-gold/15 text-white"
     >
-      <div key={`enquiry-${animKey}`} className={`w-full max-w-7xl mx-auto rounded-3xl border border-brand-gold/30 bg-[#180B1A]/95 backdrop-blur-xl p-5 sm:p-10 md:p-14 shadow-2xl ${isAnimated ? "section-card-enter" : ""}`}>
-        <div className={`mb-10 text-center ${isAnimated ? "section-text-enter" : ""}`}>
+      <div key={`enquiry-${animKey}`} className={`w-full max-w-7xl mx-auto ${isAnimated ? "section-card-enter" : ""}`}>
+        <div className={`mb-12 text-center ${isAnimated ? "section-text-enter" : ""}`}>
           <div className="mb-3 inline-flex rounded-full border border-brand-gold/30 bg-white/10 px-6 py-2 shadow-sm backdrop-blur-md">
             <img src={logo} alt="VoiceCraft" className="h-8 w-auto brightness-110" />
           </div>
@@ -1594,11 +1594,11 @@ function Enquiry({ isAnimated, animKey }) {
           <div className="w-16 h-1 rounded-full bg-brand-gold mx-auto mt-3" />
         </div>
 
-        <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1.2fr_0.8fr] items-start">
+        <div className="grid gap-8 lg:gap-10 lg:grid-cols-[1.25fr_0.75fr] items-stretch">
           <ProgramEnquiryForm />
 
           {/* Contact Info Card */}
-          <aside className="relative overflow-hidden flex flex-col justify-between rounded-3xl border border-brand-gold/25 bg-[#1E0A22]/90 p-5 sm:p-7 md:p-8 shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-brand-gold/50 transition-all duration-300 h-full group">
+          <aside className="relative overflow-hidden flex flex-col justify-between rounded-3xl border border-brand-gold/25 bg-[#1E0A22]/90 p-6 sm:p-8 md:p-10 shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-brand-gold/50 transition-all duration-300 h-full group">
             {/* Subtle Animated Hover Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.06] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold to-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -1716,7 +1716,7 @@ function ProgramEnquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-3xl border border-brand-gold/25 bg-[#1E0A22]/90 p-5 sm:p-8 md:p-9 shadow-xl"
+      className="rounded-3xl border border-brand-gold/25 bg-[#1E0A22]/90 p-6 sm:p-8 md:p-10 shadow-xl"
     >
       <h3 className="font-display font-serif text-2xl font-bold text-white mb-5">
         Choose your course
@@ -1817,23 +1817,29 @@ function FormSelect({ name, label, options, required = false }) {
         {label}
         {required ? <span className="ml-1 text-brand-gold">*</span> : null}
       </span>
-      <select
-        name={name}
-        required={required}
-        defaultValue=""
-        className="h-11 w-full rounded-full border border-brand-gold/30 bg-[#140616] px-4 text-xs sm:text-sm font-medium text-white outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 cursor-pointer"
-      >
-        {options.map((option, index) => (
-          <option
-            key={option}
-            value={index === 0 ? "" : option}
-            disabled={index === 0}
-            className="bg-[#1D0A20] text-white"
-          >
-            {option}
-          </option>
-        ))}
-      </select>
+      <div className="relative">
+        <select
+          name={name}
+          required={required}
+          defaultValue=""
+          className="h-11 w-full appearance-none rounded-full border border-brand-gold/30 bg-[#140616] pl-4 pr-10 text-xs sm:text-sm font-medium text-white outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 cursor-pointer"
+        >
+          {options.map((option, index) => (
+            <option
+              key={option}
+              value={index === 0 ? "" : option}
+              disabled={index === 0}
+              className="bg-[#1D0A20] text-white"
+            >
+              {option}
+            </option>
+          ))}
+        </select>
+        <ChevronDown
+          size={18}
+          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-brand-gold/90"
+        />
+      </div>
     </label>
   );
 }
@@ -2039,34 +2045,6 @@ function SectionHeading({ eyebrow, title, isAnimated }) {
       </h2>
       <div className="w-20 h-1 rounded-full bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-olive mx-auto mt-4" />
     </div>
-  );
-}
-
-// Executive Masterclass Reading Progress Bar
-function ReadingProgressBar() {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (docHeight > 0) {
-        setProgress((scrollTop / docHeight) * 100);
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <div
-      className="fixed top-[68px] lg:top-[114px] left-0 h-[3px] bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-olive z-50 transition-[width] duration-150 ease-out pointer-events-none"
-      style={{ width: `${progress}%` }}
-      role="progressbar"
-      aria-valuenow={Math.round(progress)}
-      aria-valuemin="0"
-      aria-valuemax="100"
-    />
   );
 }
 
