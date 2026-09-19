@@ -505,7 +505,7 @@ export default function Home() {
   };
 
   return (
-    <main className="w-full min-h-screen overflow-hidden bg-brand-cream pt-[68px] lg:pt-[114px]">
+    <main className="w-full min-h-screen overflow-hidden bg-[#120614] text-[#F8F5EE] pt-[68px] lg:pt-[114px]">
       <ReadingProgressBar />
       <Navbar
         programs={programs.map((program) => program.title)}
@@ -555,48 +555,48 @@ export default function Home() {
   );
 }
 
-// 1. HERO SECTION (Consen IT Solution 02 Style: Student Girl Hero Image + Floating Stats + Times New Roman)
+// 1. HERO SECTION (Executive Masterclass Style: Dark Obsidian Plum + Student Girl Hero Image + Gold Accents + Times New Roman)
 function HeroSection({ isAnimated, animKey }) {
   return (
     <section
       id="home"
       data-section="home"
       aria-label="Home section"
-      className="relative w-full overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-[#FAF6EE] to-[#F5EFE6] scroll-mt-28 px-4 sm:px-8 lg:px-14 py-12 lg:py-24 flex items-center"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-[#120614] via-[#1A081C] to-[#210922] scroll-mt-28 px-4 sm:px-8 lg:px-14 py-12 lg:py-24 flex items-center"
     >
       {/* Decorative ambient background glows */}
-      <div className="absolute top-10 left-1/4 w-80 h-80 rounded-full bg-brand-purple/5 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 rounded-full bg-brand-gold/10 blur-3xl pointer-events-none" />
+      <div className="absolute top-10 left-1/4 w-96 h-96 rounded-full bg-[#4A154B]/25 blur-3xl pointer-events-none liquid-orb-purple" />
+      <div className="absolute bottom-10 right-1/4 w-96 h-96 rounded-full bg-brand-gold/15 blur-3xl pointer-events-none liquid-orb-gold" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-10 items-center">
           {/* Content Column: 2nd on mobile, 1st on desktop */}
           <div key={`hero-content-${animKey}`} className="order-2 lg:order-1 flex flex-col items-start text-left max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-olive/15 border border-brand-olive/30 text-brand-olive text-xs sm:text-sm font-bold uppercase tracking-wider mb-5 anim-hero-badge shadow-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-brand-gold/30 text-brand-gold text-xs sm:text-sm font-bold uppercase tracking-wider mb-5 anim-hero-badge shadow-sm backdrop-blur-md">
               <Sparkles size={14} className="text-brand-gold animate-pulse" />
-              <span>✦ ONLY HIGH QUALITY COACHING</span>
+              <span>✦ EXECUTIVE MASTERCLASS COACHING</span>
             </div>
 
-            <h1 className="font-display font-serif text-4xl sm:text-5xl md:text-5xl lg:text-[62px] font-bold leading-[1.12] tracking-tight text-brand-purple">
-              <span className="inline-block anim-hero-title-1">Unlock your confidence.</span> <br />
-              <span className="inline-block text-brand-olive anim-hero-title-2">Communicate with power.</span>
+            <h1 className="font-display font-serif text-4xl sm:text-5xl md:text-5xl lg:text-[62px] font-bold leading-[1.12] tracking-tight text-white">
+              <span className="inline-block gold-text-gradient">Unlock your confidence.</span> <br />
+              <span className="inline-block text-white/95">Communicate with power.</span>
             </h1>
 
-            <div className="mt-5 h-1.5 w-24 rounded-full bg-gradient-to-r from-brand-gold to-brand-olive anim-hero-line" />
+            <div className="mt-5 h-1.5 w-24 rounded-full bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-olive" />
 
-            <p className="mt-5 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90 max-w-xl anim-hero-desc">
+            <p className="mt-5 text-base sm:text-lg font-medium leading-relaxed text-white/80 max-w-xl">
               From confident speaking to developing fluency, we help you express,
               connect and succeed in every stage of life.
             </p>
 
             {/* Strict rounded-full action buttons */}
-            <div className="mt-8 flex flex-wrap items-center gap-4 anim-hero-buttons">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <Button
                 href="#enquiry"
                 variant="primary"
                 size="lg"
                 icon={CalendarDays}
-                className="rounded-full shadow-lg shadow-brand-purple/20 hover:scale-105 transition-all duration-300"
+                className="rounded-full shadow-lg shadow-brand-gold/20 hover:scale-105 transition-all duration-300"
               >
                 Join a Session
               </Button>
@@ -610,18 +610,18 @@ function HeroSection({ isAnimated, animKey }) {
               </Button>
             </div>
 
-            {/* Consen Trust Indicators */}
-            <div className="mt-10 pt-6 border-t border-brand-purple/10 flex flex-wrap items-center gap-y-2.5 gap-x-6 text-xs sm:text-sm font-bold text-brand-purple/85">
+            {/* Trust Indicators */}
+            <div className="mt-10 pt-6 border-t border-brand-gold/15 flex flex-wrap items-center gap-y-2.5 gap-x-6 text-xs sm:text-sm font-bold text-white/80">
               <div className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-brand-olive shrink-0" />
+                <CheckCircle2 size={16} className="text-brand-gold shrink-0" />
                 <span>1-on-1 & Small Batches</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-brand-olive shrink-0" />
+                <CheckCircle2 size={16} className="text-brand-gold shrink-0" />
                 <span>Practical Speech Exercises</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-brand-olive shrink-0" />
+                <CheckCircle2 size={16} className="text-brand-gold shrink-0" />
                 <span>Classroom & Live Online</span>
               </div>
             </div>
@@ -630,17 +630,17 @@ function HeroSection({ isAnimated, animKey }) {
           {/* Student Girl Image Column: 1st on mobile, 2nd on desktop */}
           <div key={`hero-image-${animKey}`} className="order-1 lg:order-2 relative mx-auto w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[460px] pt-4 lg:pt-6 pb-10 lg:pb-12">
             {/* Background Aesthetic Ring */}
-            <div className="absolute inset-0 rounded-[44px] bg-gradient-to-tr from-brand-purple/15 via-brand-gold/15 to-brand-olive/15 blur-2xl transform scale-95 pointer-events-none" />
+            <div className="absolute inset-0 rounded-[44px] bg-gradient-to-tr from-brand-purple/30 via-brand-gold/25 to-brand-olive/20 blur-2xl transform scale-95 pointer-events-none" />
             <div className="absolute -inset-3.5 rounded-[42px] border-2 border-dashed border-brand-gold/40 pointer-events-none" />
 
             {/* Framed Student Girl Portrait Card */}
-            <div className="relative z-10 w-full aspect-[3/4] overflow-hidden rounded-[36px] border-4 border-white bg-gradient-to-b from-white to-[#F5EFE6] shadow-[0_20px_50px_rgba(74,21,75,0.16)]">
+            <div className="relative z-10 w-full aspect-[3/4] overflow-hidden rounded-[36px] border-2 border-brand-gold/40 bg-[#1A081C] shadow-[0_20px_60px_rgba(0,0,0,0.7)]">
               <img
                 src={studentHero}
                 alt="VoiceCraft Academy Student"
                 className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-brand-deep/95 via-brand-deep/50 to-transparent flex items-end justify-center p-4 pb-8 sm:pb-9 text-center">
+              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#120614]/95 via-[#120614]/60 to-transparent flex items-end justify-center p-4 pb-8 sm:pb-9 text-center">
                 <div>
                   <p className="text-white font-display font-serif text-base sm:text-lg font-bold leading-tight drop-shadow-sm">
                     Empowering Confident Voices
@@ -654,32 +654,32 @@ function HeroSection({ isAnimated, animKey }) {
 
             {/* Floating Stat Badge 1: 1000+ Students Trained (Top Left) */}
             <div className="absolute -top-3 -left-3 sm:-left-6 z-20 animate-float">
-              <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(74,21,75,0.14)] hover:scale-105 transition-transform">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-purple to-brand-deep flex items-center justify-center text-white shadow-sm shrink-0">
+              <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-[#1A081C]/90 backdrop-blur-xl border border-brand-gold/35 shadow-[0_12px_32px_rgba(0,0,0,0.6)] hover:scale-105 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-[#987625] flex items-center justify-center text-brand-deep shadow-sm shrink-0">
                   <Users size={18} />
                 </div>
                 <div className="flex flex-col text-left">
-                  <strong className="font-display font-serif text-base sm:text-lg font-bold text-brand-purple leading-tight">
+                  <strong className="font-display font-serif text-base sm:text-lg font-bold gold-text-gradient leading-tight">
                     1000+
                   </strong>
-                  <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 whitespace-nowrap leading-tight">
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-white/75 whitespace-nowrap leading-tight">
                     Students Trained
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Floating Stat Badge 2: 20+ Years Experience (Bottom Left - Placed below to avoid overlapping text) */}
+            {/* Floating Stat Badge 2: 20+ Years Experience (Bottom Left) */}
             <div className="absolute -bottom-4 sm:-bottom-6 -left-3 sm:-left-8 z-20 animate-float-delayed">
-              <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(179,146,57,0.18)] hover:scale-105 transition-transform">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-[#987625] flex items-center justify-center text-white shadow-sm shrink-0">
+              <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-[#1A081C]/90 backdrop-blur-xl border border-brand-gold/35 shadow-[0_12px_32px_rgba(0,0,0,0.6)] hover:scale-105 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-[#987625] flex items-center justify-center text-brand-deep shadow-sm shrink-0">
                   <Star size={18} />
                 </div>
                 <div className="flex flex-col text-left">
-                  <strong className="font-display font-serif text-base sm:text-lg font-bold text-brand-gold leading-tight">
+                  <strong className="font-display font-serif text-base sm:text-lg font-bold gold-text-gradient leading-tight">
                     20+ Years
                   </strong>
-                  <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 whitespace-nowrap leading-tight">
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-white/75 whitespace-nowrap leading-tight">
                     Experience
                   </span>
                 </div>
@@ -688,7 +688,7 @@ function HeroSection({ isAnimated, animKey }) {
 
             {/* Floating Stat Badge 3: Personalized Mentorship (Bottom Right) */}
             <div className="absolute -bottom-4 sm:-bottom-6 -right-3 sm:-right-6 z-20 animate-float">
-              <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(110,137,52,0.18)] hover:scale-105 transition-transform">
+              <div className="flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-[#1A081C]/90 backdrop-blur-xl border border-brand-gold/35 shadow-[0_12px_32px_rgba(0,0,0,0.6)] hover:scale-105 transition-transform">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-olive to-[#556d25] flex items-center justify-center text-white shadow-sm shrink-0">
                   <Sparkles size={18} />
                 </div>
@@ -696,7 +696,7 @@ function HeroSection({ isAnimated, animKey }) {
                   <strong className="font-display font-serif text-base sm:text-lg font-bold text-brand-olive leading-tight">
                     Personalized
                   </strong>
-                  <span className="text-[10px] sm:text-[11px] font-semibold text-brand-ink/80 whitespace-nowrap leading-tight">
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-white/75 whitespace-nowrap leading-tight">
                     Mentorship
                   </span>
                 </div>
@@ -709,31 +709,31 @@ function HeroSection({ isAnimated, animKey }) {
   );
 }
 
-// 2. CONSEN IT SOLUTION 02 "OUR FEATURES" STRIP (Style 6 Cards)
+// 2. EXECUTIVE MASTERCLASS "OUR FEATURES" STRIP (Dark Obsidian Glass Cards)
 function FeatureHighlightStrip() {
   return (
-    <section className="relative z-20 pt-10 sm:pt-14 pb-16 px-4 sm:px-8 lg:px-14">
+    <section className="relative z-20 pt-10 sm:pt-14 pb-16 px-4 sm:px-8 lg:px-14 bg-[#120614]">
       <div className="w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {/* Feature 1 */}
-          <div className="relative overflow-hidden h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating hover:border-brand-olive/60 transition-all duration-300 flex flex-col justify-between group">
+          <div className="relative overflow-hidden h-full rounded-3xl bg-[#1B091E]/80 backdrop-blur-md p-8 border border-brand-gold/25 shadow-2xl hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-brand-gold/60 transition-all duration-300 flex flex-col justify-between group">
             {/* Subtle Animated Hover Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.06] via-brand-olive/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            <div className="absolute top-0 left-0 right-0 h-1 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.08] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold to-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
             <div className="relative z-10 flex flex-col items-start">
-              <div className="w-14 h-14 rounded-2xl bg-brand-olive/15 text-brand-olive flex items-center justify-center mb-5 group-hover:bg-brand-olive group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300 shrink-0">
+              <div className="w-14 h-14 rounded-2xl bg-brand-olive/20 text-brand-olive border border-brand-olive/30 flex items-center justify-center mb-5 group-hover:bg-brand-olive group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300 shrink-0">
                 <Presentation size={26} strokeWidth={2.2} />
               </div>
-              <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
+              <h3 className="font-display font-serif text-2xl font-bold text-white leading-snug">
                 Classroom & Live Online
               </h3>
-              <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
+              <p className="mt-3 text-sm font-medium leading-relaxed text-white/75">
                 Interactive speaking sessions conducted at Marathahalli, Bangalore, plus interactive live online sessions globally.
               </p>
             </div>
             <div className="relative z-10 mt-6 pt-2">
-              <a href="#programs" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-olive group-hover:text-brand-purple transition-colors">
+              <a href="#programs" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-gold group-hover:text-white transition-colors">
                 <span>Explore Options</span>
                 <ChevronRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
               </a>
@@ -741,24 +741,24 @@ function FeatureHighlightStrip() {
           </div>
 
           {/* Feature 2 */}
-          <div className="relative overflow-hidden h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating hover:border-brand-gold/70 transition-all duration-300 flex flex-col justify-between group">
+          <div className="relative overflow-hidden h-full rounded-3xl bg-[#1B091E]/80 backdrop-blur-md p-8 border border-brand-gold/25 shadow-2xl hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-brand-gold/60 transition-all duration-300 flex flex-col justify-between group">
             {/* Subtle Animated Hover Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.07] via-brand-gold/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            <div className="absolute top-0 left-0 right-0 h-1 bg-brand-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.08] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold to-[#987625] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
             <div className="relative z-10 flex flex-col items-start">
-              <div className="w-14 h-14 rounded-2xl bg-brand-gold/20 text-brand-gold flex items-center justify-center mb-5 group-hover:bg-brand-gold group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300 shrink-0">
+              <div className="w-14 h-14 rounded-2xl bg-brand-gold/20 text-brand-gold border border-brand-gold/30 flex items-center justify-center mb-5 group-hover:bg-gradient-to-r group-hover:from-brand-gold group-hover:to-[#987625] group-hover:text-brand-deep group-hover:scale-110 group-hover:shadow-md transition-all duration-300 shrink-0">
                 <Award size={26} strokeWidth={2.2} />
               </div>
-              <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
+              <h3 className="font-display font-serif text-2xl font-bold text-white leading-snug">
                 20+ Years of Mentorship
               </h3>
-              <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
+              <p className="mt-3 text-sm font-medium leading-relaxed text-white/75">
                 Guided directly by DTM Jothi, Master VoiceCraft Coach with structured speech frameworks and individualized feedback.
               </p>
             </div>
             <div className="relative z-10 mt-6 pt-2">
-              <a href="#about" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-gold group-hover:text-brand-purple transition-colors">
+              <a href="#about" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-gold group-hover:text-white transition-colors">
                 <span>Meet Founder</span>
                 <ChevronRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
               </a>
@@ -766,24 +766,24 @@ function FeatureHighlightStrip() {
           </div>
 
           {/* Feature 3 */}
-          <div className="relative overflow-hidden h-full rounded-3xl bg-white p-8 border border-[#eadfcd] shadow-card hover:-translate-y-2 hover:shadow-floating hover:border-brand-purple/60 transition-all duration-300 flex flex-col justify-between group">
+          <div className="relative overflow-hidden h-full rounded-3xl bg-[#1B091E]/80 backdrop-blur-md p-8 border border-brand-gold/25 shadow-2xl hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-brand-gold/60 transition-all duration-300 flex flex-col justify-between group">
             {/* Subtle Animated Hover Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-brand-purple/[0.06] via-brand-purple/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            <div className="absolute top-0 left-0 right-0 h-1 bg-brand-purple transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#7A2880]/[0.1] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold to-brand-purple transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
             <div className="relative z-10 flex flex-col items-start">
-              <div className="w-14 h-14 rounded-2xl bg-brand-purple/15 text-brand-purple flex items-center justify-center mb-5 group-hover:bg-brand-purple group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300 shrink-0">
+              <div className="w-14 h-14 rounded-2xl bg-brand-purple/30 text-brand-gold border border-brand-gold/30 flex items-center justify-center mb-5 group-hover:bg-brand-gold group-hover:text-brand-deep group-hover:scale-110 group-hover:shadow-md transition-all duration-300 shrink-0">
                 <Globe size={26} strokeWidth={2.2} />
               </div>
-              <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
+              <h3 className="font-display font-serif text-2xl font-bold text-white leading-snug">
                 Global Student Community
               </h3>
-              <p className="mt-3 text-sm font-medium leading-relaxed text-brand-ink/80">
+              <p className="mt-3 text-sm font-medium leading-relaxed text-white/75">
                 Proud learners across India, Bahrain, and overseas achieving speaking confidence, clarity, and top exam scores.
               </p>
             </div>
             <div className="relative z-10 mt-6 pt-2">
-              <a href="#testimonials" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-purple group-hover:text-brand-gold transition-colors">
+              <a href="#testimonials" className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-gold group-hover:text-white transition-colors">
                 <span>Read Stories</span>
                 <ChevronRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
               </a>
@@ -795,12 +795,12 @@ function FeatureHighlightStrip() {
   );
 }
 
-// 3. ABOUT US SECTION (Consen IT Solution 02 Style: DTM Jothi Portrait + Bio + Credentials + Quote)
+// 3. ABOUT US SECTION (Executive Masterclass Style: DTM Jothi Portrait + Bio + Credentials + Quote)
 function About({ isAnimated, animKey, onSelectProgram }) {
   return (
     <section
       id="about"
-      className="scroll-mt-28 bg-white px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-gradient-to-b from-[#180B1A] to-[#120614] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-brand-gold/15"
     >
       <div
         key={`about-${animKey}`}
@@ -808,7 +808,7 @@ function About({ isAnimated, animKey, onSelectProgram }) {
       >
         {/* Left Column: Framed DTM Jothi Portrait + Badges */}
         <div className={`mx-auto w-full max-w-[400px] flex flex-col items-center text-center ${isAnimated ? "section-card-enter" : ""}`}>
-          <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[34px] border-4 border-white bg-gradient-to-b from-white to-[#F5EFE6] shadow-xl">
+          <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[34px] border-2 border-brand-gold/40 bg-[#1D0A20] shadow-2xl">
             <img
               src={authorpic}
               alt="DTM Jothi from VoiceCraft"
@@ -816,17 +816,17 @@ function About({ isAnimated, animKey, onSelectProgram }) {
             />
             {/* Experience Pill Badge */}
             <div className="absolute top-4 left-4 z-10">
-              <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-brand-deep/90 backdrop-blur-md text-white text-xs font-bold shadow-md border border-white/20">
+              <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#120614]/90 backdrop-blur-md text-white text-xs font-bold shadow-md border border-brand-gold/40">
                 <Award size={14} className="text-brand-gold" />
                 20+ Years Mentorship
               </span>
             </div>
           </div>
 
-          <blockquote className="mt-5 font-serif text-xl font-semibold italic text-brand-olive sm:text-2xl">
+          <blockquote className="mt-5 font-serif text-xl font-semibold italic text-brand-gold sm:text-2xl">
             “Reading is rewarding”
           </blockquote>
-          <p className="mt-1 font-display font-serif text-3xl sm:text-4xl font-bold text-brand-purple">
+          <p className="mt-1 font-display font-serif text-3xl sm:text-4xl font-bold text-white">
             DTM Jothi
           </p>
           <span className="text-xs font-bold text-brand-gold uppercase tracking-wider mt-1">
@@ -834,19 +834,19 @@ function About({ isAnimated, animKey, onSelectProgram }) {
           </span>
         </div>
 
-        {/* Right Column: Consen 02 Content & Checklist */}
+        {/* Right Column: Masterclass Content & Checklist */}
         <div className={isAnimated ? "section-text-enter" : ""}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-extrabold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs font-extrabold uppercase tracking-wider mb-4">
             <span>ABOUT THE FOUNDER & MASTER COACH</span>
           </div>
 
-          <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-brand-purple">
+          <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white">
             Fastest Pathway Reaching <br className="hidden sm:inline" />Communication Mastery
           </h2>
 
           <div className="mt-4 h-1 w-20 rounded-full bg-brand-gold" />
 
-          <p className="mt-6 text-base sm:text-lg font-medium leading-relaxed text-brand-ink/90">
+          <p className="mt-6 text-base sm:text-lg font-medium leading-relaxed text-white/85">
             Founded and led by DTM Jothi, VoiceCraft is dedicated to empowering
             individuals to speak with clarity, confidence, and impact. With
             decades of experience in mentoring speakers and language learners,
@@ -854,53 +854,53 @@ function About({ isAnimated, animKey, onSelectProgram }) {
             effectively at every stage of life.
           </p>
 
-          {/* Consen 02 Checkmark Features (style10) */}
+          {/* Masterclass Checkmark Features */}
           <div className="mt-8 grid sm:grid-cols-2 gap-4">
-            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream/70 hover:bg-white border border-[#eadfcd] hover:border-brand-olive/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-              <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              <div className="relative z-10 w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
+            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-[#1E0A22]/70 hover:bg-[#280E2D]/80 border border-brand-gold/20 hover:border-brand-gold/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <div className="relative z-10 w-7 h-7 rounded-full bg-gradient-to-br from-brand-gold to-[#987625] text-brand-deep flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300 font-bold">
                 <Check size={14} strokeWidth={3} />
               </div>
               <div className="relative z-10">
-                <strong className="block text-sm font-bold text-brand-purple">Structured Curriculum</strong>
-                <p className="text-xs text-brand-ink/80 mt-0.5">Engaging frameworks tailored to each learner's age and goals.</p>
+                <strong className="block text-sm font-bold text-white">Structured Curriculum</strong>
+                <p className="text-xs text-white/70 mt-0.5">Engaging frameworks tailored to each learner's age and goals.</p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream/70 hover:bg-white border border-[#eadfcd] hover:border-brand-olive/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-              <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              <div className="relative z-10 w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
+            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-[#1E0A22]/70 hover:bg-[#280E2D]/80 border border-brand-gold/20 hover:border-brand-gold/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <div className="relative z-10 w-7 h-7 rounded-full bg-gradient-to-br from-brand-gold to-[#987625] text-brand-deep flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300 font-bold">
                 <Check size={14} strokeWidth={3} />
               </div>
               <div className="relative z-10">
-                <strong className="block text-sm font-bold text-brand-purple">Fear-Free Environment</strong>
-                <p className="text-xs text-brand-ink/80 mt-0.5">A safe, encouraging space to practice without hesitation.</p>
+                <strong className="block text-sm font-bold text-white">Fear-Free Environment</strong>
+                <p className="text-xs text-white/70 mt-0.5">A safe, encouraging space to practice without hesitation.</p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream/70 hover:bg-white border border-[#eadfcd] hover:border-brand-olive/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-              <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              <div className="relative z-10 w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
+            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-[#1E0A22]/70 hover:bg-[#280E2D]/80 border border-brand-gold/20 hover:border-brand-gold/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <div className="relative z-10 w-7 h-7 rounded-full bg-gradient-to-br from-brand-gold to-[#987625] text-brand-deep flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300 font-bold">
                 <Check size={14} strokeWidth={3} />
               </div>
               <div className="relative z-10">
-                <strong className="block text-sm font-bold text-brand-purple">Personalized Mentorship</strong>
-                <p className="text-xs text-brand-ink/80 mt-0.5">Direct guidance and evaluation from DTM Jothi herself.</p>
+                <strong className="block text-sm font-bold text-white">Personalized Mentorship</strong>
+                <p className="text-xs text-white/70 mt-0.5">Direct guidance and evaluation from DTM Jothi herself.</p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-brand-cream/70 hover:bg-white border border-[#eadfcd] hover:border-brand-olive/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-              <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              <div className="relative z-10 w-7 h-7 rounded-full bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
+            <div className="relative overflow-hidden group flex items-start gap-3.5 p-4 rounded-2xl bg-[#1E0A22]/70 hover:bg-[#280E2D]/80 border border-brand-gold/20 hover:border-brand-gold/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <div className="relative z-10 w-7 h-7 rounded-full bg-gradient-to-br from-brand-gold to-[#987625] text-brand-deep flex items-center justify-center shrink-0 mt-0.5 shadow-sm group-hover:scale-110 transition-transform duration-300 font-bold">
                 <Check size={14} strokeWidth={3} />
               </div>
               <div className="relative z-10">
-                <strong className="block text-sm font-bold text-brand-purple">Real-World Exercises</strong>
-                <p className="text-xs text-brand-ink/80 mt-0.5">Practical speeches, debates, workplace meetings, and mocks.</p>
+                <strong className="block text-sm font-bold text-white">Real-World Exercises</strong>
+                <p className="text-xs text-white/70 mt-0.5">Practical speeches, debates, workplace meetings, and mocks.</p>
               </div>
             </div>
           </div>
@@ -929,7 +929,7 @@ function About({ isAnimated, animKey, onSelectProgram }) {
   );
 }
 
-// 4. "WHAT WE DO" / OUR PROGRAMS SECTION (Consen IT Solution 02 Style 7 Program Grid)
+// 4. "WHAT WE DO" / OUR PROGRAMS SECTION (Executive Masterclass Bento Program Grid)
 function ProgramsSection({
   selectedCourse,
   setSelectedCourse,
@@ -960,7 +960,7 @@ function ProgramsSection({
   return (
     <section
       id="programs"
-      className="scroll-mt-28 bg-[#FAF9F6] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-[#120614] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-brand-gold/15"
     >
       <div key={`programs-${animKey}`} className="w-full max-w-7xl mx-auto">
         <SectionHeading
@@ -968,7 +968,7 @@ function ProgramsSection({
           title="Tailored Programs for Every Communicator"
           isAnimated={isAnimated}
         />
-        <p className="text-center text-sm sm:text-base font-medium text-brand-ink/80 max-w-2xl mx-auto -mt-2 mb-10">
+        <p className="text-center text-sm sm:text-base font-medium text-white/75 max-w-2xl mx-auto -mt-2 mb-10">
           Structured courses designed for students, working professionals, and language enthusiasts.
         </p>
 
@@ -987,8 +987,8 @@ function ProgramsSection({
               onClick={() => setActiveCategory(cat.value)}
               className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm ${
                 activeCategory === cat.value
-                  ? "bg-brand-purple text-white shadow-md scale-105"
-                  : "bg-white text-brand-ink/80 border border-[#eadfcd] hover:bg-brand-cream hover:text-brand-purple"
+                  ? "bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-gold text-brand-deep font-bold shadow-md scale-105"
+                  : "bg-[#1D0A20] text-white/80 border border-brand-gold/25 hover:border-brand-gold/60 hover:text-white"
               }`}
             >
               {cat.label}
@@ -996,7 +996,7 @@ function ProgramsSection({
           ))}
         </div>
 
-        {/* Consen IT Solution 02 Style 7 Spacious 2x2 Bento Program Cards */}
+        {/* Executive Masterclass Bento Program Cards */}
         <div className={`grid gap-8 md:grid-cols-2 ${isAnimated ? "section-card-enter" : ""}`}>
           {filteredPrograms.map((program) => (
             <ConsenProgramCard
@@ -1031,22 +1031,22 @@ function ConsenProgramCard({ program, isActive, onLearnMore }) {
 
   return (
     <article
-      className={`relative overflow-hidden group flex flex-col justify-between rounded-[32px] border bg-white p-7 sm:p-9 shadow-card hover:-translate-y-2 hover:shadow-floating hover:border-brand-olive/60 transition-all duration-300 ${
+      className={`relative overflow-hidden group flex flex-col justify-between rounded-[32px] border bg-[#1B091E]/90 p-7 sm:p-9 shadow-2xl hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-brand-gold/60 transition-all duration-300 ${
         isActive
-          ? "border-brand-olive ring-2 ring-brand-olive/30 shadow-lg"
-          : "border-[#eadfcd]"
+          ? "border-brand-gold ring-2 ring-brand-gold/40 shadow-lg"
+          : "border-brand-gold/25"
       }`}
     >
       {/* Subtle Animated Hover Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.05] via-brand-olive/[0.01] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-1 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.06] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold to-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
       {/* Top Meta Bar with Number Tag */}
-      <div className="relative z-10 flex items-center justify-between pb-5 border-b border-[#eadfcd]/60">
-        <span className="text-xs font-extrabold uppercase tracking-wider text-brand-olive">
+      <div className="relative z-10 flex items-center justify-between pb-5 border-b border-brand-gold/20">
+        <span className="text-xs font-extrabold uppercase tracking-wider text-brand-gold">
           {subtitle}
         </span>
-        <span className="font-display font-serif text-2xl font-bold text-brand-purple/20 group-hover:text-brand-olive/40 transition-colors">
+        <span className="font-display font-serif text-2xl font-bold text-brand-gold/30 group-hover:text-brand-gold/70 transition-colors">
           {number}
         </span>
       </div>
@@ -1054,7 +1054,7 @@ function ConsenProgramCard({ program, isActive, onLearnMore }) {
       {/* Main Content Area: Split Logo + Info */}
       <div className="relative z-10 mt-6 flex flex-col sm:flex-row items-start gap-6">
         {/* Logo Container */}
-        <div className="grid h-[100px] w-[150px] shrink-0 place-items-center rounded-2xl bg-brand-cream/80 p-3 border border-[#eadfcd]/70 shadow-sm group-hover:scale-105 group-hover:shadow-md transition-all duration-300">
+        <div className="grid h-[100px] w-[150px] shrink-0 place-items-center rounded-2xl bg-white p-3 border border-brand-gold/30 shadow-md group-hover:scale-105 group-hover:shadow-lg transition-all duration-300">
           <img
             src={iconImage}
             alt={title}
@@ -1064,20 +1064,20 @@ function ConsenProgramCard({ program, isActive, onLearnMore }) {
 
         {/* Title & Description */}
         <div className="flex-1">
-          <h3 className="font-display font-serif text-2xl font-bold text-brand-purple leading-snug">
+          <h3 className="font-display font-serif text-2xl font-bold text-white leading-snug">
             {title}
           </h3>
-          <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-brand-ink/80">
+          <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-white/75">
             {description}
           </p>
         </div>
       </div>
 
       {/* Core Syllabus Checklist */}
-      <div className="relative z-10 mt-6 grid sm:grid-cols-2 gap-2.5 py-4 border-y border-[#eadfcd]/60">
+      <div className="relative z-10 mt-6 grid sm:grid-cols-2 gap-2.5 py-4 border-y border-brand-gold/20">
         {highlights.map((item, i) => (
-          <div key={i} className="flex items-center gap-2 text-xs font-semibold text-brand-ink/85">
-            <CheckCircle2 size={14} className="text-brand-olive shrink-0" />
+          <div key={i} className="flex items-center gap-2 text-xs font-semibold text-white/85">
+            <CheckCircle2 size={14} className="text-brand-gold shrink-0" />
             <span>{item}</span>
           </div>
         ))}
@@ -1085,8 +1085,8 @@ function ConsenProgramCard({ program, isActive, onLearnMore }) {
 
       {/* Format strip & Action Button */}
       <div className="relative z-10 mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="text-[11px] text-brand-ink/70">
-          <span className="font-bold text-brand-purple">Format: </span>
+        <div className="text-[11px] text-white/70">
+          <span className="font-bold text-brand-gold">Format: </span>
           <span>{duration}</span>
         </div>
 
@@ -1097,7 +1097,7 @@ function ConsenProgramCard({ program, isActive, onLearnMore }) {
           className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm shrink-0 ${
             isActive
               ? "bg-brand-olive text-white hover:bg-[#5e6b26]"
-              : "bg-brand-purple text-white hover:bg-brand-deep hover:scale-105"
+              : "bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-gold text-brand-deep font-bold hover:brightness-105 hover:scale-105"
           }`}
         >
           <span>{isActive ? "Viewing Syllabus" : "View Details & Syllabus"}</span>
@@ -1115,13 +1115,13 @@ function CourseDetailPanel({ panelRef, title, iconImage, details, onClose }) {
   return (
     <article
       ref={panelRef}
-      className="mt-12 overflow-hidden rounded-3xl border border-[#d8cc8b] bg-white shadow-2xl transition-all"
+      className="mt-12 overflow-hidden rounded-3xl border border-brand-gold/35 bg-[#1B091E] shadow-2xl transition-all"
     >
       <div className="grid gap-0 lg:grid-cols-[0.95fr_1.4fr]">
-        <div className="relative overflow-hidden bg-brand-deep px-6 py-8 text-white md:px-10 md:py-10 flex flex-col justify-between">
+        <div className="relative overflow-hidden bg-[#280E2D] px-6 py-8 text-white md:px-10 md:py-10 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-brand-gold/20">
           <div>
             <div className="flex items-center justify-between">
-              <div className="grid h-[100px] w-[180px] place-items-center overflow-hidden rounded-2xl bg-white p-3 shadow-md">
+              <div className="grid h-[100px] w-[180px] place-items-center overflow-hidden rounded-2xl bg-white p-3 shadow-md border border-brand-gold/30">
                 {iconImage ? (
                   <img
                     src={iconImage}
@@ -1133,7 +1133,7 @@ function CourseDetailPanel({ panelRef, title, iconImage, details, onClose }) {
               <button
                 type="button"
                 onClick={onClose}
-                className="text-white/70 hover:text-white text-xs font-bold underline cursor-pointer"
+                className="text-brand-gold hover:text-white text-xs font-bold underline cursor-pointer"
               >
                 Close Syllabus
               </button>
@@ -1158,14 +1158,14 @@ function CourseDetailPanel({ panelRef, title, iconImage, details, onClose }) {
             ))}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-white/15">
+          <div className="mt-8 pt-6 border-t border-brand-gold/20">
             <p className="text-xs text-brand-gold font-semibold">
               Master Mentorship by DTM Jothi
             </p>
           </div>
         </div>
 
-        <div className="bg-[#FFFDF9] p-6 md:p-10 flex flex-col justify-between">
+        <div className="bg-[#180B1A] p-6 md:p-10 flex flex-col justify-between text-white">
           <div>
             <div className="grid gap-6 md:grid-cols-2">
               <DetailList title="What you will learn" items={details.covers} />
@@ -1177,7 +1177,7 @@ function CourseDetailPanel({ panelRef, title, iconImage, details, onClose }) {
                 type="button"
                 aria-expanded={isMoreDetailsOpen}
                 onClick={() => setIsMoreDetailsOpen((open) => !open)}
-                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-brand-olive bg-white px-6 py-2.5 text-xs font-bold text-brand-olive shadow-sm transition hover:bg-brand-cream cursor-pointer"
+                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-brand-gold/50 bg-[#1D0A20] px-6 py-2.5 text-xs font-bold text-brand-gold shadow-sm transition hover:bg-brand-gold hover:text-brand-deep cursor-pointer"
               >
                 <span>{isMoreDetailsOpen ? "Hide Advanced Details" : "View Full Course Structure & Options"}</span>
                 <ChevronRight
@@ -1195,18 +1195,18 @@ function CourseDetailPanel({ panelRef, title, iconImage, details, onClose }) {
             ) : null}
           </div>
 
-          <div className="mt-8 rounded-2xl border border-[#eadfcd] bg-white p-5 shadow-sm">
-            <p className="text-xs sm:text-sm font-medium leading-relaxed text-brand-ink">
-              <strong className="text-brand-olive">Best for:</strong>{" "}
+          <div className="mt-8 rounded-2xl border border-brand-gold/25 bg-[#210922] p-5 shadow-sm">
+            <p className="text-xs sm:text-sm font-medium leading-relaxed text-white/85">
+              <strong className="text-brand-gold">Best for:</strong>{" "}
               {details.bestFor}
             </p>
-            <div className="mt-4 flex flex-col gap-3 border-t border-[#eadfcd] pt-4 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm font-bold text-brand-purple">
+            <div className="mt-4 flex flex-col gap-3 border-t border-brand-gold/20 pt-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm font-bold text-white">
                 Enroll or book a trial class today.
               </p>
               <a
                 href="#enquiry"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-purple px-6 py-3 text-xs font-bold text-white shadow-md hover:bg-brand-deep transition-colors shrink-0"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-gold px-6 py-3 text-xs font-bold text-brand-deep shadow-md hover:brightness-105 transition-all shrink-0"
               >
                 <span>Enquire For This Program</span>
                 <ChevronRight size={16} strokeWidth={3} />
@@ -1221,21 +1221,21 @@ function CourseDetailPanel({ panelRef, title, iconImage, details, onClose }) {
 
 function MoreDetails({ details }) {
   return (
-    <div className="mb-6 rounded-2xl border border-[#eadfcd] bg-white p-6 shadow-sm">
-      <h4 className="font-display font-serif text-xl font-bold text-brand-purple mb-4">
+    <div className="mb-6 rounded-2xl border border-brand-gold/25 bg-[#210922] p-6 shadow-sm">
+      <h4 className="font-display font-serif text-xl font-bold text-white mb-4">
         Course Structure & Modules
       </h4>
       <div className="grid gap-5">
         {details.map((section, idx) => (
           <section key={idx}>
-            <h5 className="text-sm font-bold text-brand-olive">
+            <h5 className="text-sm font-bold text-brand-gold">
               {section.title}
             </h5>
             <div className="mt-2 grid gap-2">
               {section.paragraphs?.map((paragraph, pIdx) => (
                 <p
                   key={pIdx}
-                  className="text-xs sm:text-sm font-medium leading-relaxed text-brand-ink"
+                  className="text-xs sm:text-sm font-medium leading-relaxed text-white/80"
                 >
                   {paragraph}
                 </p>
@@ -1258,7 +1258,7 @@ function MoreDetails({ details }) {
 function DetailList({ title, items }) {
   return (
     <div>
-      <h4 className="text-sm font-bold text-brand-purple mb-3">{title}</h4>
+      <h4 className="text-sm font-bold text-brand-gold mb-3">{title}</h4>
       <ul className="grid gap-2">
         {items.map((item, idx) => (
           <CoursePoint key={idx}>{item}</CoursePoint>
@@ -1270,24 +1270,24 @@ function DetailList({ title, items }) {
 
 function CoursePoint({ children }) {
   return (
-    <li className="flex items-start gap-2.5 text-xs sm:text-sm font-medium leading-relaxed text-brand-ink">
-      <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-olive" />
+    <li className="flex items-start gap-2.5 text-xs sm:text-sm font-medium leading-relaxed text-white/85">
+      <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-gold" />
       <span>{children}</span>
     </li>
   );
 }
 
-// 5. CALL TO ACTION STRIP (Consen IT Solution 02 "Need Service?" Style)
+// 5. CALL TO ACTION STRIP (Executive Masterclass Luxury Banner)
 function CallToActionStrip() {
   return (
-    <section className="bg-brand-deep py-14 lg:py-16 px-4 sm:px-8 lg:px-14 border-t border-brand-purple/30 text-white relative overflow-hidden">
+    <section className="bg-gradient-to-r from-[#210922] via-[#350E38] to-[#210922] py-14 lg:py-16 px-4 sm:px-8 lg:px-14 border-t border-brand-gold/30 text-white relative overflow-hidden">
       {/* Decorative ambient background glows */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-brand-purple/40 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-brand-gold/20 blur-3xl pointer-events-none" />
+      <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#7A2880]/30 blur-3xl pointer-events-none liquid-orb-purple" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-brand-gold/20 blur-3xl pointer-events-none liquid-orb-gold" />
 
       <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
         <div className="text-center lg:text-left max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-brand-gold text-xs font-bold uppercase tracking-wider mb-3 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-brand-gold/30 text-brand-gold text-xs font-bold uppercase tracking-wider mb-3 shadow-sm backdrop-blur-md">
             <Sparkles size={13} className="text-brand-gold" />
             <span>READY TO TRANSFORM YOUR VOICE?</span>
           </div>
@@ -1302,7 +1302,7 @@ function CallToActionStrip() {
         <div className="flex flex-wrap items-center justify-center gap-4 shrink-0">
           <Button
             href="#enquiry"
-            variant="gold"
+            variant="primary"
             size="lg"
             className="rounded-full shadow-lg hover:scale-105 transition-all"
           >
@@ -1312,7 +1312,7 @@ function CallToActionStrip() {
             href="https://wa.me/919919911027"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/30 hover:border-white text-white font-bold text-xs transition-all hover:bg-white/10"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-brand-gold/40 hover:border-brand-gold text-white font-bold text-xs transition-all hover:bg-white/10"
           >
             <MessageCircle size={16} />
             <span>Chat on WhatsApp</span>
@@ -1323,7 +1323,7 @@ function CallToActionStrip() {
   );
 }
 
-// 6. WHY CHOOSE SECTION (Consen IT Solution 02 Split Masterclass Pattern)
+// 6. WHY CHOOSE SECTION (Executive Masterclass Split Pattern)
 function WhyChooseSection({ isAnimated, animKey }) {
   const benefits = [
     {
@@ -1359,39 +1359,39 @@ function WhyChooseSection({ isAnimated, animKey }) {
   ];
 
   return (
-    <section id="why-us" className="scroll-mt-28 bg-white px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]">
+    <section id="why-us" className="scroll-mt-28 bg-gradient-to-b from-[#120614] to-[#180B1A] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-brand-gold/15 text-white">
       <div key={`why-${animKey}`} className="w-full max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-14 items-start">
           {/* Left Column: Master Coach Quote & Rating Banner */}
           <div className="flex flex-col items-start">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-olive/15 text-brand-olive text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs font-bold uppercase tracking-wider mb-4">
               <span>✦ THE VOICECRAFT ADVANTAGE</span>
             </div>
 
-            <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-brand-purple">
+            <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white">
               Why Choose <br />VoiceCraft Academy?
             </h2>
 
             <div className="mt-4 h-1.5 w-20 rounded-full bg-brand-gold" />
 
             {/* Quote Card */}
-            <blockquote className="mt-6 p-6 rounded-3xl bg-brand-cream border border-[#eadfcd] text-brand-ink/90 font-serif italic text-base leading-relaxed">
+            <blockquote className="mt-6 p-6 rounded-3xl bg-[#1E0A22]/90 border border-brand-gold/25 text-white/90 font-serif italic text-base leading-relaxed">
               “Language learning should fit the learner's needs rather than being the other way around. We build for every learner a bespoke learning pathway that fits their goals.”
-              <span className="block not-italic font-sans text-xs font-bold text-brand-purple mt-3">
+              <span className="block not-italic font-sans text-xs font-bold text-brand-gold mt-3">
                 — DTM Jothi • Founder & Master Coach
               </span>
             </blockquote>
 
             {/* Rating Stat Card */}
-            <div className="mt-6 w-full p-5 rounded-3xl bg-[#FAF6EE] border border-[#eadfcd] flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-brand-gold/20 flex items-center justify-center text-brand-gold shrink-0">
+            <div className="mt-6 w-full p-5 rounded-3xl bg-[#1E0A22]/90 border border-brand-gold/25 flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-brand-gold/20 border border-brand-gold/30 flex items-center justify-center text-brand-gold shrink-0">
                 <Star size={24} className="fill-brand-gold" />
               </div>
               <div>
-                <strong className="block text-base font-bold text-brand-purple">
+                <strong className="block text-base font-bold text-white">
                   4.9 / 5.0 Star Rating
                 </strong>
-                <span className="text-xs font-semibold text-brand-ink/75">
+                <span className="text-xs font-semibold text-white/75">
                   Over 150+ verified student success reviews
                 </span>
               </div>
@@ -1416,20 +1416,20 @@ function WhyChooseSection({ isAnimated, animKey }) {
               return (
                 <article
                   key={benefit.title}
-                  className="relative overflow-hidden flex flex-col items-start rounded-3xl border border-[#eadfcd] bg-white p-6 shadow-sm hover:shadow-floating hover:-translate-y-2 hover:border-brand-purple/50 transition-all duration-300 group"
+                  className="relative overflow-hidden flex flex-col items-start rounded-3xl border border-brand-gold/25 bg-[#1B091E]/90 p-6 shadow-2xl hover:shadow-[0_16px_40px_rgba(0,0,0,0.6)] hover:-translate-y-2 hover:border-brand-gold/60 transition-all duration-300 group"
                 >
                   {/* Subtle Animated Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-brand-purple/[0.06] via-brand-purple/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-brand-purple transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.06] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold to-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
                   <div className="relative z-10 w-full">
-                    <div className="w-12 h-12 rounded-2xl bg-brand-purple/10 text-brand-purple flex items-center justify-center mb-4 group-hover:bg-brand-purple group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
+                    <div className="w-12 h-12 rounded-2xl bg-brand-gold/15 text-brand-gold border border-brand-gold/30 flex items-center justify-center mb-4 group-hover:bg-brand-gold group-hover:text-brand-deep group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
                       <Icon size={22} strokeWidth={2.2} />
                     </div>
-                    <h3 className="font-display font-serif text-xl font-bold text-brand-purple">
+                    <h3 className="font-display font-serif text-xl font-bold text-white">
                       {benefit.title}
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-brand-ink/80">
+                    <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-white/75">
                       {benefit.description}
                     </p>
                   </div>
@@ -1443,7 +1443,7 @@ function WhyChooseSection({ isAnimated, animKey }) {
   );
 }
 
-// 7. COUNTER STRIP (Consen Metrics Banner)
+// 7. COUNTER STRIP (Executive Masterclass Metrics Banner)
 function CounterStrip() {
   const metrics = [
     { value: "1000+", label: "Students Trained", icon: Users },
@@ -1453,16 +1453,16 @@ function CounterStrip() {
   ];
 
   return (
-    <section className="bg-brand-deep py-14 px-4 sm:px-8 lg:px-14 border-t border-brand-purple/30 text-white relative overflow-hidden">
+    <section className="bg-[#0A020C] py-14 px-4 sm:px-8 lg:px-14 border-y border-brand-gold/20 text-white relative overflow-hidden">
       <div className="w-full max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative z-10">
         {metrics.map((item, idx) => {
           const Icon = item.icon;
           return (
             <div key={idx} className="flex flex-col items-center">
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-brand-gold mb-3">
+              <div className="w-12 h-12 rounded-full bg-white/5 border border-brand-gold/30 flex items-center justify-center text-brand-gold mb-3">
                 <Icon size={22} />
               </div>
-              <strong className="font-display font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-gold">
+              <strong className="font-display font-serif text-3xl sm:text-4xl lg:text-5xl font-bold gold-text-gradient">
                 {item.value}
               </strong>
               <span className="mt-2 text-xs sm:text-sm font-semibold text-white/80">
@@ -1476,12 +1476,12 @@ function CounterStrip() {
   );
 }
 
-// 8. TESTIMONIALS SECTION (Consen IT Solution 02 Style 3)
+// 8. TESTIMONIALS SECTION (Executive Masterclass Reviews)
 function Testimonials({ isAnimated, animKey }) {
   return (
     <section
       id="testimonials"
-      className="scroll-mt-28 bg-[#FAF9F6] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-[#120614] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-brand-gold/15 text-white"
     >
       <div key={`testi-${animKey}`} className="w-full max-w-7xl mx-auto">
         <SectionHeading
@@ -1509,10 +1509,10 @@ function TestimonialCard({ quote, name }) {
     .toUpperCase();
 
   return (
-    <figure className="relative overflow-hidden flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-8 shadow-card hover:-translate-y-2 hover:shadow-floating hover:border-brand-gold/60 transition-all duration-300 group">
+    <figure className="relative overflow-hidden flex flex-col justify-between rounded-3xl border border-brand-gold/25 bg-[#1B091E]/90 p-8 shadow-2xl hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-brand-gold/60 transition-all duration-300 group">
       {/* Subtle Animated Hover Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.06] via-brand-gold/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-1 bg-brand-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.06] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold to-[#987625] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
       <div className="relative z-10">
         <div className="flex gap-1 mb-4" aria-label="5 star rating">
@@ -1523,15 +1523,15 @@ function TestimonialCard({ quote, name }) {
             />
           ))}
         </div>
-        <blockquote className="font-serif italic text-sm sm:text-base font-medium leading-relaxed text-brand-ink/90">
+        <blockquote className="font-serif italic text-sm sm:text-base font-medium leading-relaxed text-white/85">
           "{quote}"
         </blockquote>
       </div>
-      <figcaption className="relative z-10 mt-6 flex items-center gap-3.5 pt-4 border-t border-brand-purple/10">
-        <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-purple/10 text-brand-purple text-sm font-extrabold uppercase shadow-sm group-hover:scale-110 group-hover:bg-brand-purple group-hover:text-white group-hover:shadow-md transition-all duration-300">
+      <figcaption className="relative z-10 mt-6 flex items-center gap-3.5 pt-4 border-t border-brand-gold/20">
+        <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-gold/20 border border-brand-gold/30 text-brand-gold text-sm font-extrabold uppercase shadow-sm group-hover:scale-110 group-hover:bg-brand-gold group-hover:text-brand-deep group-hover:shadow-md transition-all duration-300">
           {initials}
         </div>
-        <strong className="text-sm font-bold text-brand-purple">
+        <strong className="text-sm font-bold text-white">
           {name}
         </strong>
       </figcaption>
@@ -1539,12 +1539,12 @@ function TestimonialCard({ quote, name }) {
   );
 }
 
-// 9. GALLERY SECTION
+// 9. GALLERY SECTION (Executive Masterclass Moments)
 function Gallery({ isAnimated, animKey }) {
   return (
     <section
       id="gallery"
-      className="scroll-mt-28 bg-white px-4 sm:px-8 lg:px-14 py-20 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-gradient-to-b from-[#180B1A] to-[#120614] px-4 sm:px-8 lg:px-14 py-20 border-t border-brand-gold/15 text-white"
     >
       <div key={`gallery-${animKey}`} className="w-full max-w-7xl mx-auto">
         <SectionHeading
@@ -1557,7 +1557,7 @@ function Gallery({ isAnimated, animKey }) {
             {[...galleryMoments, ...galleryMoments].map((moment, index) => (
               <div
                 key={index}
-                className="w-64 sm:w-80 aspect-[4/3] shrink-0 overflow-hidden rounded-2xl border border-[#d8cc8b] bg-white shadow-md hover:scale-105 transition-transform duration-300"
+                className="w-64 sm:w-80 aspect-[4/3] shrink-0 overflow-hidden rounded-2xl border-2 border-brand-gold/30 bg-[#1B091E] shadow-xl hover:border-brand-gold/70 hover:scale-105 transition-all duration-300"
               >
                 <img
                   src={moment.image}
@@ -1573,22 +1573,22 @@ function Gallery({ isAnimated, animKey }) {
   );
 }
 
-// 10. ENQUIRY SECTION (Consen Split Layout)
+// 10. ENQUIRY SECTION (Executive Masterclass Booking Suite)
 function Enquiry({ isAnimated, animKey }) {
   return (
     <section
       id="enquiry"
-      className="scroll-mt-28 bg-[#FAF9F6] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-[#eadfcd]"
+      className="scroll-mt-28 bg-[#120614] px-4 sm:px-8 lg:px-14 py-20 lg:py-28 border-t border-brand-gold/15 text-white"
     >
-      <div key={`enquiry-${animKey}`} className={`w-full max-w-7xl mx-auto rounded-3xl border border-[#eadfcd] bg-brand-cream p-5 sm:p-10 md:p-14 shadow-lg ${isAnimated ? "section-card-enter" : ""}`}>
+      <div key={`enquiry-${animKey}`} className={`w-full max-w-7xl mx-auto rounded-3xl border border-brand-gold/30 bg-[#180B1A]/95 backdrop-blur-xl p-5 sm:p-10 md:p-14 shadow-2xl ${isAnimated ? "section-card-enter" : ""}`}>
         <div className={`mb-10 text-center ${isAnimated ? "section-text-enter" : ""}`}>
-          <div className="mb-3 inline-flex rounded-full border border-[#eadfcd] bg-white px-6 py-2 shadow-sm">
-            <img src={logo} alt="VoiceCraft" className="h-8 w-auto" />
+          <div className="mb-3 inline-flex rounded-full border border-brand-gold/30 bg-white/10 px-6 py-2 shadow-sm backdrop-blur-md">
+            <img src={logo} alt="VoiceCraft" className="h-8 w-auto brightness-110" />
           </div>
-          <p className="text-xs font-bold uppercase tracking-widest text-brand-olive mb-1">
+          <p className="text-xs font-bold uppercase tracking-widest text-brand-gold mb-1">
             GET IN TOUCH WITH OUR MASTER COACH
           </p>
-          <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-brand-purple">
+          <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white">
             Enquire Now
           </h2>
           <div className="w-16 h-1 rounded-full bg-brand-gold mx-auto mt-3" />
@@ -1597,17 +1597,17 @@ function Enquiry({ isAnimated, animKey }) {
         <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1.2fr_0.8fr] items-start">
           <ProgramEnquiryForm />
 
-          {/* Consen Contact Info Card */}
-          <aside className="relative overflow-hidden flex flex-col justify-between rounded-3xl border border-[#eadfcd] bg-white p-5 sm:p-7 md:p-8 shadow-sm hover:shadow-floating hover:border-brand-olive/50 transition-all duration-300 h-full group">
+          {/* Contact Info Card */}
+          <aside className="relative overflow-hidden flex flex-col justify-between rounded-3xl border border-brand-gold/25 bg-[#1E0A22]/90 p-5 sm:p-7 md:p-8 shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:border-brand-gold/50 transition-all duration-300 h-full group">
             {/* Subtle Animated Hover Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-brand-olive/[0.04] via-brand-olive/[0.01] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            <div className="absolute top-0 left-0 right-0 h-1 bg-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-gold/[0.06] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-gold to-brand-olive transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
             <div className="relative z-10">
-              <h3 className="font-display font-serif text-2xl font-bold text-brand-olive">
+              <h3 className="font-display font-serif text-2xl font-bold text-brand-gold">
                 Need to talk?
               </h3>
-              <p className="mt-1 text-sm font-bold text-brand-ink">
+              <p className="mt-1 text-sm font-medium text-white/80">
                 We're here to help guide your communication journey.
               </p>
               <div className="mt-6 space-y-4">
@@ -1636,7 +1636,7 @@ function Enquiry({ isAnimated, animKey }) {
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-brand-purple/10">
+            <div className="mt-8 pt-6 border-t border-brand-gold/20">
               <a
                 href="https://wa.me/919919911027"
                 target="_blank"
@@ -1646,7 +1646,7 @@ function Enquiry({ isAnimated, animKey }) {
                 <MessageCircle size={18} />
                 <span>Chat Instantly on WhatsApp</span>
               </a>
-              <p className="mt-2 text-center text-[11px] font-semibold text-brand-ink/70">
+              <p className="mt-2 text-center text-[11px] font-semibold text-white/60">
                 Direct reply within 24 hours.
               </p>
             </div>
@@ -1716,9 +1716,9 @@ function ProgramEnquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-3xl border border-[#e9e2d8] bg-white p-5 sm:p-8 md:p-9 shadow-sm"
+      className="rounded-3xl border border-brand-gold/25 bg-[#1E0A22]/90 p-5 sm:p-8 md:p-9 shadow-xl"
     >
-      <h3 className="font-display font-serif text-2xl font-bold text-brand-purple mb-5">
+      <h3 className="font-display font-serif text-2xl font-bold text-white mb-5">
         Choose your course
       </h3>
 
@@ -1750,14 +1750,14 @@ function ProgramEnquiryForm() {
       </div>
 
       <label className="mt-4 block">
-        <span className="mb-1.5 block text-xs font-bold text-brand-ink">
+        <span className="mb-1.5 block text-xs font-bold text-white/90">
           Message (Optional)
         </span>
         <textarea
           name="message"
           rows="3"
           placeholder="Tell us about your learning goals..."
-          className="w-full resize-none rounded-2xl border border-[#dcd8df] bg-white px-4 py-3 text-xs sm:text-sm font-medium text-brand-ink outline-none transition placeholder:text-slate-400 focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15"
+          className="w-full resize-none rounded-2xl border border-brand-gold/30 bg-[#140616] px-4 py-3 text-xs sm:text-sm font-medium text-white placeholder:text-white/40 outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20"
         />
       </label>
 
@@ -1765,7 +1765,7 @@ function ProgramEnquiryForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-brand-purple px-6 text-sm font-bold text-white shadow-md hover:bg-brand-deep hover:scale-[1.01] transition-all duration-200 cursor-pointer disabled:opacity-60"
+        className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-gold px-6 text-sm font-bold text-brand-deep shadow-lg shadow-brand-gold/25 hover:brightness-110 hover:scale-[1.01] transition-all duration-200 cursor-pointer disabled:opacity-60"
       >
         <span>{isSubmitting ? "Sending..." : "Submit Enquiry"}</span>
         <ChevronRight size={18} strokeWidth={2.8} />
@@ -1775,8 +1775,8 @@ function ProgramEnquiryForm() {
         <p
           className={`mt-4 rounded-full px-4 py-2.5 text-xs text-center font-bold ${
             submitState.status === "success"
-              ? "bg-green-50 text-green-700"
-              : "bg-red-50 text-red-700"
+              ? "bg-green-950/80 text-green-300 border border-green-800/50"
+              : "bg-red-950/80 text-red-300 border border-red-800/50"
           }`}
         >
           {submitState.message}
@@ -1795,16 +1795,16 @@ function FormField({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-xs font-bold text-brand-ink">
+      <span className="mb-1.5 block text-xs font-bold text-white/90">
         {label}
-        {required ? <span className="ml-1 text-red-600">*</span> : null}
+        {required ? <span className="ml-1 text-brand-gold">*</span> : null}
       </span>
       <input
         name={name}
         type={type}
         required={required}
         placeholder={placeholder}
-        className="h-11 w-full rounded-full border border-[#dcd8df] bg-white px-4 text-xs sm:text-sm font-medium text-brand-ink outline-none transition placeholder:text-slate-400 focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15"
+        className="h-11 w-full rounded-full border border-brand-gold/30 bg-[#140616] px-4 text-xs sm:text-sm font-medium text-white placeholder:text-white/40 outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20"
       />
     </label>
   );
@@ -1813,21 +1813,22 @@ function FormField({
 function FormSelect({ name, label, options, required = false }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-xs font-bold text-brand-ink">
+      <span className="mb-1.5 block text-xs font-bold text-white/90">
         {label}
-        {required ? <span className="ml-1 text-red-600">*</span> : null}
+        {required ? <span className="ml-1 text-brand-gold">*</span> : null}
       </span>
       <select
         name={name}
         required={required}
         defaultValue=""
-        className="h-11 w-full rounded-full border border-[#dcd8df] bg-white px-4 text-xs sm:text-sm font-medium text-slate-600 outline-none transition focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15 cursor-pointer"
+        className="h-11 w-full rounded-full border border-brand-gold/30 bg-[#140616] px-4 text-xs sm:text-sm font-medium text-white outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 cursor-pointer"
       >
         {options.map((option, index) => (
           <option
             key={option}
             value={index === 0 ? "" : option}
             disabled={index === 0}
+            className="bg-[#1D0A20] text-white"
           >
             {option}
           </option>
@@ -1853,14 +1854,14 @@ function EnquiryContactItem({ icon: Icon, label, value, href }) {
 
   const content = (
     <div className="flex items-center gap-3 sm:gap-3.5">
-      <span className="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-2xl bg-brand-cream border border-[#eadfcd] text-brand-purple shadow-sm">
+      <span className="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-2xl bg-brand-gold/15 border border-brand-gold/30 text-brand-gold shadow-sm">
         <Icon size={18} strokeWidth={2.2} className="sm:w-[19px] sm:h-[19px]" />
       </span>
       <div className="min-w-0 flex-1">
-        <strong className="block text-[10px] sm:text-[11px] font-bold text-brand-olive uppercase tracking-wider">
+        <strong className="block text-[10px] sm:text-[11px] font-bold text-brand-gold uppercase tracking-wider">
           {label}
         </strong>
-        <span className="contact-email-text block text-xs sm:text-sm font-bold text-brand-purple break-words [overflow-wrap:anywhere] [word-break:break-word] leading-snug">
+        <span className="contact-email-text block text-xs sm:text-sm font-bold text-white break-words [overflow-wrap:anywhere] [word-break:break-word] leading-snug">
           {displayValue}
         </span>
       </div>
@@ -1877,10 +1878,10 @@ function EnquiryContactItem({ icon: Icon, label, value, href }) {
   return content;
 }
 
-// 11. FOOTER (Consen IT Solution 02 Style 4-Column Footer)
+// 11. FOOTER (Executive Masterclass 4-Column Footer)
 function Footer() {
   return (
-    <footer className="bg-brand-deep text-white border-t border-brand-purple/20">
+    <footer className="bg-[#0A020C] text-white border-t border-brand-gold/20">
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Column 1: Brand Info */}
@@ -1903,7 +1904,7 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-gold hover:text-brand-deep flex items-center justify-center text-white transition-all text-xs"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-gold hover:text-brand-deep border border-brand-gold/20 flex items-center justify-center text-white transition-all text-xs"
                 >
                   <Icon size={14} />
                 </a>
@@ -1963,7 +1964,7 @@ function Footer() {
                 </a>
               </div>
               <div className="pt-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[11px] font-semibold text-brand-gold">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[11px] font-semibold text-brand-gold border border-brand-gold/25">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
                   Classroom & Live Online
                 </span>
@@ -1973,7 +1974,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 bg-[#1b051c] px-6 py-4 text-center text-xs text-white/60">
+      <div className="border-t border-brand-gold/15 bg-[#060107] px-6 py-4 text-center text-xs text-white/50">
         &copy; 2025 VoiceCraft Academy. All Rights Reserved. Master Coaching by DTM Jothi.
       </div>
     </footer>
@@ -1984,20 +1985,20 @@ function SectionHeading({ eyebrow, title, isAnimated }) {
   return (
     <div className={`text-center max-w-3xl mx-auto mb-4 ${isAnimated ? "section-text-enter" : ""}`}>
       {eyebrow ? (
-        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-brand-olive/15 text-brand-olive text-xs font-bold uppercase tracking-wider mb-3 border border-brand-olive/25 shadow-sm">
+        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-brand-gold/15 text-brand-gold text-xs font-bold uppercase tracking-wider mb-3 border border-brand-gold/30 shadow-sm backdrop-blur-md">
           <Sparkles size={13} className="text-brand-gold shrink-0" />
           <span>{eyebrow}</span>
         </div>
       ) : null}
-      <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-brand-purple">
+      <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white">
         {title}
       </h2>
-      <div className="w-20 h-1 rounded-full bg-gradient-to-r from-brand-gold to-brand-olive mx-auto mt-4" />
+      <div className="w-20 h-1 rounded-full bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-olive mx-auto mt-4" />
     </div>
   );
 }
 
-// Consen 02 Luxury Reading Progress Bar
+// Executive Masterclass Reading Progress Bar
 function ReadingProgressBar() {
   const [progress, setProgress] = useState(0);
 
@@ -2015,7 +2016,7 @@ function ReadingProgressBar() {
 
   return (
     <div
-      className="fixed top-[68px] lg:top-[114px] left-0 h-[3px] bg-gradient-to-r from-brand-gold via-brand-olive to-brand-gold z-50 transition-[width] duration-150 ease-out pointer-events-none"
+      className="fixed top-[68px] lg:top-[114px] left-0 h-[3px] bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-olive z-50 transition-[width] duration-150 ease-out pointer-events-none"
       style={{ width: `${progress}%` }}
       role="progressbar"
       aria-valuenow={Math.round(progress)}
@@ -2025,7 +2026,7 @@ function ReadingProgressBar() {
   );
 }
 
-// Consen 02 Floating Scroll-to-Top Button
+// Floating Scroll-to-Top Button
 function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -2048,7 +2049,7 @@ function ScrollToTopButton() {
       type="button"
       onClick={scrollToTop}
       aria-label="Scroll to top"
-      className="fixed bottom-6 right-6 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-brand-purple hover:bg-brand-deep text-brand-gold border-2 border-brand-gold/40 shadow-floating flex items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer animate-fade-in"
+      className="fixed bottom-6 right-6 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#1D0A20] hover:bg-[#2A0F2E] text-brand-gold border-2 border-brand-gold/40 shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer animate-fade-in"
     >
       <ArrowUp size={20} strokeWidth={2.5} />
     </button>
@@ -2063,7 +2064,7 @@ function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-6 left-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-floating transition-all duration-300 hover:scale-105 group"
+      className="fixed bottom-6 left-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-2xl transition-all duration-300 hover:scale-105 group"
     >
       <MessageCircle size={18} className="animate-pulse shrink-0" />
       <span className="hidden sm:inline">WhatsApp Us</span>

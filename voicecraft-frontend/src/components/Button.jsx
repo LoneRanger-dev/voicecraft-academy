@@ -23,17 +23,17 @@ export default function Button({
 
   const variants = {
     primary:
-      "bg-gradient-to-r from-brand-purple to-brand-deep text-white shadow-lg shadow-brand-purple/25 hover:shadow-xl hover:shadow-brand-purple/35 hover:-translate-y-0.5 focus:ring-brand-purple",
+      "bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-gold text-brand-deep font-bold shadow-lg shadow-brand-gold/25 hover:shadow-xl hover:shadow-brand-gold/40 hover:brightness-105 hover:-translate-y-0.5 focus:ring-brand-gold",
     gold:
-      "bg-gradient-to-r from-brand-gold to-[#987625] text-white shadow-lg shadow-brand-gold/25 hover:shadow-xl hover:shadow-brand-gold/40 hover:-translate-y-0.5 focus:ring-brand-gold",
+      "bg-gradient-to-r from-brand-gold via-[#F3DE9C] to-brand-gold text-brand-deep font-bold shadow-lg shadow-brand-gold/25 hover:shadow-xl hover:shadow-brand-gold/40 hover:brightness-105 hover:-translate-y-0.5 focus:ring-brand-gold",
     secondary:
-      "bg-white/80 backdrop-blur-md border border-brand-purple/20 text-brand-purple hover:bg-brand-purple hover:text-white hover:border-brand-purple shadow-sm hover:shadow-md hover:-translate-y-0.5 focus:ring-brand-purple",
+      "bg-[#1D0A20]/90 backdrop-blur-md border border-brand-gold/30 text-white hover:bg-[#2A0F2E] hover:border-brand-gold/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 focus:ring-brand-gold",
     olive:
       "bg-brand-olive text-white shadow-md shadow-brand-olive/25 hover:bg-[#5C752B] hover:shadow-lg hover:-translate-y-0.5 focus:ring-brand-olive",
     glass:
-      "bg-white/70 backdrop-blur-xl border border-white/90 text-brand-ink hover:bg-white/90 shadow-glass hover:shadow-glass-hover hover:-translate-y-0.5 focus:ring-brand-purple",
+      "bg-white/10 backdrop-blur-xl border border-brand-gold/25 text-white hover:bg-white/15 shadow-glass hover:shadow-glass-hover hover:-translate-y-0.5 focus:ring-brand-gold",
     outline:
-      "border-2 border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white focus:ring-brand-purple",
+      "border-2 border-brand-gold/60 text-brand-gold hover:bg-brand-gold hover:text-brand-deep focus:ring-brand-gold",
     whatsapp:
       "bg-[#25D366] text-white shadow-md shadow-green-500/25 hover:bg-[#20bd5a] hover:shadow-lg hover:-translate-y-0.5 focus:ring-green-500",
   };
